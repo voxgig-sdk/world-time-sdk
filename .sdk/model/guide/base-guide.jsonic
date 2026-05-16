@@ -1,0 +1,34 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 3
+  metrics: count: path: 5
+  metrics: count: method: 5
+
+  entity: ipn: {
+  }
+
+  entity: ipn2: {
+    path: "/ip": {
+      op: load: method: *GET
+    }
+    path: "/ip/{ipv4}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: timezone: {
+    path: "/timezone": {
+      op: list: method: *GET
+    }
+    path: "/timezone/{area}": {
+      rename: param: "area": *"id"
+      op: load: method: *GET
+    }
+    path: "/timezone/{area}/{location}": {
+      op: load: method: *GET
+      op: load: transform: res: *("`body.timezone`")|top
+    }
+  }
+
+}

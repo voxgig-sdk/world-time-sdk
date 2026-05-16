@@ -1,0 +1,12 @@
+{
+  point: "warning"
+  when: 1778898510393
+  note: "No paths defined for entity=ipn"
+  entm: {
+    name: "ipn"
+    orig: "TimeData"
+    path: {
+    }
+  }
+
+}

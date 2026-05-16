@@ -1,0 +1,9 @@
+# BasicIpnFlow
+
+main: kit: flow: BasicIpnFlow:
+{
+  entity: "ipn",
+  kind: "basic",
+  name: "BasicIpnFlow",
+  "key$": "BasicIpnFlow"
+}

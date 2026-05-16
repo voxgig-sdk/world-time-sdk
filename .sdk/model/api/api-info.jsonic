@@ -1,0 +1,26 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        url: "https://worldtimeapi.org"
+      }
+      description: "Simple JSON/plain-text API to obtain the current time in, and related data about, a timezone."
+      license: {
+        name: "Public Domain"
+      }
+      servers: [
+        {
+          description: "Production server"
+          url: "https://worldtimeapi.org/api"
+        }
+      ]
+      title: "World Time API"
+      version: "1.0.0"
+    }
+  }
+}
+
+}

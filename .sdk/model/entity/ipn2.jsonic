@@ -1,0 +1,144 @@
+# Entity: ipn2
+
+main: kit: entity: ipn2: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "abbreviation"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "client_ip"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "datetime"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "day_of_week"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "day_of_year"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "dst"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "dst_from"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "dst_offset"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "dst_until"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "raw_offset"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "timezone"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "unixtime"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "utc_datetime"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "utc_offset"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "week_number"
+      req: false
+      type: "`$INTEGER`"
+    }
+  ]
+
+  name: "ipn2"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: "8.8.8.8"
+                kind: "param"
+                name: "ipv4"
+                orig: "ipv4"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/ip/{ipv4}"
+          parts: [
+            "ip"
+            "{ipv4}"
+          ]
+          select: {
+            exist: [
+              "ipv4"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          method: "GET"
+          orig: "/ip"
+          parts: [
+            "ip"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "ip"
+      ]
+    ]
+  }
+
+
+
+}

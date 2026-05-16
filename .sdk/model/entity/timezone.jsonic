@@ -1,0 +1,193 @@
+# Entity: timezone
+
+main: kit: entity: timezone: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "abbreviation"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "client_ip"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "datetime"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "day_of_week"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "day_of_year"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "dst"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "dst_from"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "dst_offset"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "dst_until"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "raw_offset"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "timezone"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "unixtime"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "utc_datetime"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "utc_offset"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "week_number"
+      req: false
+      type: "`$INTEGER`"
+    }
+  ]
+
+  name: "timezone"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          method: "GET"
+          orig: "/timezone"
+          parts: [
+            "timezone"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: "America"
+                kind: "param"
+                name: "area"
+                orig: "area"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                example: "New_York"
+                kind: "param"
+                name: "location"
+                orig: "location"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/timezone/{area}/{location}"
+          parts: [
+            "timezone"
+            "{area}"
+            "{location}"
+          ]
+          select: {
+            exist: [
+              "area"
+              "location"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          args: {
+            params: [
+              {
+                example: "Europe"
+                kind: "param"
+                name: "id"
+                orig: "area"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/timezone/{area}"
+          parts: [
+            "timezone"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              area: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "timezone"
+      ]
+    ]
+  }
+
+
+
+}

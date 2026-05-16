@@ -1,0 +1,67 @@
+<?php
+declare(strict_types=1);
+
+// WorldTime SDK utility registration
+
+require_once __DIR__ . '/../core/UtilityType.php';
+require_once __DIR__ . '/Clean.php';
+require_once __DIR__ . '/Done.php';
+require_once __DIR__ . '/MakeError.php';
+require_once __DIR__ . '/FeatureAdd.php';
+require_once __DIR__ . '/FeatureHook.php';
+require_once __DIR__ . '/FeatureInit.php';
+require_once __DIR__ . '/Fetcher.php';
+require_once __DIR__ . '/MakeFetchDef.php';
+require_once __DIR__ . '/MakeContext.php';
+require_once __DIR__ . '/MakeOptions.php';
+require_once __DIR__ . '/MakeRequest.php';
+require_once __DIR__ . '/MakeResponse.php';
+require_once __DIR__ . '/MakeResult.php';
+require_once __DIR__ . '/MakePoint.php';
+require_once __DIR__ . '/MakeSpec.php';
+require_once __DIR__ . '/MakeUrl.php';
+require_once __DIR__ . '/Param.php';
+require_once __DIR__ . '/PrepareAuth.php';
+require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/PrepareHeaders.php';
+require_once __DIR__ . '/PrepareMethod.php';
+require_once __DIR__ . '/PrepareParams.php';
+require_once __DIR__ . '/PreparePath.php';
+require_once __DIR__ . '/PrepareQuery.php';
+require_once __DIR__ . '/ResultBasic.php';
+require_once __DIR__ . '/ResultBody.php';
+require_once __DIR__ . '/ResultHeaders.php';
+require_once __DIR__ . '/TransformRequest.php';
+require_once __DIR__ . '/TransformResponse.php';
+
+WorldTimeUtility::setRegistrar(function (WorldTimeUtility $u): void {
+    $u->clean = [WorldTimeClean::class, 'call'];
+    $u->done = [WorldTimeDone::class, 'call'];
+    $u->make_error = [WorldTimeMakeError::class, 'call'];
+    $u->feature_add = [WorldTimeFeatureAdd::class, 'call'];
+    $u->feature_hook = [WorldTimeFeatureHook::class, 'call'];
+    $u->feature_init = [WorldTimeFeatureInit::class, 'call'];
+    $u->fetcher = [WorldTimeFetcher::class, 'call'];
+    $u->make_fetch_def = [WorldTimeMakeFetchDef::class, 'call'];
+    $u->make_context = [WorldTimeMakeContext::class, 'call'];
+    $u->make_options = [WorldTimeMakeOptions::class, 'call'];
+    $u->make_request = [WorldTimeMakeRequest::class, 'call'];
+    $u->make_response = [WorldTimeMakeResponse::class, 'call'];
+    $u->make_result = [WorldTimeMakeResult::class, 'call'];
+    $u->make_point = [WorldTimeMakePoint::class, 'call'];
+    $u->make_spec = [WorldTimeMakeSpec::class, 'call'];
+    $u->make_url = [WorldTimeMakeUrl::class, 'call'];
+    $u->param = [WorldTimeParam::class, 'call'];
+    $u->prepare_auth = [WorldTimePrepareAuth::class, 'call'];
+    $u->prepare_body = [WorldTimePrepareBody::class, 'call'];
+    $u->prepare_headers = [WorldTimePrepareHeaders::class, 'call'];
+    $u->prepare_method = [WorldTimePrepareMethod::class, 'call'];
+    $u->prepare_params = [WorldTimePrepareParams::class, 'call'];
+    $u->prepare_path = [WorldTimePreparePath::class, 'call'];
+    $u->prepare_query = [WorldTimePrepareQuery::class, 'call'];
+    $u->result_basic = [WorldTimeResultBasic::class, 'call'];
+    $u->result_body = [WorldTimeResultBody::class, 'call'];
+    $u->result_headers = [WorldTimeResultHeaders::class, 'call'];
+    $u->transform_request = [WorldTimeTransformRequest::class, 'call'];
+    $u->transform_response = [WorldTimeTransformResponse::class, 'call'];
+});

@@ -1,0 +1,322 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "World Time API",
+    "description": "Simple JSON/plain-text API to obtain the current time in, and related data about, a timezone.",
+    "version": "1.0.0",
+    "contact": {
+      "url": "https://worldtimeapi.org"
+    },
+    "license": {
+      "name": "Public Domain"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://worldtimeapi.org/api",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/timezone": {
+      "get": {
+        "summary": "List all timezones",
+        "description": "Returns a list of all available timezones.",
+        "operationId": "listTimezones",
+        "tags": [
+          "Timezone"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "example": [
+                    "Africa/Abidjan",
+                    "Africa/Accra",
+                    "America/New_York",
+                    "Europe/London",
+                    "Asia/Tokyo"
+                  ]
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/timezone/{area}": {
+      "get": {
+        "summary": "List timezones for an area",
+        "description": "Returns a list of all timezones available for a particular area (e.g., Europe, America, Asia).",
+        "operationId": "listTimezonesForArea",
+        "tags": [
+          "Timezone"
+        ],
+        "parameters": [
+          {
+            "name": "area",
+            "in": "path",
+            "required": true,
+            "description": "The timezone area (e.g., Europe, America, Asia, Africa, Pacific, etc.)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Europe"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "example": [
+                    "Europe/Amsterdam",
+                    "Europe/Berlin",
+                    "Europe/London",
+                    "Europe/Paris"
+                  ]
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Area not found"
+          }
+        }
+      }
+    },
+    "/timezone/{area}/{location}": {
+      "get": {
+        "summary": "Get current time for a timezone",
+        "description": "Returns the current time and related data for a specific timezone.",
+        "operationId": "getTimeForTimezone",
+        "tags": [
+          "Timezone"
+        ],
+        "parameters": [
+          {
+            "name": "area",
+            "in": "path",
+            "required": true,
+            "description": "The timezone area (e.g., Europe, America, Asia)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "America"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "description": "The timezone location (e.g., New_York, Los_Angeles, London)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "New_York"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TimeData"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Timezone not found"
+          }
+        }
+      }
+    },
+    "/ip": {
+      "get": {
+        "summary": "Get current time by IP",
+        "description": "Returns the current time based on the requester's IP address geolocation.",
+        "operationId": "getTimeByIP",
+        "tags": [
+          "IP"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TimeData"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ip/{ipv4}": {
+      "get": {
+        "summary": "Get current time by specific IP",
+        "description": "Returns the current time based on a specific IPv4 address geolocation.",
+        "operationId": "getTimeBySpecificIP",
+        "tags": [
+          "IP"
+        ],
+        "parameters": [
+          {
+            "name": "ipv4",
+            "in": "path",
+            "required": true,
+            "description": "The IPv4 address to lookup",
+            "schema": {
+              "type": "string",
+              "format": "ipv4"
+            },
+            "example": "8.8.8.8"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TimeData"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "IP address not found or cannot be geolocated"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "TimeData": {
+        "type": "object",
+        "properties": {
+          "abbreviation": {
+            "type": "string",
+            "description": "The abbreviated name of the timezone",
+            "example": "EST"
+          },
+          "client_ip": {
+            "type": "string",
+            "description": "The IP address of the client",
+            "example": "203.0.113.0"
+          },
+          "datetime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The current datetime in ISO 8601 format",
+            "example": "2024-01-15T10:30:45.123456-05:00"
+          },
+          "day_of_week": {
+            "type": "integer",
+            "description": "The day of the week (0-6, where 0 is Sunday)",
+            "example": 1
+          },
+          "day_of_year": {
+            "type": "integer",
+            "description": "The day of the year (1-365/366)",
+            "example": 15
+          },
+          "dst": {
+            "type": "boolean",
+            "description": "Whether daylight saving time is currently in effect",
+            "example": false
+          },
+          "dst_from": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "The datetime when DST starts",
+            "example": "2024-03-10T07:00:00+00:00"
+          },
+          "dst_offset": {
+            "type": "integer",
+            "description": "The DST offset in seconds",
+            "example": 0
+          },
+          "dst_until": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "The datetime when DST ends",
+            "example": "2024-11-03T06:00:00+00:00"
+          },
+          "raw_offset": {
+            "type": "integer",
+            "description": "The raw offset from UTC in seconds",
+            "example": -18000
+          },
+          "timezone": {
+            "type": "string",
+            "description": "The IANA timezone identifier",
+            "example": "America/New_York"
+          },
+          "unixtime": {
+            "type": "integer",
+            "description": "The current Unix timestamp",
+            "example": 1705327845
+          },
+          "utc_datetime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The current UTC datetime in ISO 8601 format",
+            "example": "2024-01-15T15:30:45.123456+00:00"
+          },
+          "utc_offset": {
+            "type": "string",
+            "description": "The UTC offset in ±HH:MM format",
+            "example": "-05:00"
+          },
+          "week_number": {
+            "type": "integer",
+            "description": "The ISO week number of the year",
+            "example": 3
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Timezone",
+      "description": "Operations related to timezone queries"
+    },
+    {
+      "name": "IP",
+      "description": "Operations related to IP-based geolocation queries"
+    }
+  ]
+}

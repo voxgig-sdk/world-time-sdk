@@ -1,0 +1,10 @@
+# Entity: ipn
+
+main: kit: entity: ipn: {
+
+  alias: field: {}
+
+  name: "ipn"
+
+
+}

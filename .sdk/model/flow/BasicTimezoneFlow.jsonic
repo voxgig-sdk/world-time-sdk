@@ -1,0 +1,44 @@
+# BasicTimezoneFlow
+
+main: kit: flow: BasicTimezoneFlow:
+{
+  entity: "timezone",
+  kind: "basic",
+  name: "BasicTimezoneFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "timezone_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "timezone_ref01",
+        srcdatavar: "timezone_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "timezone01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-timezone_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicTimezoneFlow"
+}
