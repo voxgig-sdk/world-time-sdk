@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/world-time-sdk"
-	"github.com/voxgig-sdk/world-time-sdk/core"
+	sdk "github.com/voxgig-sdk/world-time-sdk/go"
+	"github.com/voxgig-sdk/world-time-sdk/go/core"
 )
 
 func TestIpn2Direct(t *testing.T) {

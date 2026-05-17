@@ -1,10 +1,10 @@
 package voxgigworldtimesdk
 
 import (
-	"github.com/voxgig-sdk/world-time-sdk/core"
-	"github.com/voxgig-sdk/world-time-sdk/entity"
-	"github.com/voxgig-sdk/world-time-sdk/feature"
-	_ "github.com/voxgig-sdk/world-time-sdk/utility"
+	"github.com/voxgig-sdk/world-time-sdk/go/core"
+	"github.com/voxgig-sdk/world-time-sdk/go/entity"
+	"github.com/voxgig-sdk/world-time-sdk/go/feature"
+	_ "github.com/voxgig-sdk/world-time-sdk/go/utility"
 )
 
 // Type aliases preserve external API.

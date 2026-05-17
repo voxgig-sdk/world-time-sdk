@@ -1,7 +1,7 @@
 package feature
 
 import (
-	"github.com/voxgig-sdk/world-time-sdk/core"
+	"github.com/voxgig-sdk/world-time-sdk/go/core"
 )
 
 type BaseFeature struct {

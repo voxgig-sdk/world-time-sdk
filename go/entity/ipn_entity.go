@@ -1,9 +1,9 @@
 package entity
 
 import (
-	"github.com/voxgig-sdk/world-time-sdk/core"
+	"github.com/voxgig-sdk/world-time-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/world-time-sdk/go/utility/struct"
 )
 
 type IpnEntity struct {

@@ -18,7 +18,8 @@
         "utc_offset": "sa3",
         "week_number": "sa4",
         "area": "AREA01",
-        "location": "LOCATION01"
+        "location": "LOCATION01",
+        "id": "TIMEZONE00"
       },
       "TIMEZONE01": {
         "abbreviation": "s12c",
@@ -37,7 +38,8 @@
         "utc_offset": "s139",
         "week_number": "s13a",
         "area": "AREA01",
-        "location": "LOCATION01"
+        "location": "LOCATION01",
+        "id": "TIMEZONE01"
       },
       "TIMEZONE02": {
         "abbreviation": "s1c2",
@@ -56,7 +58,8 @@
         "utc_offset": "s1cf",
         "week_number": "s1d0",
         "area": "AREA01",
-        "location": "LOCATION01"
+        "location": "LOCATION01",
+        "id": "TIMEZONE02"
       }
     }
   },

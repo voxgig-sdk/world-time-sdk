@@ -17,7 +17,8 @@
         "utc_datetime": "sa2",
         "utc_offset": "sa3",
         "week_number": "sa4",
-        "ipv4": "IPV401"
+        "ipv4": "IPV401",
+        "id": "IPN200"
       },
       "IPN201": {
         "abbreviation": "s12c",
@@ -35,7 +36,8 @@
         "utc_datetime": "s138",
         "utc_offset": "s139",
         "week_number": "s13a",
-        "ipv4": "IPV401"
+        "ipv4": "IPV401",
+        "id": "IPN201"
       },
       "IPN202": {
         "abbreviation": "s1c2",
@@ -53,7 +55,8 @@
         "utc_datetime": "s1ce",
         "utc_offset": "s1cf",
         "week_number": "s1d0",
-        "ipv4": "IPV401"
+        "ipv4": "IPV401",
+        "id": "IPN202"
       }
     }
   },

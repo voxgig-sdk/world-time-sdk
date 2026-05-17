@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/voxgig-sdk/world-time-sdk"
-	"github.com/voxgig-sdk/world-time-sdk/core"
+	sdk "github.com/voxgig-sdk/world-time-sdk/go"
+	"github.com/voxgig-sdk/world-time-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/world-time-sdk/go/utility/struct"
 )
 
 func TestIpnEntity(t *testing.T) {
