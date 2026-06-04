@@ -91,7 +91,6 @@ def _ipn2_basic_setup(extra):
         "WORLDTIME_TEST_IPN__ENTID": idmap,
         "WORLDTIME_TEST_LIVE": "FALSE",
         "WORLDTIME_TEST_EXPLAIN": "FALSE",
-        "WORLDTIME_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -102,7 +101,6 @@ def _ipn2_basic_setup(extra):
     if env.get("WORLDTIME_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("WORLDTIME_APIKEY"),
             },
             extra or {},
         ])

@@ -78,7 +78,6 @@ function ipn_basic_setup($extra)
         "WORLDTIME_TEST_IPN_ENTID" => $idmap,
         "WORLDTIME_TEST_LIVE" => "FALSE",
         "WORLDTIME_TEST_EXPLAIN" => "FALSE",
-        "WORLDTIME_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -90,7 +89,6 @@ function ipn_basic_setup($extra)
     if ($env["WORLDTIME_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["WORLDTIME_APIKEY"],
             ],
             $extra ?? [],
         ]);

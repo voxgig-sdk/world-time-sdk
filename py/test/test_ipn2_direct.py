@@ -66,14 +66,12 @@ def _ipn2_direct_setup(mockres):
     env = runner.env_override({
         "WORLDTIME_TEST_IPN__ENTID": {},
         "WORLDTIME_TEST_LIVE": "FALSE",
-        "WORLDTIME_APIKEY": "NONE",
     })
 
     live = env.get("WORLDTIME_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
-            "apikey": env.get("WORLDTIME_APIKEY"),
         }
         client = WorldTimeSDK(merged_opts)
         return {

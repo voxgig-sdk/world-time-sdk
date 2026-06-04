@@ -31,9 +31,7 @@ loading a specific record.
 ```ruby
 require_relative "WorldTime_sdk"
 
-client = WorldTimeSDK.new({
-  "apikey" => ENV["WORLD-TIME_APIKEY"],
-})
+client = WorldTimeSDK.new({})
 ```
 
 
@@ -113,7 +111,6 @@ Create a `.env.local` file at the project root:
 
 ```
 WORLD-TIME_TEST_LIVE=TRUE
-WORLD-TIME_APIKEY=<your-key>
 ```
 
 Then run:
@@ -136,7 +133,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `String` | API key for authentication. |
 | `base` | `String` | Base URL of the API server. |
 | `prefix` | `String` | URL path prefix prepended to all requests. |
 | `suffix` | `String` | URL path suffix appended to all requests. |

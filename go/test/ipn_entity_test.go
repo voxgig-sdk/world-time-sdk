@@ -104,7 +104,6 @@ func ipnBasicSetup(extra map[string]any) *entityTestSetup {
 		"WORLDTIME_TEST_IPN_ENTID": idmap,
 		"WORLDTIME_TEST_LIVE":      "FALSE",
 		"WORLDTIME_TEST_EXPLAIN":   "FALSE",
-		"WORLDTIME_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["WORLDTIME_TEST_IPN_ENTID"])
@@ -115,7 +114,6 @@ func ipnBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["WORLDTIME_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
-				"apikey": env["WORLDTIME_APIKEY"],
 			},
 			extra,
 		})

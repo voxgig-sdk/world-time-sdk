@@ -20,9 +20,7 @@ loading a specific record.
 <?php
 require_once 'worldtime_sdk.php';
 
-$client = new WorldTimeSDK([
-    "apikey" => getenv("WORLD-TIME_APIKEY"),
-]);
+$client = new WorldTimeSDK([]);
 ```
 
 
@@ -105,7 +103,6 @@ Create a `.env.local` file at the project root:
 
 ```
 WORLD-TIME_TEST_LIVE=TRUE
-WORLD-TIME_APIKEY=<your-key>
 ```
 
 Then run:
@@ -128,7 +125,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |

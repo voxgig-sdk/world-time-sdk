@@ -116,14 +116,12 @@ def timezone_direct_setup(mockres)
   env = Runner.env_override({
     "WORLDTIME_TEST_TIMEZONE_ENTID" => {},
     "WORLDTIME_TEST_LIVE" => "FALSE",
-    "WORLDTIME_APIKEY" => "NONE",
   })
 
   live = env["WORLDTIME_TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {
-      "apikey" => env["WORLDTIME_APIKEY"],
     }
     client = WorldTimeSDK.new(merged_opts)
     return {

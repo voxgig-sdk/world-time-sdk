@@ -1,6 +1,6 @@
 {
   point: "warning"
-  when: 1779160867875
+  when: 1780583288708
   note: "No paths defined for entity=ipn"
   entm: {
     name: "ipn"

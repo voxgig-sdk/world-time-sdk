@@ -26,9 +26,7 @@ loading a specific record.
 ```lua
 local sdk = require("world-time_sdk")
 
-local client = sdk.new({
-  apikey = os.getenv("WORLD-TIME_APIKEY"),
-})
+local client = sdk.new({})
 ```
 
 
@@ -110,7 +108,6 @@ Create a `.env.local` file at the project root:
 
 ```
 WORLD-TIME_TEST_LIVE=TRUE
-WORLD-TIME_APIKEY=<your-key>
 ```
 
 Then run:
@@ -133,7 +130,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |

@@ -106,7 +106,6 @@ function basicSetup(extra?: any) {
     'WORLD_TIME_TEST_IPN_ENTID': idmap,
     'WORLD_TIME_TEST_LIVE': 'FALSE',
     'WORLD_TIME_TEST_EXPLAIN': 'FALSE',
-    'WORLD_TIME_APIKEY': 'NONE',
   })
 
   idmap = env['WORLD_TIME_TEST_IPN_ENTID']
@@ -116,7 +115,6 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new WorldTimeSDK(merge([
       {
-        apikey: env.WORLD_TIME_APIKEY,
       },
       extra
     ]))

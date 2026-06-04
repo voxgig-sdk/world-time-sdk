@@ -20,9 +20,6 @@ class WorldTimeConfig
             ],
             "options" => [
                 "base" => "https://worldtimeapi.org/api",
-                "auth" => [
-                    "prefix" => "Bearer",
-                ],
                 "headers" => [
           'content-type' => 'application/json',
         ],

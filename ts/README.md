@@ -17,9 +17,7 @@ loading a specific record.
 ```ts
 import { WorldTimeSDK } from 'world-time'
 
-const client = new WorldTimeSDK({
-  apikey: process.env.WORLD-TIME_APIKEY,
-})
+const client = new WorldTimeSDK({})
 ```
 
 
@@ -72,7 +70,7 @@ const result = await client.Planet().load({ id: 'test01' })
 You can also use the instance method:
 
 ```ts
-const client = new WorldTimeSDK({ apikey: '...' })
+const client = new WorldTimeSDK()
 const testClient = client.tester()
 ```
 
@@ -108,7 +106,6 @@ const logger = {
 }
 
 const client = new WorldTimeSDK({
-  apikey: '...',
   extend: [logger],
 })
 ```
@@ -119,7 +116,6 @@ Create a `.env.local` file at the project root:
 
 ```
 WORLD-TIME_TEST_LIVE=TRUE
-WORLD-TIME_APIKEY=<your-key>
 ```
 
 Then run:
@@ -137,7 +133,6 @@ cd ts && npm test
 
 ```ts
 new WorldTimeSDK(options?: {
-  apikey?: string
   base?: string
   prefix?: string
   suffix?: string
@@ -148,7 +143,6 @@ new WorldTimeSDK(options?: {
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |

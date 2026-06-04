@@ -120,14 +120,12 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'WORLDTIME_TEST_TIMEZONE_ENTID': {},
     'WORLDTIME_TEST_LIVE': 'FALSE',
-    'WORLDTIME_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.WORLDTIME_TEST_LIVE
 
   if (live) {
     const client = new WorldTimeSDK({
-      apikey: env.WORLDTIME_APIKEY,
     })
 
     let idmap: any = env['WORLDTIME_TEST_TIMEZONE_ENTID']
