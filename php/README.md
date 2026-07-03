@@ -10,7 +10,7 @@ The PHP SDK for the WorldTime API — an entity-oriented client using PHP conven
 
 ## Install
 ```bash
-composer require voxgig/world-time-sdk
+composer require voxgig-sdk/world-time
 ```
 
 

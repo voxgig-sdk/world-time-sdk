@@ -10,7 +10,7 @@ The TypeScript SDK for the WorldTime API — a type-safe, entity-oriented client
 
 ## Install
 ```bash
-npm install world-time
+npm install @voxgig-sdk/world-time
 ```
 ## Tutorial: your first API call
 

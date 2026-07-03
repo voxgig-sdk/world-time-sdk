@@ -10,7 +10,7 @@ The Python SDK for the WorldTime API — an entity-oriented client following Pyt
 
 ## Install
 ```bash
-pip install world-time-sdk
+pip install voxgig-sdk-world-time
 ```
 
 Or install from source:

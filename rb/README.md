@@ -10,13 +10,13 @@ The Ruby SDK for the WorldTime API — an entity-oriented client using idiomatic
 
 ## Install
 ```bash
-gem install world-time-sdk
+gem install voxgig-sdk-world-time
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "world-time-sdk"
+gem "voxgig-sdk-world-time"
 ```
 
 Then run:

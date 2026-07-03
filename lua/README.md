@@ -10,7 +10,7 @@ The Lua SDK for the WorldTime API — an entity-oriented client using Lua conven
 
 ## Install
 ```bash
-luarocks install world-time-sdk
+luarocks install voxgig-sdk-world-time
 ```
 
 If the module is not yet published, add the source directory to
