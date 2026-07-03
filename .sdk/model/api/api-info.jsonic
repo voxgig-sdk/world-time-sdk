@@ -19,31 +19,7 @@ main: {
       ]
       title: "World Time API"
       version: "1.0.0"
-      tagline: "Get the current time and related timezone data via a simple JSON/plain-text API"
-      homepage: "https://worldtimeapi.org/"
-      docs_url: "https://worldtimeapi.org/pages/examples"
-      license_short: "Public Domain"
-      license_md: `- Released into the Public Domain by the project authors
-- No attribution required, but a courtesy link back is appreciated
-- The service is provided as-is with no uptime guarantee`
-      about_md: `[World Time API](https://worldtimeapi.org/) is a free, public service that returns the current time and a handful of useful timezone metadata for a requested location. It is operated as an open community project and serves responses as JSON or plain text.
-
-What you typically get from a response:
-- Current local date/time and UTC offset for the requested timezone
-- Day-of-week, day-of-year, and week number
-- Whether daylight saving time is currently in effect
-- The IANA timezone name and abbreviation
-
-Operational notes:
-- CORS is disabled, so calls must be made server-side or via a proxy
-- No API key or authentication is required
-- Reliability varies by endpoint; the per-timezone endpoint is the most consistently available`
-      entity_desc: {
-        ipn: "Lookup of timezone information based on the caller's IP address (or a supplied IPv4), backed by `/ip` and `/ip/{ipv4}`."
-        ipn2: "Alternate IP-based timezone lookup grouping exposed by this SDK, covering the same `/ip` family of endpoints."
-        timezone: "Current time and DST/offset metadata for a named IANA timezone, served from paths like `/timezone/{area}` and `/timezone/{area}/{location}` (e.g. `/timezone/America/Argentina/Salta`)."
-      }
-      auth: false
     }
   }
 }
+

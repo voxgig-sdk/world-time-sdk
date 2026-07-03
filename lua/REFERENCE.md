@@ -30,12 +30,12 @@ Create a new SDK client instance.
 
 ### Static Methods
 
-#### `sdk.test(testopts, sdkopts)`
+#### `sdk.test(testopts?, sdkopts?)`
 
-Create a test client with mock features active. Both arguments may be `nil`.
+Create a test client with mock features active. Both arguments are optional.
 
 ```lua
-local client = sdk.test(nil, nil)
+local client = sdk.test()
 ```
 
 
@@ -158,7 +158,7 @@ local ipn2 = client:Ipn2(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Ipn2(nil):load({ id = "ipn2_id" }, nil)
+local result, err = client:Ipn2():load({ id = "ipn2_id" })
 ```
 
 ### Common Methods
@@ -224,7 +224,7 @@ local timezone = client:Timezone(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Timezone(nil):list(nil, nil)
+local results, err = client:Timezone():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -232,7 +232,7 @@ local results, err = client:Timezone(nil):list(nil, nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Timezone(nil):load({ id = "timezone_id" }, nil)
+local result, err = client:Timezone():load({ id = "timezone_id" })
 ```
 
 ### Common Methods

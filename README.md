@@ -1,23 +1,8 @@
 # WorldTime SDK
 
-Get the current time and related timezone data via a simple JSON/plain-text API
+World Time API client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About World Time API
-
-[World Time API](https://worldtimeapi.org/) is a free, public service that returns the current time and a handful of useful timezone metadata for a requested location. It is operated as an open community project and serves responses as JSON or plain text.
-
-What you typically get from a response:
-- Current local date/time and UTC offset for the requested timezone
-- Day-of-week, day-of-year, and week number
-- Whether daylight saving time is currently in effect
-- The IANA timezone name and abbreviation
-
-Operational notes:
-- CORS is disabled, so calls must be made server-side or via a proxy
-- No API key or authentication is required
-- Reliability varies by endpoint; the per-timezone endpoint is the most consistently available
 
 ## Try it
 
@@ -51,27 +36,28 @@ gem install world-time-sdk
 luarocks install world-time-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { WorldTimeSDK } from 'world-time'
 
-const client = new WorldTimeSDK({})
+const client = new WorldTimeSDK({
+  apikey: process.env.WORLD-TIME_APIKEY,
+})
 
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -101,9 +87,9 @@ The API exposes 3 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Ipn** | Lookup of timezone information based on the caller's IP address (or a supplied IPv4), backed by `/ip` and `/ip/{ipv4}`. | `` |
-| **Ipn2** | Alternate IP-based timezone lookup grouping exposed by this SDK, covering the same `/ip` family of endpoints. | `/ip/{ipv4}` |
-| **Timezone** | Current time and DST/offset metadata for a named IANA timezone, served from paths like `/timezone/{area}` and `/timezone/{area}/{location}` (e.g. `/timezone/America/Argentina/Salta`). | `/timezone` |
+| **Ipn** |  | `` |
+| **Ipn2** |  | `/ip/{ipv4}` |
+| **Timezone** |  | `/timezone` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -113,9 +99,12 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from worldtime_sdk import WorldTimeSDK
 
-client = WorldTimeSDK({})
+client = WorldTimeSDK({
+    "apikey": os.environ.get("WORLD-TIME_APIKEY"),
+})
 
 ```
 
@@ -125,7 +114,9 @@ client = WorldTimeSDK({})
 <?php
 require_once 'worldtime_sdk.php';
 
-$client = new WorldTimeSDK([]);
+$client = new WorldTimeSDK([
+    "apikey" => getenv("WORLD-TIME_APIKEY"),
+]);
 
 ```
 
@@ -134,7 +125,9 @@ $client = new WorldTimeSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/world-time-sdk/go"
 
-client := sdk.NewWorldTimeSDK(map[string]any{})
+client := sdk.NewWorldTimeSDK(map[string]any{
+    "apikey": os.Getenv("WORLD-TIME_APIKEY"),
+})
 
 ```
 
@@ -143,7 +136,9 @@ client := sdk.NewWorldTimeSDK(map[string]any{})
 ```ruby
 require_relative "WorldTime_sdk"
 
-client = WorldTimeSDK.new({})
+client = WorldTimeSDK.new({
+  "apikey" => ENV["WORLD-TIME_APIKEY"],
+})
 
 ```
 
@@ -152,7 +147,9 @@ client = WorldTimeSDK.new({})
 ```lua
 local sdk = require("world-time_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("WORLD-TIME_APIKEY"),
+})
 
 ```
 
@@ -172,25 +169,21 @@ const result = await client.Ipn().load({ id: 'test01' })
 ### Python
 
 ```python
-client = WorldTimeSDK.test(None, None)
-result, err = client.Ipn(None).load(
-    {"id": "test01"}, None
-)
+client = WorldTimeSDK.test()
+result, err = client.Ipn().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = WorldTimeSDK::test(null, null);
-[$result, $err] = $client->Ipn(null)->load(
-    ["id" => "test01"], null
-);
+$client = WorldTimeSDK::test();
+[$result, $err] = $client->Ipn()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.Ipn(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -199,19 +192,15 @@ result, err := client.Ipn(nil).Load(
 ### Ruby
 
 ```ruby
-client = WorldTimeSDK.test(nil, nil)
-result, err = client.Ipn(nil).load(
-  { "id" => "test01" }, nil
-)
+client = WorldTimeSDK.test
+result, err = client.Ipn().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:Ipn(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:Ipn():load({ id = "test01" })
 ```
 
 ## How it works
@@ -315,15 +304,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the World Time API
-
-- Upstream: [https://worldtimeapi.org/](https://worldtimeapi.org/)
-- API docs: [https://worldtimeapi.org/pages/examples](https://worldtimeapi.org/pages/examples)
-
-- Released into the Public Domain by the project authors
-- No attribution required, but a courtesy link back is appreciated
-- The service is provided as-is with no uptime guarantee
 
 ---
 

@@ -110,12 +110,14 @@ func ipn2DirectSetup(mockres any) *ipn2DirectSetupResult {
 	env := envOverride(map[string]any{
 		"WORLDTIME_TEST_IPN__ENTID": map[string]any{},
 		"WORLDTIME_TEST_LIVE":    "FALSE",
+		"WORLDTIME_APIKEY":       "NONE",
 	})
 
 	live := env["WORLDTIME_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["WORLDTIME_APIKEY"],
 		}
 		client := sdk.NewWorldTimeSDK(mergedOpts)
 

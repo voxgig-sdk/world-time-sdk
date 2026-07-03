@@ -69,12 +69,14 @@ def ipn2_direct_setup(mockres)
   env = Runner.env_override({
     "WORLDTIME_TEST_IPN__ENTID" => {},
     "WORLDTIME_TEST_LIVE" => "FALSE",
+    "WORLDTIME_APIKEY" => "NONE",
   })
 
   live = env["WORLDTIME_TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {
+      "apikey" => env["WORLDTIME_APIKEY"],
     }
     client = WorldTimeSDK.new(merged_opts)
     return {

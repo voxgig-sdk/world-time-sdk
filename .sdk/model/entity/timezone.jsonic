@@ -139,7 +139,7 @@ main: kit: entity: timezone: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.timezone`"
           }
         }
         {
