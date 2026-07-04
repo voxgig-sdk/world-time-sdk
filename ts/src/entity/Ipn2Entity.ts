@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Ipn2,
+  Ipn2LoadMatch,
+} from '../WorldTimeTypes'
 
 // TODO: needs Entity superclass
-class Ipn2Entity extends WorldTimeEntityBase {
+class Ipn2Entity extends WorldTimeEntityBase<Ipn2> {
 
   constructor(client: WorldTimeSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class Ipn2Entity extends WorldTimeEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: Ipn2LoadMatch, ctrl?: Control): Promise<Ipn2> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class Ipn2Entity extends WorldTimeEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Ipn2> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

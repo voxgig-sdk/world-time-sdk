@@ -49,8 +49,7 @@ class TestIpn2Entity:
         # LOAD
         ipn2_ref01_ent = client.Ipn2(None)
         ipn2_ref01_match_dt0 = {}
-        ipn2_ref01_data_dt0_loaded, err = ipn2_ref01_ent.load(ipn2_ref01_match_dt0, None)
-        assert err is None
+        ipn2_ref01_data_dt0_loaded = ipn2_ref01_ent.load(ipn2_ref01_match_dt0, None)
         assert ipn2_ref01_data_dt0_loaded is not None
 
 
@@ -91,7 +90,6 @@ def _ipn2_basic_setup(extra):
         "WORLDTIME_TEST_IPN__ENTID": idmap,
         "WORLDTIME_TEST_LIVE": "FALSE",
         "WORLDTIME_TEST_EXPLAIN": "FALSE",
-        "WORLDTIME_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -102,7 +100,6 @@ def _ipn2_basic_setup(extra):
     if env.get("WORLDTIME_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("WORLDTIME_APIKEY"),
             },
             extra or {},
         ])

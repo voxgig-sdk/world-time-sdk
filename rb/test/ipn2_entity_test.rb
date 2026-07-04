@@ -42,8 +42,7 @@ class Ipn2EntityTest < Minitest::Test
     # LOAD
     ipn2_ref01_ent = client.Ipn2(nil)
     ipn2_ref01_match_dt0 = {}
-    ipn2_ref01_data_dt0_loaded, err = ipn2_ref01_ent.load(ipn2_ref01_match_dt0, nil)
-    assert_nil err
+    ipn2_ref01_data_dt0_loaded = ipn2_ref01_ent.load(ipn2_ref01_match_dt0, nil)
     assert !ipn2_ref01_data_dt0_loaded.nil?
 
   end
@@ -82,7 +81,6 @@ def ipn2_basic_setup(extra)
     "WORLDTIME_TEST_IPN__ENTID" => idmap,
     "WORLDTIME_TEST_LIVE" => "FALSE",
     "WORLDTIME_TEST_EXPLAIN" => "FALSE",
-    "WORLDTIME_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,7 +92,6 @@ def ipn2_basic_setup(extra)
   if env["WORLDTIME_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["WORLDTIME_APIKEY"],
       },
       extra || {},
     ])

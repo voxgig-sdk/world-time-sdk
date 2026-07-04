@@ -14,9 +14,6 @@ func MakeConfig() map[string]any {
 		},
 		"options": map[string]any{
 			"base": "https://worldtimeapi.org/api",
-			"auth": map[string]any{
-				"prefix": "Bearer",
-			},
 			"headers": map[string]any{
 				"content-type": "application/json",
 			},
@@ -161,6 +158,7 @@ func MakeConfig() map[string]any {
 											"orig": "ipv4",
 											"reqd": true,
 											"type": "`$STRING`",
+											"index$": 0,
 										},
 									},
 								},
@@ -356,6 +354,7 @@ func MakeConfig() map[string]any {
 											"orig": "area",
 											"reqd": true,
 											"type": "`$STRING`",
+											"index$": 0,
 										},
 										map[string]any{
 											"active": true,
@@ -365,6 +364,7 @@ func MakeConfig() map[string]any {
 											"orig": "location",
 											"reqd": true,
 											"type": "`$STRING`",
+											"index$": 1,
 										},
 									},
 								},
@@ -399,6 +399,7 @@ func MakeConfig() map[string]any {
 											"orig": "area",
 											"reqd": true,
 											"type": "`$STRING`",
+											"index$": 0,
 										},
 									},
 								},

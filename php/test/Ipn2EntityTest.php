@@ -49,8 +49,7 @@ class Ipn2EntityTest extends TestCase
         // LOAD
         $ipn2_ref01_ent = $client->Ipn2(null);
         $ipn2_ref01_match_dt0 = [];
-        [$ipn2_ref01_data_dt0_loaded, $err] = $ipn2_ref01_ent->load($ipn2_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $ipn2_ref01_data_dt0_loaded = $ipn2_ref01_ent->load($ipn2_ref01_match_dt0, null);
         $this->assertNotNull($ipn2_ref01_data_dt0_loaded);
 
     }
@@ -85,7 +84,6 @@ function ipn2_basic_setup($extra)
         "WORLDTIME_TEST_IPN__ENTID" => $idmap,
         "WORLDTIME_TEST_LIVE" => "FALSE",
         "WORLDTIME_TEST_EXPLAIN" => "FALSE",
-        "WORLDTIME_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -97,7 +95,6 @@ function ipn2_basic_setup($extra)
     if ($env["WORLDTIME_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["WORLDTIME_APIKEY"],
             ],
             $extra ?? [],
         ]);

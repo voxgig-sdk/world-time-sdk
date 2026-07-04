@@ -45,6 +45,7 @@ class Ipn2Entity
     end
   end
 
+  # @return [Ipn2, Hash] the current Ipn2 data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class Ipn2Entity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Ipn2 fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single Ipn2.
+  #
+  # @param reqmatch [Ipn2LoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Ipn2, Hash] the loaded Ipn2; raises WorldTimeError on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

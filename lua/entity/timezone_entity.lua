@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch TimezoneLoadMatch
+---@param ctrl? table
+---@return Timezone
+---@return string? err
 function TimezoneEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -104,6 +108,10 @@ end
 
 
 
+---@param reqmatch TimezoneListMatch
+---@param ctrl? table
+---@return Timezone[]
+---@return string? err
 function TimezoneEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

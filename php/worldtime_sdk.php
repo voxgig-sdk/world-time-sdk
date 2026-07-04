@@ -103,7 +103,7 @@ class WorldTimeSDK
         return $this->_rootctx;
     }
 
-    public function prepare(array $fetchargs = []): array
+    public function prepare(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
         $fetchargs = $fetchargs ?? [];
@@ -149,19 +149,27 @@ class WorldTimeSDK
 
         [$_, $err] = ($utility->prepare_auth)($ctx);
         if ($err) {
-            return [null, $err];
+            return ($utility->make_error)($ctx, $err);
         }
 
-        return ($utility->make_fetch_def)($ctx);
+        [$fetchdef, $fd_err] = ($utility->make_fetch_def)($ctx);
+        if ($fd_err) {
+            return ($utility->make_error)($ctx, $fd_err);
+        }
+        return $fetchdef;
     }
 
-    public function direct(array $fetchargs = []): array
+    public function direct(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
 
-        [$fetchdef, $err] = $this->prepare($fetchargs);
-        if ($err) {
-            return [["ok" => false, "err" => $err], null];
+        // direct() is the raw-HTTP escape hatch: it never throws, it returns
+        // an {ok, err, ...} dict. prepare() now raises on error, so catch it
+        // and surface the failure through the dict instead.
+        try {
+            $fetchdef = $this->prepare($fetchargs);
+        } catch (\Throwable $err) {
+            return ["ok" => false, "err" => $err];
         }
 
         $fetchargs = $fetchargs ?? [];
@@ -176,14 +184,14 @@ class WorldTimeSDK
         [$fetched, $fetch_err] = ($utility->fetcher)($ctx, $url, $fetchdef);
 
         if ($fetch_err) {
-            return [["ok" => false, "err" => $fetch_err], null];
+            return ["ok" => false, "err" => $fetch_err];
         }
 
         if ($fetched === null) {
-            return [[
+            return [
                 "ok" => false,
                 "err" => $ctx->make_error("direct_no_response", "response: undefined"),
-            ], null];
+            ];
         }
 
         if (is_array($fetched)) {
@@ -208,38 +216,71 @@ class WorldTimeSDK
                 }
             }
 
-            return [[
+            return [
                 "ok" => $status >= 200 && $status < 300,
                 "status" => $status,
                 "headers" => Struct::getprop($fetched, "headers"),
                 "data" => $json_data,
-            ], null];
+            ];
         }
 
-        return [[
+        return [
             "ok" => false,
             "err" => $ctx->make_error("direct_invalid", "invalid response type"),
-        ], null];
+        ];
     }
 
 
-    public function Ipn($data = null)
+    private $_ipn = null;
+
+    // Idiomatic facade: $client->ipn()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Ipn() (PHP method
+    // names are case-insensitive).
+    public function ipn($data = null)
     {
         require_once __DIR__ . '/entity/ipn_entity.php';
+        if ($data === null) {
+            if ($this->_ipn === null) {
+                $this->_ipn = new IpnEntity($this, null);
+            }
+            return $this->_ipn;
+        }
         return new IpnEntity($this, $data);
     }
 
 
-    public function Ipn2($data = null)
+    private $_ipn2 = null;
+
+    // Idiomatic facade: $client->ipn2()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Ipn2() (PHP method
+    // names are case-insensitive).
+    public function ipn2($data = null)
     {
         require_once __DIR__ . '/entity/ipn2_entity.php';
+        if ($data === null) {
+            if ($this->_ipn2 === null) {
+                $this->_ipn2 = new Ipn2Entity($this, null);
+            }
+            return $this->_ipn2;
+        }
         return new Ipn2Entity($this, $data);
     }
 
 
-    public function Timezone($data = null)
+    private $_timezone = null;
+
+    // Idiomatic facade: $client->timezone()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Timezone() (PHP method
+    // names are case-insensitive).
+    public function timezone($data = null)
     {
         require_once __DIR__ . '/entity/timezone_entity.php';
+        if ($data === null) {
+            if ($this->_timezone === null) {
+                $this->_timezone = new TimezoneEntity($this, null);
+            }
+            return $this->_timezone;
+        }
         return new TimezoneEntity($this, $data);
     }
 

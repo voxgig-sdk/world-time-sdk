@@ -15,9 +15,6 @@ module WorldTimeConfig
       },
       "options" => {
         "base" => "https://worldtimeapi.org/api",
-        "auth" => {
-          "prefix" => "Bearer",
-        },
         "headers" => {
           "content-type" => "application/json",
         },
@@ -162,6 +159,7 @@ module WorldTimeConfig
                         "orig" => "ipv4",
                         "reqd" => true,
                         "type" => "`$STRING`",
+                        "index$" => 0,
                       },
                     ],
                   },
@@ -357,6 +355,7 @@ module WorldTimeConfig
                         "orig" => "area",
                         "reqd" => true,
                         "type" => "`$STRING`",
+                        "index$" => 0,
                       },
                       {
                         "active" => true,
@@ -366,6 +365,7 @@ module WorldTimeConfig
                         "orig" => "location",
                         "reqd" => true,
                         "type" => "`$STRING`",
+                        "index$" => 1,
                       },
                     ],
                   },
@@ -400,6 +400,7 @@ module WorldTimeConfig
                         "orig" => "area",
                         "reqd" => true,
                         "type" => "`$STRING`",
+                        "index$" => 0,
                       },
                     ],
                   },

@@ -20,9 +20,6 @@ class WorldTimeConfig
             ],
             "options" => [
                 "base" => "https://worldtimeapi.org/api",
-                "auth" => [
-                    "prefix" => "Bearer",
-                ],
                 "headers" => [
           'content-type' => 'application/json',
         ],
@@ -167,6 +164,7 @@ class WorldTimeConfig
                         'orig' => 'ipv4',
                         'reqd' => true,
                         'type' => '`$STRING`',
+                        'index$' => 0,
                       ],
                     ],
                   ],
@@ -362,6 +360,7 @@ class WorldTimeConfig
                         'orig' => 'area',
                         'reqd' => true,
                         'type' => '`$STRING`',
+                        'index$' => 0,
                       ],
                       [
                         'active' => true,
@@ -371,6 +370,7 @@ class WorldTimeConfig
                         'orig' => 'location',
                         'reqd' => true,
                         'type' => '`$STRING`',
+                        'index$' => 1,
                       ],
                     ],
                   ],
@@ -405,6 +405,7 @@ class WorldTimeConfig
                         'orig' => 'area',
                         'reqd' => true,
                         'type' => '`$STRING`',
+                        'index$' => 0,
                       ],
                     ],
                   ],

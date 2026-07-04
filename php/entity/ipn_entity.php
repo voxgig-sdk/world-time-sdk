@@ -55,6 +55,9 @@ class IpnEntity
         return new IpnEntity($this->_client, $opts);
     }
 
+    /**
+     * @param Ipn|array $args Ipn data (assoc-array) to store.
+     */
     public function data_set($args): void
     {
         if ($args) {
@@ -63,12 +66,18 @@ class IpnEntity
         }
     }
 
+    /**
+     * @return Ipn|array The current Ipn data as an assoc-array.
+     */
     public function data_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetData");
         return Struct::clone($this->_data);
     }
 
+    /**
+     * @param array $args Match filter (any subset of Ipn fields).
+     */
     public function match_set($args): void
     {
         if ($args) {
@@ -77,6 +86,9 @@ class IpnEntity
         }
     }
 
+    /**
+     * @return array The current match filter (any subset of Ipn fields).
+     */
     public function match_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetMatch");
@@ -93,7 +105,7 @@ class IpnEntity
 
     
 
-    private function _run_op($ctx, callable $post_done): array
+    private function _run_op($ctx, callable $post_done): mixed
     {
         $utility = $this->_utility;
 

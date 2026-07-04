@@ -38,10 +38,6 @@ class Config {
   options = {
     base: 'https://worldtimeapi.org/api',
 
-    auth: {
-      prefix: 'Bearer',
-    },
-
     headers: {
       "content-type": "application/json"
     },
@@ -195,7 +191,8 @@ class Config {
                     "name": "ipv4",
                     "orig": "ipv4",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -390,7 +387,8 @@ class Config {
                     "name": "area",
                     "orig": "area",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   },
                   {
                     "active": true,
@@ -399,7 +397,8 @@ class Config {
                     "name": "location",
                     "orig": "location",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 1
                   }
                 ]
               },
@@ -433,7 +432,8 @@ class Config {
                     "name": "id",
                     "orig": "area",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },

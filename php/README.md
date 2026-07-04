@@ -9,9 +9,10 @@ The PHP SDK for the WorldTime API — an entity-oriented client using PHP conven
 
 
 ## Install
-```bash
-composer require voxgig-sdk/world-time
-```
+This package is not yet published to Packagist. Install it from the
+GitHub release tag (`php/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/world-time-sdk/releases](https://github.com/voxgig-sdk/world-time-sdk/releases)
 
 
 ## Tutorial: your first API call
@@ -25,9 +26,7 @@ loading a specific record.
 <?php
 require_once 'worldtime_sdk.php';
 
-$client = new WorldTimeSDK([
-    "apikey" => getenv("WORLD-TIME_APIKEY"),
-]);
+$client = new WorldTimeSDK();
 ```
 
 
@@ -38,28 +37,31 @@ $client = new WorldTimeSDK([
 For endpoints not covered by entity methods:
 
 ```php
-[$result, $err] = $client->direct([
+// direct() is the raw-HTTP escape hatch: it returns a result array
+// (it does not throw). Branch on $result["ok"].
+$result = $client->direct([
     "path" => "/api/resource/{id}",
     "method" => "GET",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
+} else {
+    echo "Error: " . $result["err"]->getMessage();
 }
 ```
 
 ### Prepare a request without sending it
 
 ```php
-[$fetchdef, $err] = $client->prepare([
+// prepare() throws on error and returns the fetch definition.
+$fetchdef = $client->prepare([
     "path" => "/api/resource/{id}",
     "method" => "DELETE",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 echo $fetchdef["url"];
 echo $fetchdef["method"];
@@ -73,7 +75,7 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = WorldTimeSDK::test();
 
-[$result, $err] = $client->WorldTime()->load(["id" => "test01"]);
+$result = $client->ipn()->load(["id" => "test01"]);
 // $result contains mock response data
 ```
 
@@ -107,8 +109,7 @@ $client = new WorldTimeSDK([
 Create a `.env.local` file at the project root:
 
 ```
-WORLD-TIME_TEST_LIVE=TRUE
-WORLD-TIME_APIKEY=<your-key>
+WORLD_TIME_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -131,7 +132,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -179,8 +179,12 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `[$result, $err]`. The first value is an
-`array` with these keys:
+Entity operations return the bare result data (an `array` for single-entity
+ops, a `list` for `list`) and throw on error. Wrap calls in
+`try`/`catch` to handle failures.
+
+The `direct()` escape hatch never throws — it returns a result `array`
+you branch on via `$result["ok"]`:
 
 | Key | Type | Description |
 | --- | --- | --- |
@@ -257,12 +261,12 @@ API path: `/timezone`
 
 ### Ipn
 
-Create an instance: `const ipn = client.Ipn()`
+Create an instance: `const ipn = client.ipn`
 
 
 ### Ipn2
 
-Create an instance: `const ipn2 = client.Ipn2()`
+Create an instance: `const ipn2 = client.ipn2`
 
 #### Operations
 
@@ -293,13 +297,13 @@ Create an instance: `const ipn2 = client.Ipn2()`
 #### Example: Load
 
 ```ts
-const ipn2 = await client.Ipn2().load({ id: 'ipn2_id' })
+const ipn2 = await client.ipn2.load({ id: 'ipn2_id' })
 ```
 
 
 ### Timezone
 
-Create an instance: `const timezone = client.Timezone()`
+Create an instance: `const timezone = client.timezone`
 
 #### Operations
 
@@ -331,13 +335,13 @@ Create an instance: `const timezone = client.Timezone()`
 #### Example: Load
 
 ```ts
-const timezone = await client.Timezone().load({ id: 'timezone_id' })
+const timezone = await client.timezone.load({ id: 'timezone_id' })
 ```
 
 #### Example: List
 
 ```ts
-const timezones = await client.Timezone().list()
+const timezones = await client.timezone.list()
 ```
 
 
@@ -412,11 +416,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$moon = $client->Moon();
-[$result, $err] = $moon->load(["planet_id" => "earth", "id" => "luna"]);
+$ipn = $client->ipn();
+$ipn->load(["id" => "example_id"]);
 
-// $moon->dataGet() now returns the loaded moon data
-// $moon->matchGet() returns the last match criteria
+// $ipn->dataGet() now returns the loaded ipn data
+// $ipn->matchGet() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

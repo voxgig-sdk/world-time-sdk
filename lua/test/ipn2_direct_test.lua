@@ -70,14 +70,12 @@ function ipn2_direct_setup(mockres)
   local env = runner.env_override({
     ["WORLDTIME_TEST_IPN__ENTID"] = {},
     ["WORLDTIME_TEST_LIVE"] = "FALSE",
-    ["WORLDTIME_APIKEY"] = "NONE",
   })
 
   local live = env["WORLDTIME_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
-      apikey = env["WORLDTIME_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

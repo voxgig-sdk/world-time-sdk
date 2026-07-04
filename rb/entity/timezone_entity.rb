@@ -45,6 +45,7 @@ class TimezoneEntity
     end
   end
 
+  # @return [Timezone, Hash] the current Timezone data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class TimezoneEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Timezone fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single Timezone.
+  #
+  # @param reqmatch [TimezoneLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Timezone, Hash] the loaded Timezone; raises WorldTimeError on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -86,6 +93,11 @@ class TimezoneEntity
 
 
   
+  # List Timezone items matching the given filter.
+  #
+  # @param reqmatch [TimezoneListMatch, Hash, nil] match filter (any subset of Timezone fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<Timezone>, Array] the matching Timezone items; raises WorldTimeError on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

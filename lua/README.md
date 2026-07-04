@@ -9,12 +9,9 @@ The Lua SDK for the WorldTime API — an entity-oriented client using Lua conven
 
 
 ## Install
-```bash
-luarocks install voxgig-sdk-world-time
-```
-
-If the module is not yet published, add the source directory to
-your `LUA_PATH`:
+This package is not yet published to LuaRocks. Install it from the
+GitHub release tag (`lua/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/world-time-sdk/releases)),
+or add the source directory to your `LUA_PATH`:
 
 ```bash
 export LUA_PATH="path/to/lua/?.lua;path/to/lua/?/init.lua;;"
@@ -31,9 +28,7 @@ loading a specific record.
 ```lua
 local sdk = require("world-time_sdk")
 
-local client = sdk.new({
-  apikey = os.getenv("WORLD-TIME_APIKEY"),
-})
+local client = sdk.new()
 ```
 
 
@@ -79,7 +74,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:WorldTime():load({ id = "test01" })
+local result, err = client:ipn():load({ id = "test01" })
 -- result contains mock response data
 ```
 
@@ -112,8 +107,7 @@ local client = sdk.new({
 Create a `.env.local` file at the project root:
 
 ```
-WORLD-TIME_TEST_LIVE=TRUE
-WORLD-TIME_APIKEY=<your-key>
+WORLD_TIME_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -136,7 +130,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -262,12 +255,12 @@ API path: `/timezone`
 
 ### Ipn
 
-Create an instance: `const ipn = client.Ipn()`
+Create an instance: `const ipn = client.ipn`
 
 
 ### Ipn2
 
-Create an instance: `const ipn2 = client.Ipn2()`
+Create an instance: `const ipn2 = client.ipn2`
 
 #### Operations
 
@@ -298,13 +291,13 @@ Create an instance: `const ipn2 = client.Ipn2()`
 #### Example: Load
 
 ```ts
-const ipn2 = await client.Ipn2().load({ id: 'ipn2_id' })
+const ipn2 = await client.ipn2.load({ id: 'ipn2_id' })
 ```
 
 
 ### Timezone
 
-Create an instance: `const timezone = client.Timezone()`
+Create an instance: `const timezone = client.timezone`
 
 #### Operations
 
@@ -336,13 +329,13 @@ Create an instance: `const timezone = client.Timezone()`
 #### Example: Load
 
 ```ts
-const timezone = await client.Timezone().load({ id: 'timezone_id' })
+const timezone = await client.timezone.load({ id: 'timezone_id' })
 ```
 
 #### Example: List
 
 ```ts
-const timezones = await client.Timezone().list()
+const timezones = await client.timezone.list()
 ```
 
 
@@ -417,11 +410,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local moon = client:Moon(nil)
-moon:load({ planet_id = "earth", id = "luna" }, nil)
+local ipn = client:ipn()
+ipn:load({ id = "example_id" })
 
--- moon:data_get() now returns the loaded moon data
--- moon:match_get() returns the last match criteria
+-- ipn:data_get() now returns the loaded ipn data
+-- ipn:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

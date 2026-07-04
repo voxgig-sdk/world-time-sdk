@@ -14,9 +14,14 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Timezone,
+  TimezoneLoadMatch,
+  TimezoneListMatch,
+} from '../WorldTimeTypes'
 
 // TODO: needs Entity superclass
-class TimezoneEntity extends WorldTimeEntityBase {
+class TimezoneEntity extends WorldTimeEntityBase<Timezone> {
 
   constructor(client: WorldTimeSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +37,7 @@ class TimezoneEntity extends WorldTimeEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: TimezoneLoadMatch, ctrl?: Control): Promise<Timezone> {
 
     const utility = this._utility
 
@@ -136,14 +141,16 @@ class TimezoneEntity extends WorldTimeEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Timezone> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: TimezoneListMatch, ctrl?: Control): Promise<Timezone[]> {
 
     const utility = this._utility
 
@@ -243,7 +250,9 @@ class TimezoneEntity extends WorldTimeEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Timezone[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

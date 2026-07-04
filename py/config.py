@@ -15,9 +15,6 @@ def make_config():
         },
         "options": {
             "base": "https://worldtimeapi.org/api",
-            "auth": {
-                "prefix": "Bearer",
-            },
             "headers": {
         "content-type": "application/json",
       },
@@ -162,6 +159,7 @@ def make_config():
                       "orig": "ipv4",
                       "reqd": True,
                       "type": "`$STRING`",
+                      "index$": 0,
                     },
                   ],
                 },
@@ -357,6 +355,7 @@ def make_config():
                       "orig": "area",
                       "reqd": True,
                       "type": "`$STRING`",
+                      "index$": 0,
                     },
                     {
                       "active": True,
@@ -366,6 +365,7 @@ def make_config():
                       "orig": "location",
                       "reqd": True,
                       "type": "`$STRING`",
+                      "index$": 1,
                     },
                   ],
                 },
@@ -400,6 +400,7 @@ def make_config():
                       "orig": "area",
                       "reqd": True,
                       "type": "`$STRING`",
+                      "index$": 0,
                     },
                   ],
                 },

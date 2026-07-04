@@ -144,16 +144,23 @@ class WorldTimeSDK:
 
         _, err = utility.prepare_auth(ctx)
         if err is not None:
-            return None, err
+            raise err
 
-        return utility.make_fetch_def(ctx)
+        fetchdef, err = utility.make_fetch_def(ctx)
+        if err is not None:
+            raise err
+
+        return fetchdef
 
     def direct(self, fetchargs=None):
         utility = self._utility
 
-        fetchdef, err = self.prepare(fetchargs)
-        if err is not None:
-            return {"ok": False, "err": err}, None
+        try:
+            fetchdef = self.prepare(fetchargs)
+        except Exception as err:
+            # direct() is the raw-HTTP escape hatch: it never raises, it
+            # returns a result object callers branch on via result["ok"].
+            return {"ok": False, "err": err}
 
         if fetchargs is None:
             fetchargs = {}
@@ -170,13 +177,13 @@ class WorldTimeSDK:
         fetched, fetch_err = utility.fetcher(ctx, url, fetchdef)
 
         if fetch_err is not None:
-            return {"ok": False, "err": fetch_err}, None
+            return {"ok": False, "err": fetch_err}
 
         if fetched is None:
             return {
                 "ok": False,
                 "err": ctx.make_error("direct_no_response", "response: undefined"),
-            }, None
+            }
 
         if isinstance(fetched, dict):
             status = helpers.to_int(vs.getprop(fetched, "status"))
@@ -205,25 +212,58 @@ class WorldTimeSDK:
                 "status": status,
                 "headers": headers,
                 "data": json_data,
-            }, None
+            }
 
         return {
             "ok": False,
             "err": ctx.make_error("direct_invalid", "invalid response type"),
-        }, None
+        }
 
+
+    @property
+    def ipn(self):
+        """Idiomatic facade: client.ipn.list() / client.ipn.load({"id": ...})."""
+        from entity.ipn_entity import IpnEntity
+        cached = getattr(self, "_ipn", None)
+        if cached is None:
+            cached = IpnEntity(self, None)
+            self._ipn = cached
+        return cached
 
     def Ipn(self, data=None):
+        # Deprecated: use client.ipn instead.
         from entity.ipn_entity import IpnEntity
         return IpnEntity(self, data)
 
 
+    @property
+    def ipn2(self):
+        """Idiomatic facade: client.ipn2.list() / client.ipn2.load({"id": ...})."""
+        from entity.ipn2_entity import Ipn2Entity
+        cached = getattr(self, "_ipn2", None)
+        if cached is None:
+            cached = Ipn2Entity(self, None)
+            self._ipn2 = cached
+        return cached
+
     def Ipn2(self, data=None):
+        # Deprecated: use client.ipn2 instead.
         from entity.ipn2_entity import Ipn2Entity
         return Ipn2Entity(self, data)
 
 
+    @property
+    def timezone(self):
+        """Idiomatic facade: client.timezone.list() / client.timezone.load({"id": ...})."""
+        from entity.timezone_entity import TimezoneEntity
+        cached = getattr(self, "_timezone", None)
+        if cached is None:
+            cached = TimezoneEntity(self, None)
+            self._timezone = cached
+        return cached
+
     def Timezone(self, data=None):
+        # Deprecated: use client.timezone instead.
         from entity.timezone_entity import TimezoneEntity
         return TimezoneEntity(self, data)
 

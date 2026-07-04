@@ -50,14 +50,12 @@ class TestTimezoneEntity:
         timezone_ref01_ent = client.Timezone(None)
         timezone_ref01_match = {}
 
-        timezone_ref01_list_result, err = timezone_ref01_ent.list(timezone_ref01_match, None)
-        assert err is None
+        timezone_ref01_list_result = timezone_ref01_ent.list(timezone_ref01_match, None)
         assert isinstance(timezone_ref01_list_result, list)
 
         # LOAD
         timezone_ref01_match_dt0 = {}
-        timezone_ref01_data_dt0_loaded, err = timezone_ref01_ent.load(timezone_ref01_match_dt0, None)
-        assert err is None
+        timezone_ref01_data_dt0_loaded = timezone_ref01_ent.load(timezone_ref01_match_dt0, None)
         assert timezone_ref01_data_dt0_loaded is not None
 
 
@@ -98,7 +96,6 @@ def _timezone_basic_setup(extra):
         "WORLDTIME_TEST_TIMEZONE_ENTID": idmap,
         "WORLDTIME_TEST_LIVE": "FALSE",
         "WORLDTIME_TEST_EXPLAIN": "FALSE",
-        "WORLDTIME_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -109,7 +106,6 @@ def _timezone_basic_setup(extra):
     if env.get("WORLDTIME_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("WORLDTIME_APIKEY"),
             },
             extra or {},
         ])

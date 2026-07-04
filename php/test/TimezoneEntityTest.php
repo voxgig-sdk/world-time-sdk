@@ -50,14 +50,12 @@ class TimezoneEntityTest extends TestCase
         $timezone_ref01_ent = $client->Timezone(null);
         $timezone_ref01_match = [];
 
-        [$timezone_ref01_list_result, $err] = $timezone_ref01_ent->list($timezone_ref01_match, null);
-        $this->assertNull($err);
+        $timezone_ref01_list_result = $timezone_ref01_ent->list($timezone_ref01_match, null);
         $this->assertIsArray($timezone_ref01_list_result);
 
         // LOAD
         $timezone_ref01_match_dt0 = [];
-        [$timezone_ref01_data_dt0_loaded, $err] = $timezone_ref01_ent->load($timezone_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $timezone_ref01_data_dt0_loaded = $timezone_ref01_ent->load($timezone_ref01_match_dt0, null);
         $this->assertNotNull($timezone_ref01_data_dt0_loaded);
 
     }
@@ -92,7 +90,6 @@ function timezone_basic_setup($extra)
         "WORLDTIME_TEST_TIMEZONE_ENTID" => $idmap,
         "WORLDTIME_TEST_LIVE" => "FALSE",
         "WORLDTIME_TEST_EXPLAIN" => "FALSE",
-        "WORLDTIME_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -104,7 +101,6 @@ function timezone_basic_setup($extra)
     if ($env["WORLDTIME_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["WORLDTIME_APIKEY"],
             ],
             $extra ?? [],
         ]);

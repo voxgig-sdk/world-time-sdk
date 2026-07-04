@@ -245,16 +245,25 @@ func (sdk *WorldTimeSDK) Direct(fetchargs map[string]any) (map[string]any, error
 }
 
 
+// Ipn returns a Ipn entity bound to this client.
+// Idiomatic usage: client.Ipn(nil).List(nil, nil) or
+// client.Ipn(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *WorldTimeSDK) Ipn(data map[string]any) WorldTimeEntity {
 	return NewIpnEntityFunc(sdk, data)
 }
 
 
+// Ipn2 returns a Ipn2 entity bound to this client.
+// Idiomatic usage: client.Ipn2(nil).List(nil, nil) or
+// client.Ipn2(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *WorldTimeSDK) Ipn2(data map[string]any) WorldTimeEntity {
 	return NewIpn2EntityFunc(sdk, data)
 }
 
 
+// Timezone returns a Timezone entity bound to this client.
+// Idiomatic usage: client.Timezone(nil).List(nil, nil) or
+// client.Timezone(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *WorldTimeSDK) Timezone(data map[string]any) WorldTimeEntity {
 	return NewTimezoneEntityFunc(sdk, data)
 }

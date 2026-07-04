@@ -43,14 +43,12 @@ class TimezoneEntityTest < Minitest::Test
     timezone_ref01_ent = client.Timezone(nil)
     timezone_ref01_match = {}
 
-    timezone_ref01_list_result, err = timezone_ref01_ent.list(timezone_ref01_match, nil)
-    assert_nil err
+    timezone_ref01_list_result = timezone_ref01_ent.list(timezone_ref01_match, nil)
     assert timezone_ref01_list_result.is_a?(Array)
 
     # LOAD
     timezone_ref01_match_dt0 = {}
-    timezone_ref01_data_dt0_loaded, err = timezone_ref01_ent.load(timezone_ref01_match_dt0, nil)
-    assert_nil err
+    timezone_ref01_data_dt0_loaded = timezone_ref01_ent.load(timezone_ref01_match_dt0, nil)
     assert !timezone_ref01_data_dt0_loaded.nil?
 
   end
@@ -89,7 +87,6 @@ def timezone_basic_setup(extra)
     "WORLDTIME_TEST_TIMEZONE_ENTID" => idmap,
     "WORLDTIME_TEST_LIVE" => "FALSE",
     "WORLDTIME_TEST_EXPLAIN" => "FALSE",
-    "WORLDTIME_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -101,7 +98,6 @@ def timezone_basic_setup(extra)
   if env["WORLDTIME_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["WORLDTIME_APIKEY"],
       },
       extra || {},
     ])

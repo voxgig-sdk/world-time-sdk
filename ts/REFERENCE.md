@@ -18,7 +18,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `object` | SDK configuration options. |
-| `options.apikey` | `string` | API key for authentication. |
 | `options.base` | `string` | Base URL for API requests. |
 | `options.prefix` | `string` | URL prefix appended after base. |
 | `options.suffix` | `string` | URL suffix appended after path. |
@@ -134,7 +133,7 @@ Alias for `WorldTimeSDK.test()`.
 ## IpnEntity
 
 ```ts
-const ipn = client.Ipn()
+const ipn = client.ipn
 ```
 
 ### Common Methods
@@ -168,7 +167,7 @@ Return a copy of the entity options.
 ## Ipn2Entity
 
 ```ts
-const ipn2 = client.Ipn2()
+const ipn2 = client.ipn2
 ```
 
 ### Fields
@@ -198,7 +197,7 @@ const ipn2 = client.Ipn2()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Ipn2().load({ id: 'ipn2_id' })
+const result = await client.ipn2.load({ id: 'ipn2_id' })
 ```
 
 ### Common Methods
@@ -232,7 +231,7 @@ Return a copy of the entity options.
 ## TimezoneEntity
 
 ```ts
-const timezone = client.Timezone()
+const timezone = client.timezone
 ```
 
 ### Fields
@@ -262,7 +261,7 @@ const timezone = client.Timezone()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Timezone().list()
+const results = await client.timezone.list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -270,7 +269,7 @@ const results = await client.Timezone().list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Timezone().load({ id: 'timezone_id' })
+const result = await client.timezone.load({ id: 'timezone_id' })
 ```
 
 ### Common Methods

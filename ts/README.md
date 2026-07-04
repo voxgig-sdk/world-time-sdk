@@ -9,9 +9,12 @@ The TypeScript SDK for the WorldTime API — a type-safe, entity-oriented client
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/world-time
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/world-time-sdk/releases](https://github.com/voxgig-sdk/world-time-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,11 +23,9 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { WorldTimeSDK } from 'world-time'
+import { WorldTimeSDK } from '@voxgig-sdk/world-time'
 
-const client = new WorldTimeSDK({
-  apikey: process.env.WORLD-TIME_APIKEY,
-})
+const client = new WorldTimeSDK()
 ```
 
 
@@ -69,7 +70,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = WorldTimeSDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.ipn.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -77,7 +78,7 @@ const result = await client.Planet().load({ id: 'test01' })
 You can also use the instance method:
 
 ```ts
-const client = new WorldTimeSDK({ apikey: '...' })
+const client = new WorldTimeSDK()
 const testClient = client.tester()
 ```
 
@@ -86,7 +87,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.ipn
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -113,7 +114,6 @@ const logger = {
 }
 
 const client = new WorldTimeSDK({
-  apikey: '...',
   extend: [logger],
 })
 ```
@@ -123,8 +123,7 @@ const client = new WorldTimeSDK({
 Create a `.env.local` file at the project root:
 
 ```
-WORLD-TIME_TEST_LIVE=TRUE
-WORLD-TIME_APIKEY=<your-key>
+WORLD_TIME_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -142,7 +141,6 @@ cd ts && npm test
 
 ```ts
 new WorldTimeSDK(options?: {
-  apikey?: string
   base?: string
   prefix?: string
   suffix?: string
@@ -153,7 +151,6 @@ new WorldTimeSDK(options?: {
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -305,12 +302,12 @@ API path: `/timezone`
 
 ### Ipn
 
-Create an instance: `const ipn = client.Ipn()`
+Create an instance: `const ipn = client.ipn`
 
 
 ### Ipn2
 
-Create an instance: `const ipn2 = client.Ipn2()`
+Create an instance: `const ipn2 = client.ipn2`
 
 #### Operations
 
@@ -341,13 +338,13 @@ Create an instance: `const ipn2 = client.Ipn2()`
 #### Example: Load
 
 ```ts
-const ipn2 = await client.Ipn2().load({ id: 'ipn2_id' })
+const ipn2 = await client.ipn2.load({ id: 'ipn2_id' })
 ```
 
 
 ### Timezone
 
-Create an instance: `const timezone = client.Timezone()`
+Create an instance: `const timezone = client.timezone`
 
 #### Operations
 
@@ -379,13 +376,13 @@ Create an instance: `const timezone = client.Timezone()`
 #### Example: Load
 
 ```ts
-const timezone = await client.Timezone().load({ id: 'timezone_id' })
+const timezone = await client.timezone.load({ id: 'timezone_id' })
 ```
 
 #### Example: List
 
 ```ts
-const timezones = await client.Timezone().list()
+const timezones = await client.timezone.list()
 ```
 
 
@@ -446,7 +443,7 @@ world-time/
 Import the SDK from the package root:
 
 ```ts
-import { WorldTimeSDK } from 'world-time'
+import { WorldTimeSDK } from '@voxgig-sdk/world-time'
 ```
 
 ### Entity state
@@ -456,11 +453,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const ipn = client.ipn
+await ipn.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// ipn.data() now returns the loaded ipn data
+// ipn.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

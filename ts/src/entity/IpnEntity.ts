@@ -14,9 +14,12 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Ipn,
+} from '../WorldTimeTypes'
 
 // TODO: needs Entity superclass
-class IpnEntity extends WorldTimeEntityBase {
+class IpnEntity extends WorldTimeEntityBase<Ipn> {
 
   constructor(client: WorldTimeSDK, entopts: any) {
     super(client, entopts)

@@ -13,6 +13,9 @@ require_relative 'config'
 require_relative 'feature/base_feature'
 require_relative 'features'
 
+# Load typed models (Struct value objects).
+require_relative 'WorldTime_types'
+
 
 class WorldTimeSDK
   attr_accessor :mode, :features, :options
@@ -131,7 +134,7 @@ class WorldTimeSDK
     end
 
     _, err = utility.prepare_auth.call(ctx)
-    return nil, err if err
+    raise err if err
 
     utility.make_fetch_def.call(ctx)
   end
@@ -139,8 +142,14 @@ class WorldTimeSDK
   def direct(fetchargs = {})
     utility = @_utility
 
-    fetchdef, err = prepare(fetchargs)
-    return { "ok" => false, "err" => err }, nil if err
+    # direct() is the raw-HTTP escape hatch: it always returns a result hash
+    # ({ "ok" => ..., ... }) and never raises. prepare() raises on error, so
+    # trap that and surface it in the hash.
+    begin
+      fetchdef = prepare(fetchargs)
+    rescue WorldTimeError => err
+      return { "ok" => false, "err" => err }
+    end
 
     fetchargs ||= {}
     ctrl = WorldTimeHelpers.to_map(VoxgigStruct.getprop(fetchargs, "ctrl")) || {}
@@ -153,13 +162,13 @@ class WorldTimeSDK
     url = fetchdef["url"] || ""
     fetched, fetch_err = utility.fetcher.call(ctx, url, fetchdef)
 
-    return { "ok" => false, "err" => fetch_err }, nil if fetch_err
+    return { "ok" => false, "err" => fetch_err } if fetch_err
 
     if fetched.nil?
       return {
         "ok" => false,
         "err" => ctx.make_error("direct_no_response", "response: undefined"),
-      }, nil
+      }
     end
 
     if fetched.is_a?(Hash)
@@ -189,28 +198,49 @@ class WorldTimeSDK
         "status" => status,
         "headers" => headers,
         "data" => json_data,
-      }, nil
+      }
     end
 
     return {
       "ok" => false,
       "err" => ctx.make_error("direct_invalid", "invalid response type"),
-    }, nil
+    }
   end
 
 
+  # Idiomatic facade: client.ipn.list / client.ipn.load({ "id" => ... })
+  def ipn
+    require_relative 'entity/ipn_entity'
+    @ipn ||= IpnEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.ipn instead.
   def Ipn(data = nil)
     require_relative 'entity/ipn_entity'
     IpnEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.ipn2.list / client.ipn2.load({ "id" => ... })
+  def ipn2
+    require_relative 'entity/ipn2_entity'
+    @ipn2 ||= Ipn2Entity.new(self, nil)
+  end
+
+  # Deprecated: use client.ipn2 instead.
   def Ipn2(data = nil)
     require_relative 'entity/ipn2_entity'
     Ipn2Entity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.timezone.list / client.timezone.load({ "id" => ... })
+  def timezone
+    require_relative 'entity/timezone_entity'
+    @timezone ||= TimezoneEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.timezone instead.
   def Timezone(data = nil)
     require_relative 'entity/timezone_entity'
     TimezoneEntity.new(self, data)

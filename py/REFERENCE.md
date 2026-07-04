@@ -20,7 +20,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `dict` | SDK configuration options. |
-| `options["apikey"]` | `str` | API key for authentication. |
 | `options["base"]` | `str` | Base URL for API requests. |
 | `options["prefix"]` | `str` | URL prefix appended after base. |
 | `options["suffix"]` | `str` | URL suffix appended after path. |
@@ -62,9 +61,9 @@ Return a deep copy of the current SDK options.
 
 Return a copy of the SDK utility object.
 
-#### `direct(fetchargs=None) -> tuple`
+#### `direct(fetchargs=None) -> dict`
 
-Make a direct HTTP request to any API endpoint. Returns `(result, err)`.
+Make a direct HTTP request to any API endpoint. Returns a result `dict` with `ok`, `status`, `headers`, and `data` (or `err` on failure). This escape hatch never raises — branch on `result["ok"]`.
 
 **Parameters:**
 
@@ -77,11 +76,11 @@ Make a direct HTTP request to any API endpoint. Returns `(result, err)`.
 | `fetchargs["headers"]` | `dict` | Request headers (merged with defaults). |
 | `fetchargs["body"]` | `any` | Request body (dicts are JSON-serialized). |
 
-**Returns:** `(result_dict, err)`
+**Returns:** `result_dict`
 
-#### `prepare(fetchargs=None) -> tuple`
+#### `prepare(fetchargs=None) -> dict`
 
-Prepare a fetch definition without sending. Returns `(fetchdef, err)`.
+Prepare a fetch definition without sending. Returns the `fetchdef` and raises on error.
 
 
 ---
@@ -89,7 +88,7 @@ Prepare a fetch definition without sending. Returns `(fetchdef, err)`.
 ## IpnEntity
 
 ```python
-ipn = client.Ipn()
+ipn = client.ipn
 ```
 
 ### Common Methods
@@ -124,7 +123,7 @@ Return the entity name.
 ## Ipn2Entity
 
 ```python
-ipn2 = client.Ipn2()
+ipn2 = client.ipn2
 ```
 
 ### Fields
@@ -149,12 +148,12 @@ ipn2 = client.Ipn2()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.Ipn2().load({"id": "ipn2_id"})
+result = client.ipn2.load({"id": "ipn2_id"})
 ```
 
 ### Common Methods
@@ -189,7 +188,7 @@ Return the entity name.
 ## TimezoneEntity
 
 ```python
-timezone = client.Timezone()
+timezone = client.timezone
 ```
 
 ### Fields
@@ -214,20 +213,20 @@ timezone = client.Timezone()
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> tuple`
+#### `list(reqmatch, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results, err = client.Timezone().list({})
+results = client.timezone.list({})
 ```
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.Timezone().load({"id": "timezone_id"})
+result = client.timezone.load({"id": "timezone_id"})
 ```
 
 ### Common Methods
