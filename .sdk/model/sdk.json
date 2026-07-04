@@ -355,7 +355,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body.timezone`"
+                    "res": "`body`"
                   }
                 },
                 {

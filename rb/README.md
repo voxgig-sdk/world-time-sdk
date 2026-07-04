@@ -69,13 +69,17 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = WorldTimeSDK.test
+client = WorldTimeSDK.test({
+  "entity" => { "ipn" => { "test01" => { "id" => "test01" } } },
+})
 
-result = client.ipn.load({ "id" => "test01" })
-# result contains mock response data
+# load returns the bare mock record (raises on error).
+ipn = client.Ipn.load({ "id" => "test01" })
+puts ipn
 ```
 
 ### Use a custom fetch function
@@ -151,8 +155,8 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> Hash` | Build an HTTP request definition without sending. Raises on error. |
 | `direct` | `(fetchargs) -> Hash` | Build and send an HTTP request. Returns a result hash (`result["ok"]`); does not raise. |
-| `Ipn` | `(data) -> IpnEntity` | Create a Ipn entity instance. |
-| `Ipn2` | `(data) -> Ipn2Entity` | Create a Ipn2 entity instance. |
+| `Ipn` | `(data) -> IpnEntity` | Create an Ipn entity instance. |
+| `Ipn2` | `(data) -> Ipn2Entity` | Create an Ipn2 entity instance. |
 | `Timezone` | `(data) -> TimezoneEntity` | Create a Timezone entity instance. |
 
 ### Entity interface
@@ -256,12 +260,12 @@ API path: `/timezone`
 
 ### Ipn
 
-Create an instance: `const ipn = client.ipn`
+Create an instance: `ipn = client.Ipn`
 
 
 ### Ipn2
 
-Create an instance: `const ipn2 = client.ipn2`
+Create an instance: `ipn2 = client.Ipn2`
 
 #### Operations
 
@@ -291,14 +295,15 @@ Create an instance: `const ipn2 = client.ipn2`
 
 #### Example: Load
 
-```ts
-const ipn2 = await client.ipn2.load({ id: 'ipn2_id' })
+```ruby
+# load returns the bare Ipn2 record (raises on error).
+ipn2 = client.Ipn2.load({ "id" => "ipn2_id" })
 ```
 
 
 ### Timezone
 
-Create an instance: `const timezone = client.timezone`
+Create an instance: `timezone = client.Timezone`
 
 #### Operations
 
@@ -329,14 +334,16 @@ Create an instance: `const timezone = client.timezone`
 
 #### Example: Load
 
-```ts
-const timezone = await client.timezone.load({ id: 'timezone_id' })
+```ruby
+# load returns the bare Timezone record (raises on error).
+timezone = client.Timezone.load({ "id" => "timezone_id" })
 ```
 
 #### Example: List
 
-```ts
-const timezones = await client.timezone.list()
+```ruby
+# list returns an Array of Timezone records (raises on error).
+timezones = client.Timezone.list
 ```
 
 
@@ -411,7 +418,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-ipn = client.ipn
+ipn = client.Ipn
 ipn.load({ "id" => "example_id" })
 
 # ipn.data_get now returns the loaded ipn data

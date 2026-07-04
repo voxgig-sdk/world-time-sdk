@@ -206,42 +206,21 @@ class WorldTimeSDK {
 
 
 
-  _ipn?: IpnEntity
-
-  // Idiomatic facade: `client.ipn.list()` / `client.ipn.load({ id })`.
-  get ipn(): IpnEntity {
-    return (this._ipn ??= new IpnEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.ipn` instead. */
+  // Entity access: `client.Ipn().list()` / `client.Ipn().load({ id })`.
   Ipn(data?: any) {
     const self = this
     return new IpnEntity(self,data)
   }
 
 
-  _ipn2?: Ipn2Entity
-
-  // Idiomatic facade: `client.ipn2.list()` / `client.ipn2.load({ id })`.
-  get ipn2(): Ipn2Entity {
-    return (this._ipn2 ??= new Ipn2Entity(this, undefined))
-  }
-
-  /** @deprecated Use `client.ipn2` instead. */
+  // Entity access: `client.Ipn2().list()` / `client.Ipn2().load({ id })`.
   Ipn2(data?: any) {
     const self = this
     return new Ipn2Entity(self,data)
   }
 
 
-  _timezone?: TimezoneEntity
-
-  // Idiomatic facade: `client.timezone.list()` / `client.timezone.load({ id })`.
-  get timezone(): TimezoneEntity {
-    return (this._timezone ??= new TimezoneEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.timezone` instead. */
+  // Entity access: `client.Timezone().list()` / `client.Timezone().load({ id })`.
   Timezone(data?: any) {
     const self = this
     return new TimezoneEntity(self,data)

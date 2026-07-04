@@ -30,20 +30,25 @@ go mod edit -replace github.com/voxgig-sdk/world-time-sdk/go=../world-time-sdk/g
 This tutorial walks through creating a client, listing entities, and
 loading a specific record.
 
-### 1. Create a client
+### Quickstart
+
+A complete program: create a client, then call the entity operations.
+Each operation returns `(value, error)` — the value is the data itself
+(there is no `{ok, data}` wrapper), so check `err` and use the value
+directly.
 
 ```go
 package main
 
 import (
-    "fmt"
-
     sdk "github.com/voxgig-sdk/world-time-sdk/go"
-    "github.com/voxgig-sdk/world-time-sdk/go/core"
 )
 
 func main() {
     client := sdk.New()
+
+    _ = client
+}
 ```
 
 
@@ -93,10 +98,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-result, err := client.Ipn(nil).Load(
+ipn, err := client.Ipn(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
-// result contains mock response data
+if err != nil {
+    panic(err)
+}
+fmt.Println(ipn) // the loaded mock data
 ```
 
 ### Use a custom fetch function
@@ -173,8 +181,8 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `GetUtility` | `() *Utility` | Copy of the SDK utility object. |
 | `Prepare` | `(fetchargs map[string]any) (map[string]any, error)` | Build an HTTP request definition without sending. |
 | `Direct` | `(fetchargs map[string]any) (map[string]any, error)` | Build and send an HTTP request. |
-| `Ipn` | `(data map[string]any) WorldTimeEntity` | Create a Ipn entity instance. |
-| `Ipn2` | `(data map[string]any) WorldTimeEntity` | Create a Ipn2 entity instance. |
+| `Ipn` | `(data map[string]any) WorldTimeEntity` | Create an Ipn entity instance. |
+| `Ipn2` | `(data map[string]any) WorldTimeEntity` | Create an Ipn2 entity instance. |
 | `Timezone` | `(data map[string]any) WorldTimeEntity` | Create a Timezone entity instance. |
 
 ### Entity interface (WorldTimeEntity)
@@ -195,17 +203,24 @@ All entities implement the `WorldTimeEntity` interface.
 
 ### Result shape
 
-Entity operations return `(any, error)`. The `any` value is a
-`map[string]any` with these keys:
+Entity operations return `(value, error)`. The `value` is the
+operation's data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `"ok"` | `bool` | `true` if the HTTP status is 2xx. |
-| `"status"` | `int` | HTTP status code. |
-| `"headers"` | `map[string]any` | Response headers. |
-| `"data"` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `Load` / `Create` / `Update` / `Remove` | the entity record (`map[string]any`) |
+| `List` | a `[]any` of entity records |
 
-On error, `"ok"` is `false` and `"err"` contains the error value.
+Check `err` first, then use the value directly (or the typed
+`...Typed` variants, which return the entity's model struct and a typed
+slice):
+
+    ipn, err := client.Ipn(nil).Load(map[string]any{"id": "example_id"}, nil)
+    if err != nil { /* handle */ }
+    // ipn is the loaded record
+
+Only `Direct()` returns a response envelope — a `map[string]any` with
+`"ok"`, `"status"`, `"headers"`, and `"data"` keys.
 
 ### Entities
 
@@ -309,7 +324,11 @@ Create an instance: `ipn2 := client.Ipn2(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Ipn2(nil).Load(map[string]any{"id": "ipn2_id"}, nil)
+ipn2, err := client.Ipn2(nil).Load(map[string]any{"id": "ipn2_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(ipn2) // the loaded record
 ```
 
 
@@ -347,13 +366,21 @@ Create an instance: `timezone := client.Timezone(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Timezone(nil).Load(map[string]any{"id": "timezone_id"}, nil)
+timezone, err := client.Timezone(nil).Load(map[string]any{"id": "timezone_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(timezone) // the loaded record
 ```
 
 #### Example: List
 
 ```go
-results, err := client.Timezone(nil).List(nil, nil)
+timezones, err := client.Timezone(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(timezones) // the array of records
 ```
 
 

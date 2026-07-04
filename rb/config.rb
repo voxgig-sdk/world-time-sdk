@@ -384,7 +384,7 @@ module WorldTimeConfig
                   },
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body.timezone`",
+                    "res" => "`body`",
                   },
                   "index$" => 0,
                 },

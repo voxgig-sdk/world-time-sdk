@@ -91,7 +91,7 @@ same parameters as `direct()`.
 ## IpnEntity
 
 ```lua
-local ipn = client:ipn(nil)
+local ipn = client:Ipn(nil)
 ```
 
 ### Common Methods
@@ -127,7 +127,7 @@ Return the entity name.
 ## Ipn2Entity
 
 ```lua
-local ipn2 = client:ipn2(nil)
+local ipn2 = client:Ipn2(nil)
 ```
 
 ### Fields
@@ -157,7 +157,7 @@ local ipn2 = client:ipn2(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:ipn2():load({ id = "ipn2_id" })
+local result, err = client:Ipn2():load({ id = "ipn2_id" })
 ```
 
 ### Common Methods
@@ -193,7 +193,7 @@ Return the entity name.
 ## TimezoneEntity
 
 ```lua
-local timezone = client:timezone(nil)
+local timezone = client:Timezone(nil)
 ```
 
 ### Fields
@@ -223,7 +223,7 @@ local timezone = client:timezone(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:timezone():list()
+local results, err = client:Timezone():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -231,7 +231,7 @@ local results, err = client:timezone():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:timezone():load({ id = "timezone_id" })
+local result, err = client:Timezone():load({ id = "timezone_id" })
 ```
 
 ### Common Methods

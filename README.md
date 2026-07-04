@@ -130,22 +130,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = WorldTimeSDK.test()
-const result = await client.ipn.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const ipn = await client.Ipn().load({ id: 'test01' })
+// ipn is a bare Ipn populated with mock data
+console.log(ipn)
 ```
 
 ### Python
 
 ```python
 client = WorldTimeSDK.test()
-result = client.ipn.load({"id": "test01"})
+ipn = client.Ipn().load({"id": "test01"})
+print(ipn)
 ```
 
 ### PHP
 
 ```php
-$client = WorldTimeSDK::test();
-$result = $client->ipn()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = WorldTimeSDK::test([
+    "entity" => ["ipn" => ["test01" => ["id" => "test01"]]],
+]);
+$ipn = $client->Ipn()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -160,15 +165,18 @@ result, err := client.Ipn(nil).Load(
 ### Ruby
 
 ```ruby
-client = WorldTimeSDK.test
-result = client.ipn.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = WorldTimeSDK.test({
+  "entity" => { "ipn" => { "test01" => { "id" => "test01" } } },
+})
+ipn = client.Ipn.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:ipn():load({ id = "test01" })
+local result, err = client:Ipn():load({ id = "test01" })
 ```
 
 ## How it works
@@ -216,6 +224,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

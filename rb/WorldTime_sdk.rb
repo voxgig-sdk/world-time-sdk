@@ -208,39 +208,21 @@ class WorldTimeSDK
   end
 
 
-  # Idiomatic facade: client.ipn.list / client.ipn.load({ "id" => ... })
-  def ipn
-    require_relative 'entity/ipn_entity'
-    @ipn ||= IpnEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.ipn instead.
+  # Canonical facade: client.Ipn.list / client.Ipn.load({ "id" => ... })
   def Ipn(data = nil)
     require_relative 'entity/ipn_entity'
     IpnEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.ipn2.list / client.ipn2.load({ "id" => ... })
-  def ipn2
-    require_relative 'entity/ipn2_entity'
-    @ipn2 ||= Ipn2Entity.new(self, nil)
-  end
-
-  # Deprecated: use client.ipn2 instead.
+  # Canonical facade: client.Ipn2.list / client.Ipn2.load({ "id" => ... })
   def Ipn2(data = nil)
     require_relative 'entity/ipn2_entity'
     Ipn2Entity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.timezone.list / client.timezone.load({ "id" => ... })
-  def timezone
-    require_relative 'entity/timezone_entity'
-    @timezone ||= TimezoneEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.timezone instead.
+  # Canonical facade: client.Timezone.list / client.Timezone.load({ "id" => ... })
   def Timezone(data = nil)
     require_relative 'entity/timezone_entity'
     TimezoneEntity.new(self, data)

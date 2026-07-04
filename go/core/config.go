@@ -383,7 +383,7 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.timezone`",
+									"res": "`body`",
 								},
 								"index$": 0,
 							},

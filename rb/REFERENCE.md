@@ -94,7 +94,7 @@ same parameters as `direct()`. Raises on error.
 ## IpnEntity
 
 ```ruby
-ipn = client.ipn
+ipn = client.Ipn
 ```
 
 ### Common Methods
@@ -130,7 +130,7 @@ Return the entity name.
 ## Ipn2Entity
 
 ```ruby
-ipn2 = client.ipn2
+ipn2 = client.Ipn2
 ```
 
 ### Fields
@@ -160,7 +160,7 @@ ipn2 = client.ipn2
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.ipn2.load({ "id" => "ipn2_id" })
+result = client.Ipn2.load({ "id" => "ipn2_id" })
 ```
 
 ### Common Methods
@@ -196,7 +196,7 @@ Return the entity name.
 ## TimezoneEntity
 
 ```ruby
-timezone = client.timezone
+timezone = client.Timezone
 ```
 
 ### Fields
@@ -226,7 +226,7 @@ timezone = client.timezone
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.timezone.list(nil)
+results = client.Timezone.list(nil)
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -234,7 +234,7 @@ results = client.timezone.list(nil)
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.timezone.load({ "id" => "timezone_id" })
+result = client.Timezone.load({ "id" => "timezone_id" })
 ```
 
 ### Common Methods

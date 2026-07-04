@@ -93,7 +93,7 @@ Prepare a fetch definition without sending the request. Returns the
 ## IpnEntity
 
 ```php
-$ipn = $client->ipn();
+$ipn = $client->Ipn();
 ```
 
 ### Common Methods
@@ -129,7 +129,7 @@ Return the entity name.
 ## Ipn2Entity
 
 ```php
-$ipn2 = $client->ipn2();
+$ipn2 = $client->Ipn2();
 ```
 
 ### Fields
@@ -159,7 +159,7 @@ $ipn2 = $client->ipn2();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->ipn2()->load(["id" => "ipn2_id"]);
+$result = $client->Ipn2()->load(["id" => "ipn2_id"]);
 ```
 
 ### Common Methods
@@ -195,7 +195,7 @@ Return the entity name.
 ## TimezoneEntity
 
 ```php
-$timezone = $client->timezone();
+$timezone = $client->Timezone();
 ```
 
 ### Fields
@@ -225,7 +225,7 @@ $timezone = $client->timezone();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->timezone()->list([]);
+$results = $client->Timezone()->list([]);
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -233,7 +233,7 @@ $results = $client->timezone()->list([]);
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->timezone()->load(["id" => "timezone_id"]);
+$result = $client->Timezone()->load(["id" => "timezone_id"]);
 ```
 
 ### Common Methods

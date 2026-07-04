@@ -4,83 +4,81 @@
 # params (op.<name>.points[].args.params[]). Field/param types come from the
 # canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 # @voxgig/apidef VALID_CANON). Do not edit by hand.
+#
+# These are TypedDicts, not dataclasses: the SDK ops return/accept plain dicts
+# at runtime, and a TypedDict IS a dict shape, so the types match the runtime.
+# Optional (req:false) keys are modelled as TypedDict key-optionality
+# (total=False), split into a required base + total=False subclass when a type
+# has both required and optional keys.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Optional, Any
+from typing import TypedDict, Any
 
 
-@dataclass
-class Ipn:
+class Ipn(TypedDict):
     pass
 
 
-@dataclass
-class Ipn2:
-    abbreviation: Optional[str] = None
-    client_ip: Optional[str] = None
-    datetime: Optional[str] = None
-    day_of_week: Optional[int] = None
-    day_of_year: Optional[int] = None
-    dst: Optional[bool] = None
-    dst_from: Optional[str] = None
-    dst_offset: Optional[int] = None
-    dst_until: Optional[str] = None
-    raw_offset: Optional[int] = None
-    timezone: Optional[str] = None
-    unixtime: Optional[int] = None
-    utc_datetime: Optional[str] = None
-    utc_offset: Optional[str] = None
-    week_number: Optional[int] = None
+class Ipn2(TypedDict, total=False):
+    abbreviation: str
+    client_ip: str
+    datetime: str
+    day_of_week: int
+    day_of_year: int
+    dst: bool
+    dst_from: str
+    dst_offset: int
+    dst_until: str
+    raw_offset: int
+    timezone: str
+    unixtime: int
+    utc_datetime: str
+    utc_offset: str
+    week_number: int
 
 
-@dataclass
-class Ipn2LoadMatch:
+class Ipn2LoadMatch(TypedDict):
     ipv4: str
 
 
-@dataclass
-class Timezone:
-    abbreviation: Optional[str] = None
-    client_ip: Optional[str] = None
-    datetime: Optional[str] = None
-    day_of_week: Optional[int] = None
-    day_of_year: Optional[int] = None
-    dst: Optional[bool] = None
-    dst_from: Optional[str] = None
-    dst_offset: Optional[int] = None
-    dst_until: Optional[str] = None
-    raw_offset: Optional[int] = None
-    timezone: Optional[str] = None
-    unixtime: Optional[int] = None
-    utc_datetime: Optional[str] = None
-    utc_offset: Optional[str] = None
-    week_number: Optional[int] = None
+class Timezone(TypedDict, total=False):
+    abbreviation: str
+    client_ip: str
+    datetime: str
+    day_of_week: int
+    day_of_year: int
+    dst: bool
+    dst_from: str
+    dst_offset: int
+    dst_until: str
+    raw_offset: int
+    timezone: str
+    unixtime: int
+    utc_datetime: str
+    utc_offset: str
+    week_number: int
 
 
-@dataclass
-class TimezoneLoadMatch:
+class TimezoneLoadMatch(TypedDict):
     area: str
     location: str
     id: str
 
 
-@dataclass
-class TimezoneListMatch:
-    abbreviation: Optional[str] = None
-    client_ip: Optional[str] = None
-    datetime: Optional[str] = None
-    day_of_week: Optional[int] = None
-    day_of_year: Optional[int] = None
-    dst: Optional[bool] = None
-    dst_from: Optional[str] = None
-    dst_offset: Optional[int] = None
-    dst_until: Optional[str] = None
-    raw_offset: Optional[int] = None
-    timezone: Optional[str] = None
-    unixtime: Optional[int] = None
-    utc_datetime: Optional[str] = None
-    utc_offset: Optional[str] = None
-    week_number: Optional[int] = None
-
+class TimezoneListMatch(TypedDict, total=False):
+    abbreviation: str
+    client_ip: str
+    datetime: str
+    day_of_week: int
+    day_of_year: int
+    dst: bool
+    dst_from: str
+    dst_offset: int
+    dst_until: str
+    raw_offset: int
+    timezone: str
+    unixtime: int
+    utc_datetime: str
+    utc_offset: str
+    week_number: int

@@ -133,7 +133,7 @@ Alias for `WorldTimeSDK.test()`.
 ## IpnEntity
 
 ```ts
-const ipn = client.ipn
+const ipn = client.Ipn()
 ```
 
 ### Common Methods
@@ -167,7 +167,7 @@ Return a copy of the entity options.
 ## Ipn2Entity
 
 ```ts
-const ipn2 = client.ipn2
+const ipn2 = client.Ipn2()
 ```
 
 ### Fields
@@ -197,7 +197,7 @@ const ipn2 = client.ipn2
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.ipn2.load({ id: 'ipn2_id' })
+const result = await client.Ipn2().load({ id: 'ipn2_id' })
 ```
 
 ### Common Methods
@@ -231,7 +231,7 @@ Return a copy of the entity options.
 ## TimezoneEntity
 
 ```ts
-const timezone = client.timezone
+const timezone = client.Timezone()
 ```
 
 ### Fields
@@ -261,7 +261,7 @@ const timezone = client.timezone
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.timezone.list()
+const results = await client.Timezone().list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -269,7 +269,7 @@ const results = await client.timezone.list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.timezone.load({ id: 'timezone_id' })
+const result = await client.Timezone().load({ id: 'timezone_id' })
 ```
 
 ### Common Methods

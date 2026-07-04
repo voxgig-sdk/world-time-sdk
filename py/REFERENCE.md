@@ -88,7 +88,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 ## IpnEntity
 
 ```python
-ipn = client.ipn
+ipn = client.Ipn()
 ```
 
 ### Common Methods
@@ -123,7 +123,7 @@ Return the entity name.
 ## Ipn2Entity
 
 ```python
-ipn2 = client.ipn2
+ipn2 = client.Ipn2()
 ```
 
 ### Fields
@@ -153,7 +153,7 @@ ipn2 = client.ipn2
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.ipn2.load({"id": "ipn2_id"})
+result = client.Ipn2().load({"id": "ipn2_id"})
 ```
 
 ### Common Methods
@@ -188,7 +188,7 @@ Return the entity name.
 ## TimezoneEntity
 
 ```python
-timezone = client.timezone
+timezone = client.Timezone()
 ```
 
 ### Fields
@@ -218,7 +218,9 @@ timezone = client.timezone
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.timezone.list({})
+results = client.Timezone().list({})
+for timezone in results:
+    print(timezone)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -226,7 +228,7 @@ results = client.timezone.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.timezone.load({"id": "timezone_id"})
+result = client.Timezone().load({"id": "timezone_id"})
 ```
 
 ### Common Methods

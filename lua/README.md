@@ -74,8 +74,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:ipn():load({ id = "test01" })
--- result contains mock response data
+local result, err = client:Ipn():load({ id = "test01" })
+-- result is the loaded data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -153,8 +153,8 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> table, err` | Build an HTTP request definition without sending. |
 | `direct` | `(fetchargs) -> table, err` | Build and send an HTTP request. |
-| `Ipn` | `(data) -> IpnEntity` | Create a Ipn entity instance. |
-| `Ipn2` | `(data) -> Ipn2Entity` | Create a Ipn2 entity instance. |
+| `Ipn` | `(data) -> IpnEntity` | Create an Ipn entity instance. |
+| `Ipn2` | `(data) -> Ipn2Entity` | Create an Ipn2 entity instance. |
 | `Timezone` | `(data) -> TimezoneEntity` | Create a Timezone entity instance. |
 
 ### Entity interface
@@ -177,17 +177,22 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`table` with these keys:
+Entity operations return `(value, err)`. The `value` is the operation's
+data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `ok` | `boolean` | `true` if the HTTP status is 2xx. |
-| `status` | `number` | HTTP status code. |
-| `headers` | `table` | Response headers. |
-| `data` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `list` | an array (`table`) of entity records |
 
-On error, `ok` is `false` and `err` contains the error value.
+Check `err` first (it is non-`nil` on failure), then use `value`:
+
+    local ipn, err = client:Ipn():load({ id = "example_id" })
+    if err then error(err) end
+    -- ipn is the loaded record
+
+Only `direct()` returns a response envelope — a `table` with `ok`,
+`status`, `headers`, and `data` keys.
 
 ### Entities
 
@@ -255,12 +260,12 @@ API path: `/timezone`
 
 ### Ipn
 
-Create an instance: `const ipn = client.ipn`
+Create an instance: `local ipn = client:Ipn(nil)`
 
 
 ### Ipn2
 
-Create an instance: `const ipn2 = client.ipn2`
+Create an instance: `local ipn2 = client:Ipn2(nil)`
 
 #### Operations
 
@@ -290,14 +295,14 @@ Create an instance: `const ipn2 = client.ipn2`
 
 #### Example: Load
 
-```ts
-const ipn2 = await client.ipn2.load({ id: 'ipn2_id' })
+```lua
+local ipn2, err = client:Ipn2():load({ id = "ipn2_id" })
 ```
 
 
 ### Timezone
 
-Create an instance: `const timezone = client.timezone`
+Create an instance: `local timezone = client:Timezone(nil)`
 
 #### Operations
 
@@ -328,14 +333,14 @@ Create an instance: `const timezone = client.timezone`
 
 #### Example: Load
 
-```ts
-const timezone = await client.timezone.load({ id: 'timezone_id' })
+```lua
+local timezone, err = client:Timezone():load({ id = "timezone_id" })
 ```
 
 #### Example: List
 
-```ts
-const timezones = await client.timezone.list()
+```lua
+local timezones, err = client:Timezone():list()
 ```
 
 
@@ -410,7 +415,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local ipn = client:ipn()
+local ipn = client:Ipn()
 ipn:load({ id = "example_id" })
 
 -- ipn:data_get() now returns the loaded ipn data

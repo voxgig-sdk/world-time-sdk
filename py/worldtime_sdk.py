@@ -220,57 +220,27 @@ class WorldTimeSDK:
         }
 
 
-    @property
-    def ipn(self):
-        """Idiomatic facade: client.ipn.list() / client.ipn.load({"id": ...})."""
-        from entity.ipn_entity import IpnEntity
-        cached = getattr(self, "_ipn", None)
-        if cached is None:
-            cached = IpnEntity(self, None)
-            self._ipn = cached
-        return cached
-
-    def Ipn(self, data=None):
-        # Deprecated: use client.ipn instead.
+    def Ipn(self, data=None) -> "IpnEntity":
+        """Entity factory: client.Ipn().list({}) / client.Ipn().load({"id": ...})."""
         from entity.ipn_entity import IpnEntity
         return IpnEntity(self, data)
 
 
-    @property
-    def ipn2(self):
-        """Idiomatic facade: client.ipn2.list() / client.ipn2.load({"id": ...})."""
-        from entity.ipn2_entity import Ipn2Entity
-        cached = getattr(self, "_ipn2", None)
-        if cached is None:
-            cached = Ipn2Entity(self, None)
-            self._ipn2 = cached
-        return cached
-
-    def Ipn2(self, data=None):
-        # Deprecated: use client.ipn2 instead.
+    def Ipn2(self, data=None) -> "Ipn2Entity":
+        """Entity factory: client.Ipn2().list({}) / client.Ipn2().load({"id": ...})."""
         from entity.ipn2_entity import Ipn2Entity
         return Ipn2Entity(self, data)
 
 
-    @property
-    def timezone(self):
-        """Idiomatic facade: client.timezone.list() / client.timezone.load({"id": ...})."""
-        from entity.timezone_entity import TimezoneEntity
-        cached = getattr(self, "_timezone", None)
-        if cached is None:
-            cached = TimezoneEntity(self, None)
-            self._timezone = cached
-        return cached
-
-    def Timezone(self, data=None):
-        # Deprecated: use client.timezone instead.
+    def Timezone(self, data=None) -> "TimezoneEntity":
+        """Entity factory: client.Timezone().list({}) / client.Timezone().load({"id": ...})."""
         from entity.timezone_entity import TimezoneEntity
         return TimezoneEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "WorldTimeSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -290,3 +260,11 @@ class WorldTimeSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.ipn_entity import IpnEntity
+    from entity.ipn2_entity import Ipn2Entity
+    from entity.timezone_entity import TimezoneEntity

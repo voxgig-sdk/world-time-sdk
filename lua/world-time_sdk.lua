@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:ipn():list() / client:ipn():load({ id = ... })
-function WorldTimeSDK:ipn(data)
+-- Idiomatic facade: client:Ipn():list() / client:Ipn():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function WorldTimeSDK:Ipn(data)
   local EntityMod = require("entity.ipn_entity")
   if data == nil then
     if self._ipn == nil then
@@ -256,15 +257,10 @@ function WorldTimeSDK:ipn(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:ipn() instead.
-function WorldTimeSDK:Ipn(data)
-  local EntityMod = require("entity.ipn_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:ipn2():list() / client:ipn2():load({ id = ... })
-function WorldTimeSDK:ipn2(data)
+-- Idiomatic facade: client:Ipn2():list() / client:Ipn2():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function WorldTimeSDK:Ipn2(data)
   local EntityMod = require("entity.ipn2_entity")
   if data == nil then
     if self._ipn2 == nil then
@@ -275,15 +271,10 @@ function WorldTimeSDK:ipn2(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:ipn2() instead.
-function WorldTimeSDK:Ipn2(data)
-  local EntityMod = require("entity.ipn2_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:timezone():list() / client:timezone():load({ id = ... })
-function WorldTimeSDK:timezone(data)
+-- Idiomatic facade: client:Timezone():list() / client:Timezone():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function WorldTimeSDK:Timezone(data)
   local EntityMod = require("entity.timezone_entity")
   if data == nil then
     if self._timezone == nil then
@@ -291,12 +282,6 @@ function WorldTimeSDK:timezone(data)
     end
     return self._timezone
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:timezone() instead.
-function WorldTimeSDK:Timezone(data)
-  local EntityMod = require("entity.timezone_entity")
   return EntityMod.new(self, data)
 end
 

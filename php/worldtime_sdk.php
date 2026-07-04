@@ -233,10 +233,10 @@ class WorldTimeSDK
 
     private $_ipn = null;
 
-    // Idiomatic facade: $client->ipn()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Ipn() (PHP method
-    // names are case-insensitive).
-    public function ipn($data = null)
+    // Canonical facade: $client->Ipn()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->ipn()
+    // resolves here too.
+    public function Ipn($data = null)
     {
         require_once __DIR__ . '/entity/ipn_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class WorldTimeSDK
 
     private $_ipn2 = null;
 
-    // Idiomatic facade: $client->ipn2()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Ipn2() (PHP method
-    // names are case-insensitive).
-    public function ipn2($data = null)
+    // Canonical facade: $client->Ipn2()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->ipn2()
+    // resolves here too.
+    public function Ipn2($data = null)
     {
         require_once __DIR__ . '/entity/ipn2_entity.php';
         if ($data === null) {
@@ -269,10 +269,10 @@ class WorldTimeSDK
 
     private $_timezone = null;
 
-    // Idiomatic facade: $client->timezone()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Timezone() (PHP method
-    // names are case-insensitive).
-    public function timezone($data = null)
+    // Canonical facade: $client->Timezone()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->timezone()
+    // resolves here too.
+    public function Timezone($data = null)
     {
         require_once __DIR__ . '/entity/timezone_entity.php';
         if ($data === null) {
