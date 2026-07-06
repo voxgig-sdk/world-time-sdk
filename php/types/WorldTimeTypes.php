@@ -71,7 +71,7 @@ class TimezoneLoadMatch
     public string $id;
 }
 
-/** Match filter for Timezone#list (any subset of Timezone fields). */
+/** Request payload for Timezone#list. */
 class TimezoneListMatch
 {
     public ?string $abbreviation = null;

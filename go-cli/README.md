@@ -16,9 +16,6 @@ go build -o world-time-cli ./...
 
 ```sh
 # One-shot: arguments form a single AQL expression
-./world-time-cli list ipn
-./world-time-cli load 1 ipn
-./world-time-cli load '{id:1}' ipn
 
 # REPL
 ./world-time-cli
@@ -30,7 +27,6 @@ go build -o world-time-cli ./...
 |----------|----------------------------------------------|----------------------------|
 | `list`   | `[entity]` · `[query entity]`                | List records               |
 | `load`   | `[entity]` · `[query entity]`                | Load a single record       |
-| `update` | `[entity]` · `[query entity]`                | Update a record            |
 
 `query` is either a Map (`{id:1}`) or a Scalar (`1`, treated as `{id:1}`).
 `entity` is one of the SDK's entity names (auto-quoted as an atom).

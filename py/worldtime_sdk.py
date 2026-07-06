@@ -221,19 +221,19 @@ class WorldTimeSDK:
 
 
     def Ipn(self, data=None) -> "IpnEntity":
-        """Entity factory: client.Ipn().list({}) / client.Ipn().load({"id": ...})."""
+        """Entity factory: client.Ipn().list() / client.Ipn().load({"id": ...})."""
         from entity.ipn_entity import IpnEntity
         return IpnEntity(self, data)
 
 
     def Ipn2(self, data=None) -> "Ipn2Entity":
-        """Entity factory: client.Ipn2().list({}) / client.Ipn2().load({"id": ...})."""
+        """Entity factory: client.Ipn2().list() / client.Ipn2().load({"id": ...})."""
         from entity.ipn2_entity import Ipn2Entity
         return Ipn2Entity(self, data)
 
 
     def Timezone(self, data=None) -> "TimezoneEntity":
-        """Entity factory: client.Timezone().list({}) / client.Timezone().load({"id": ...})."""
+        """Entity factory: client.Timezone().list() / client.Timezone().load({"id": ...})."""
         from entity.timezone_entity import TimezoneEntity
         return TimezoneEntity(self, data)
 

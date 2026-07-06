@@ -51,6 +51,21 @@
 ---@field id string
 
 ---@class TimezoneListMatch
+---@field abbreviation? string
+---@field client_ip? string
+---@field datetime? string
+---@field day_of_week? number
+---@field day_of_year? number
+---@field dst? boolean
+---@field dst_from? string
+---@field dst_offset? number
+---@field dst_until? string
+---@field raw_offset? number
+---@field timezone? string
+---@field unixtime? number
+---@field utc_datetime? string
+---@field utc_offset? string
+---@field week_number? number
 
 local M = {}
 

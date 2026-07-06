@@ -4,6 +4,8 @@
 
 The PHP SDK for the WorldTime API — an entity-oriented client using PHP conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `$client->Ipn()` — with named operations (`list`/`load`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -30,6 +32,37 @@ $client = new WorldTimeSDK();
 ```
 
 
+## Error handling
+
+Entity operations throw a `\Throwable` on failure, so wrap them in
+`try` / `catch`:
+
+```php
+try {
+    $ipn = $client->Ipn()->load();
+} catch (\Throwable $err) {
+    echo "Error: " . $err->getMessage();
+}
+```
+
+`direct()` does **not** throw — it returns the result array. Branch on
+`ok`; on failure `status` holds the HTTP status (for error responses) and
+`err` holds a transport error, so read both defensively:
+
+```php
+$result = $client->direct([
+    "path" => "/api/resource/{id}",
+    "method" => "GET",
+    "params" => ["id" => "example_id"],
+]);
+
+if (! $result["ok"]) {
+    $err = $result["err"] ?? null;
+    echo "request failed: " . ($err ? $err->getMessage() : "HTTP " . $result["status"]);
+}
+```
+
+
 ## How-to guides
 
 ### Make a direct HTTP request
@@ -49,7 +82,10 @@ if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
 } else {
-    echo "Error: " . $result["err"]->getMessage();
+    // On an HTTP error status there is no err (only a transport failure sets
+    // it), so fall back to the status code.
+    $err = $result["err"] ?? null;
+    echo "Error: " . ($err ? $err->getMessage() : "HTTP " . $result["status"]);
 }
 ```
 
@@ -70,16 +106,13 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required. Seed fixture
-data via the `entity` option so offline calls resolve without a live server:
+Create a mock client for unit testing — no server required:
 
 ```php
-$client = WorldTimeSDK::test([
-    "entity" => ["ipn" => ["test01" => ["id" => "test01"]]],
-]);
+$client = WorldTimeSDK::test();
 
-// load() returns the bare mock record (throws on error).
-$ipn = $client->Ipn()->load(["id" => "test01"]);
+// Entity ops return the bare mock record (throws on error).
+$ipn = $client->Ipn()->load();
 print_r($ipn);
 ```
 
@@ -170,10 +203,7 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `($reqmatch, $ctrl): array` | Load a single entity by match criteria. |
-| `list` | `($reqmatch, $ctrl): array` | List entities matching the criteria. |
-| `create` | `($reqdata, $ctrl): array` | Create a new entity. |
-| `update` | `($reqdata, $ctrl): array` | Update an existing entity. |
-| `remove` | `($reqmatch, $ctrl): array` | Remove an entity. |
+| `list` | `(?array $reqmatch = null, $ctrl): array` | List entities matching the criteria (call with no argument to list all). |
 | `data_get` | `(): array` | Get entity data. |
 | `data_set` | `($data): void` | Set entity data. |
 | `match_get` | `(): array` | Get entity match criteria. |
@@ -282,27 +312,27 @@ Create an instance: `$ipn2 = $client->Ipn2();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `abbreviation` | ``$STRING`` |  |
-| `client_ip` | ``$STRING`` |  |
-| `datetime` | ``$STRING`` |  |
-| `day_of_week` | ``$INTEGER`` |  |
-| `day_of_year` | ``$INTEGER`` |  |
-| `dst` | ``$BOOLEAN`` |  |
-| `dst_from` | ``$STRING`` |  |
-| `dst_offset` | ``$INTEGER`` |  |
-| `dst_until` | ``$STRING`` |  |
-| `raw_offset` | ``$INTEGER`` |  |
-| `timezone` | ``$STRING`` |  |
-| `unixtime` | ``$INTEGER`` |  |
-| `utc_datetime` | ``$STRING`` |  |
-| `utc_offset` | ``$STRING`` |  |
-| `week_number` | ``$INTEGER`` |  |
+| `abbreviation` | `string` |  |
+| `client_ip` | `string` |  |
+| `datetime` | `string` |  |
+| `day_of_week` | `int` |  |
+| `day_of_year` | `int` |  |
+| `dst` | `bool` |  |
+| `dst_from` | `string` |  |
+| `dst_offset` | `int` |  |
+| `dst_until` | `string` |  |
+| `raw_offset` | `int` |  |
+| `timezone` | `string` |  |
+| `unixtime` | `int` |  |
+| `utc_datetime` | `string` |  |
+| `utc_offset` | `string` |  |
+| `week_number` | `int` |  |
 
 #### Example: Load
 
 ```php
 // load() returns the bare Ipn2 record (throws on error).
-$ipn2 = $client->Ipn2()->load(["id" => "ipn2_id"]);
+$ipn2 = $client->Ipn2()->load();
 ```
 
 
@@ -321,21 +351,21 @@ Create an instance: `$timezone = $client->Timezone();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `abbreviation` | ``$STRING`` |  |
-| `client_ip` | ``$STRING`` |  |
-| `datetime` | ``$STRING`` |  |
-| `day_of_week` | ``$INTEGER`` |  |
-| `day_of_year` | ``$INTEGER`` |  |
-| `dst` | ``$BOOLEAN`` |  |
-| `dst_from` | ``$STRING`` |  |
-| `dst_offset` | ``$INTEGER`` |  |
-| `dst_until` | ``$STRING`` |  |
-| `raw_offset` | ``$INTEGER`` |  |
-| `timezone` | ``$STRING`` |  |
-| `unixtime` | ``$INTEGER`` |  |
-| `utc_datetime` | ``$STRING`` |  |
-| `utc_offset` | ``$STRING`` |  |
-| `week_number` | ``$INTEGER`` |  |
+| `abbreviation` | `string` |  |
+| `client_ip` | `string` |  |
+| `datetime` | `string` |  |
+| `day_of_week` | `int` |  |
+| `day_of_year` | `int` |  |
+| `dst` | `bool` |  |
+| `dst_from` | `string` |  |
+| `dst_offset` | `int` |  |
+| `dst_until` | `string` |  |
+| `raw_offset` | `int` |  |
+| `timezone` | `string` |  |
+| `unixtime` | `int` |  |
+| `utc_datetime` | `string` |  |
+| `utc_offset` | `string` |  |
+| `week_number` | `int` |  |
 
 #### Example: Load
 
@@ -352,12 +382,16 @@ $timezones = $client->Timezone()->list();
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -374,8 +408,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as the second element in the return array.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -424,10 +459,10 @@ stores the returned data and match criteria internally.
 
 ```php
 $ipn = $client->Ipn();
-$ipn->load(["id" => "example_id"]);
+$ipn->load();
 
-// $ipn->dataGet() now returns the loaded ipn data
-// $ipn->matchGet() returns the last match criteria
+// $ipn->data_get() now returns the ipn data from the last load
+// $ipn->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

@@ -67,10 +67,12 @@ class Ipn2Entity
   
   # Load a single Ipn2.
   #
-  # @param reqmatch [Ipn2LoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param reqmatch [Ipn2LoadMatch, Hash, nil] match criteria (id/query fields);
+  #   optional — an entity with no id-like key loads with no match (nil is treated
+  #   as an empty match, so client.Ipn2.load works with no args).
   # @param ctrl [Object, nil] optional per-call control
   # @return [Ipn2, Hash] the loaded Ipn2; raises WorldTimeError on failure
-  def load(reqmatch, ctrl = nil)
+  def load(reqmatch = nil, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
       "opname" => "load",

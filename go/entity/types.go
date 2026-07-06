@@ -62,8 +62,7 @@ type TimezoneLoadMatch struct {
 	Id string `json:"id"`
 }
 
-// TimezoneListMatch mirrors the timezone fields as an all-optional match
-// filter (Go analog of Partial<Timezone>).
+// TimezoneListMatch is the typed request payload for Timezone.ListTyped.
 type TimezoneListMatch struct {
 	Abbreviation *string `json:"abbreviation,omitempty"`
 	ClientIp *string `json:"client_ip,omitempty"`

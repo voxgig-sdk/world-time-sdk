@@ -8,7 +8,7 @@ Complete API reference for the WorldTime Python SDK.
 ### Constructor
 
 ```python
-from world-time_sdk import WorldTimeSDK
+from worldtime_sdk import WorldTimeSDK
 
 client = WorldTimeSDK(options)
 ```
@@ -130,21 +130,21 @@ ipn2 = client.Ipn2()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `abbreviation` | ``$STRING`` | No |  |
-| `client_ip` | ``$STRING`` | No |  |
-| `datetime` | ``$STRING`` | No |  |
-| `day_of_week` | ``$INTEGER`` | No |  |
-| `day_of_year` | ``$INTEGER`` | No |  |
-| `dst` | ``$BOOLEAN`` | No |  |
-| `dst_from` | ``$STRING`` | No |  |
-| `dst_offset` | ``$INTEGER`` | No |  |
-| `dst_until` | ``$STRING`` | No |  |
-| `raw_offset` | ``$INTEGER`` | No |  |
-| `timezone` | ``$STRING`` | No |  |
-| `unixtime` | ``$INTEGER`` | No |  |
-| `utc_datetime` | ``$STRING`` | No |  |
-| `utc_offset` | ``$STRING`` | No |  |
-| `week_number` | ``$INTEGER`` | No |  |
+| `abbreviation` | `str` | No |  |
+| `client_ip` | `str` | No |  |
+| `datetime` | `str` | No |  |
+| `day_of_week` | `int` | No |  |
+| `day_of_year` | `int` | No |  |
+| `dst` | `bool` | No |  |
+| `dst_from` | `str` | No |  |
+| `dst_offset` | `int` | No |  |
+| `dst_until` | `str` | No |  |
+| `raw_offset` | `int` | No |  |
+| `timezone` | `str` | No |  |
+| `unixtime` | `int` | No |  |
+| `utc_datetime` | `str` | No |  |
+| `utc_offset` | `str` | No |  |
+| `week_number` | `int` | No |  |
 
 ### Operations
 
@@ -153,7 +153,7 @@ ipn2 = client.Ipn2()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Ipn2().load({"id": "ipn2_id"})
+result = client.Ipn2().load()
 ```
 
 ### Common Methods
@@ -195,30 +195,30 @@ timezone = client.Timezone()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `abbreviation` | ``$STRING`` | No |  |
-| `client_ip` | ``$STRING`` | No |  |
-| `datetime` | ``$STRING`` | No |  |
-| `day_of_week` | ``$INTEGER`` | No |  |
-| `day_of_year` | ``$INTEGER`` | No |  |
-| `dst` | ``$BOOLEAN`` | No |  |
-| `dst_from` | ``$STRING`` | No |  |
-| `dst_offset` | ``$INTEGER`` | No |  |
-| `dst_until` | ``$STRING`` | No |  |
-| `raw_offset` | ``$INTEGER`` | No |  |
-| `timezone` | ``$STRING`` | No |  |
-| `unixtime` | ``$INTEGER`` | No |  |
-| `utc_datetime` | ``$STRING`` | No |  |
-| `utc_offset` | ``$STRING`` | No |  |
-| `week_number` | ``$INTEGER`` | No |  |
+| `abbreviation` | `str` | No |  |
+| `client_ip` | `str` | No |  |
+| `datetime` | `str` | No |  |
+| `day_of_week` | `int` | No |  |
+| `day_of_year` | `int` | No |  |
+| `dst` | `bool` | No |  |
+| `dst_from` | `str` | No |  |
+| `dst_offset` | `int` | No |  |
+| `dst_until` | `str` | No |  |
+| `raw_offset` | `int` | No |  |
+| `timezone` | `str` | No |  |
+| `unixtime` | `int` | No |  |
+| `utc_datetime` | `str` | No |  |
+| `utc_offset` | `str` | No |  |
+| `week_number` | `int` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Timezone().list({})
+results = client.Timezone().list()
 for timezone in results:
     print(timezone)
 ```

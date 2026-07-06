@@ -4,6 +4,8 @@
 
 The Ruby SDK for the WorldTime API — an entity-oriented client using idiomatic Ruby conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `client.Ipn` — with named operations (`list`/`load`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -29,6 +31,33 @@ client = WorldTimeSDK.new
 ```
 
 
+## Error handling
+
+Entity operations raise on failure, so rescue them:
+
+```ruby
+begin
+  ipn = client.Ipn.load()
+rescue => err
+  warn "load failed: #{err}"
+end
+```
+
+`direct` does **not** raise — it returns the result hash. Branch on
+`ok`; on failure `status` holds the HTTP status (for error responses) and
+`err` holds a transport error, so read both defensively:
+
+```ruby
+result = client.direct({
+  "path" => "/api/resource/{id}",
+  "method" => "GET",
+  "params" => { "id" => "example_id" },
+})
+
+warn "request failed: #{result["err"] || "HTTP #{result["status"]}"}" unless result["ok"]
+```
+
+
 ## How-to guides
 
 ### Make a direct HTTP request
@@ -46,7 +75,9 @@ if result["ok"]
   puts result["status"]  # 200
   puts result["data"]    # response body
 else
-  warn result["err"]
+  # On an HTTP error status there is no err (only a transport failure sets
+  # it), so fall back to the status code.
+  warn(result["err"] || "HTTP #{result["status"]}")
 end
 ```
 
@@ -69,16 +100,13 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required. Seed fixture
-data via the `entity` option so offline calls resolve without a live server:
+Create a mock client for unit testing — no server required:
 
 ```ruby
-client = WorldTimeSDK.test({
-  "entity" => { "ipn" => { "test01" => { "id" => "test01" } } },
-})
+client = WorldTimeSDK.test
 
-# load returns the bare mock record (raises on error).
-ipn = client.Ipn.load({ "id" => "test01" })
+# Entity ops return the bare mock record (raises on error).
+ipn = client.Ipn.load()
 puts ipn
 ```
 
@@ -166,10 +194,7 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
-| `list` | `(reqmatch, ctrl) -> Array` | List entities matching the criteria. Raises on error. |
-| `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
-| `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
-| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
+| `list` | `(reqmatch = nil, ctrl) -> Array` | List entities matching the criteria (call with no argument to list all). Raises on error. |
 | `data_get` | `() -> Hash` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> Hash` | Get entity match criteria. |
@@ -277,27 +302,27 @@ Create an instance: `ipn2 = client.Ipn2`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `abbreviation` | ``$STRING`` |  |
-| `client_ip` | ``$STRING`` |  |
-| `datetime` | ``$STRING`` |  |
-| `day_of_week` | ``$INTEGER`` |  |
-| `day_of_year` | ``$INTEGER`` |  |
-| `dst` | ``$BOOLEAN`` |  |
-| `dst_from` | ``$STRING`` |  |
-| `dst_offset` | ``$INTEGER`` |  |
-| `dst_until` | ``$STRING`` |  |
-| `raw_offset` | ``$INTEGER`` |  |
-| `timezone` | ``$STRING`` |  |
-| `unixtime` | ``$INTEGER`` |  |
-| `utc_datetime` | ``$STRING`` |  |
-| `utc_offset` | ``$STRING`` |  |
-| `week_number` | ``$INTEGER`` |  |
+| `abbreviation` | `String` |  |
+| `client_ip` | `String` |  |
+| `datetime` | `String` |  |
+| `day_of_week` | `Integer` |  |
+| `day_of_year` | `Integer` |  |
+| `dst` | `Boolean` |  |
+| `dst_from` | `String` |  |
+| `dst_offset` | `Integer` |  |
+| `dst_until` | `String` |  |
+| `raw_offset` | `Integer` |  |
+| `timezone` | `String` |  |
+| `unixtime` | `Integer` |  |
+| `utc_datetime` | `String` |  |
+| `utc_offset` | `String` |  |
+| `week_number` | `Integer` |  |
 
 #### Example: Load
 
 ```ruby
 # load returns the bare Ipn2 record (raises on error).
-ipn2 = client.Ipn2.load({ "id" => "ipn2_id" })
+ipn2 = client.Ipn2.load()
 ```
 
 
@@ -316,21 +341,21 @@ Create an instance: `timezone = client.Timezone`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `abbreviation` | ``$STRING`` |  |
-| `client_ip` | ``$STRING`` |  |
-| `datetime` | ``$STRING`` |  |
-| `day_of_week` | ``$INTEGER`` |  |
-| `day_of_year` | ``$INTEGER`` |  |
-| `dst` | ``$BOOLEAN`` |  |
-| `dst_from` | ``$STRING`` |  |
-| `dst_offset` | ``$INTEGER`` |  |
-| `dst_until` | ``$STRING`` |  |
-| `raw_offset` | ``$INTEGER`` |  |
-| `timezone` | ``$STRING`` |  |
-| `unixtime` | ``$INTEGER`` |  |
-| `utc_datetime` | ``$STRING`` |  |
-| `utc_offset` | ``$STRING`` |  |
-| `week_number` | ``$INTEGER`` |  |
+| `abbreviation` | `String` |  |
+| `client_ip` | `String` |  |
+| `datetime` | `String` |  |
+| `day_of_week` | `Integer` |  |
+| `day_of_year` | `Integer` |  |
+| `dst` | `Boolean` |  |
+| `dst_from` | `String` |  |
+| `dst_offset` | `Integer` |  |
+| `dst_until` | `String` |  |
+| `raw_offset` | `Integer` |  |
+| `timezone` | `String` |  |
+| `unixtime` | `Integer` |  |
+| `utc_datetime` | `String` |  |
+| `utc_offset` | `String` |  |
+| `week_number` | `Integer` |  |
 
 #### Example: Load
 
@@ -347,12 +372,16 @@ timezones = client.Timezone.list
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -369,8 +398,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as a second return value.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -419,9 +449,9 @@ stores the returned data and match criteria internally.
 
 ```ruby
 ipn = client.Ipn
-ipn.load({ "id" => "example_id" })
+ipn.load()
 
-# ipn.data_get now returns the loaded ipn data
+# ipn.data_get now returns the ipn data from the last load
 # ipn.match_get returns the last match criteria
 ```
 

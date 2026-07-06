@@ -8,7 +8,7 @@ Complete API reference for the WorldTime Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'world-time_sdk'
+require_relative 'WorldTime_sdk'
 
 client = WorldTimeSDK.new(options)
 ```
@@ -137,21 +137,21 @@ ipn2 = client.Ipn2
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `abbreviation` | ``$STRING`` | No |  |
-| `client_ip` | ``$STRING`` | No |  |
-| `datetime` | ``$STRING`` | No |  |
-| `day_of_week` | ``$INTEGER`` | No |  |
-| `day_of_year` | ``$INTEGER`` | No |  |
-| `dst` | ``$BOOLEAN`` | No |  |
-| `dst_from` | ``$STRING`` | No |  |
-| `dst_offset` | ``$INTEGER`` | No |  |
-| `dst_until` | ``$STRING`` | No |  |
-| `raw_offset` | ``$INTEGER`` | No |  |
-| `timezone` | ``$STRING`` | No |  |
-| `unixtime` | ``$INTEGER`` | No |  |
-| `utc_datetime` | ``$STRING`` | No |  |
-| `utc_offset` | ``$STRING`` | No |  |
-| `week_number` | ``$INTEGER`` | No |  |
+| `abbreviation` | `String` | No |  |
+| `client_ip` | `String` | No |  |
+| `datetime` | `String` | No |  |
+| `day_of_week` | `Integer` | No |  |
+| `day_of_year` | `Integer` | No |  |
+| `dst` | `Boolean` | No |  |
+| `dst_from` | `String` | No |  |
+| `dst_offset` | `Integer` | No |  |
+| `dst_until` | `String` | No |  |
+| `raw_offset` | `Integer` | No |  |
+| `timezone` | `String` | No |  |
+| `unixtime` | `Integer` | No |  |
+| `utc_datetime` | `String` | No |  |
+| `utc_offset` | `String` | No |  |
+| `week_number` | `Integer` | No |  |
 
 ### Operations
 
@@ -160,7 +160,7 @@ ipn2 = client.Ipn2
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Ipn2.load({ "id" => "ipn2_id" })
+result = client.Ipn2.load()
 ```
 
 ### Common Methods
@@ -203,30 +203,30 @@ timezone = client.Timezone
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `abbreviation` | ``$STRING`` | No |  |
-| `client_ip` | ``$STRING`` | No |  |
-| `datetime` | ``$STRING`` | No |  |
-| `day_of_week` | ``$INTEGER`` | No |  |
-| `day_of_year` | ``$INTEGER`` | No |  |
-| `dst` | ``$BOOLEAN`` | No |  |
-| `dst_from` | ``$STRING`` | No |  |
-| `dst_offset` | ``$INTEGER`` | No |  |
-| `dst_until` | ``$STRING`` | No |  |
-| `raw_offset` | ``$INTEGER`` | No |  |
-| `timezone` | ``$STRING`` | No |  |
-| `unixtime` | ``$INTEGER`` | No |  |
-| `utc_datetime` | ``$STRING`` | No |  |
-| `utc_offset` | ``$STRING`` | No |  |
-| `week_number` | ``$INTEGER`` | No |  |
+| `abbreviation` | `String` | No |  |
+| `client_ip` | `String` | No |  |
+| `datetime` | `String` | No |  |
+| `day_of_week` | `Integer` | No |  |
+| `day_of_year` | `Integer` | No |  |
+| `dst` | `Boolean` | No |  |
+| `dst_from` | `String` | No |  |
+| `dst_offset` | `Integer` | No |  |
+| `dst_until` | `String` | No |  |
+| `raw_offset` | `Integer` | No |  |
+| `timezone` | `String` | No |  |
+| `unixtime` | `Integer` | No |  |
+| `utc_datetime` | `String` | No |  |
+| `utc_offset` | `String` | No |  |
+| `week_number` | `Integer` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Timezone.list(nil)
+results = client.Timezone.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`

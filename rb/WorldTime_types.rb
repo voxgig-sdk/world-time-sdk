@@ -168,7 +168,7 @@ TimezoneLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Timezone#list (any subset of Timezone fields).
+# Request payload for Timezone#list.
 #
 # @!attribute [rw] abbreviation
 #   @return [String, nil]

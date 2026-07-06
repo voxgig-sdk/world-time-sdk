@@ -135,21 +135,21 @@ ipn2 := client.Ipn2(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `abbreviation` | ``$STRING`` | No |  |
-| `client_ip` | ``$STRING`` | No |  |
-| `datetime` | ``$STRING`` | No |  |
-| `day_of_week` | ``$INTEGER`` | No |  |
-| `day_of_year` | ``$INTEGER`` | No |  |
-| `dst` | ``$BOOLEAN`` | No |  |
-| `dst_from` | ``$STRING`` | No |  |
-| `dst_offset` | ``$INTEGER`` | No |  |
-| `dst_until` | ``$STRING`` | No |  |
-| `raw_offset` | ``$INTEGER`` | No |  |
-| `timezone` | ``$STRING`` | No |  |
-| `unixtime` | ``$INTEGER`` | No |  |
-| `utc_datetime` | ``$STRING`` | No |  |
-| `utc_offset` | ``$STRING`` | No |  |
-| `week_number` | ``$INTEGER`` | No |  |
+| `abbreviation` | `string` | No |  |
+| `client_ip` | `string` | No |  |
+| `datetime` | `string` | No |  |
+| `day_of_week` | `int` | No |  |
+| `day_of_year` | `int` | No |  |
+| `dst` | `bool` | No |  |
+| `dst_from` | `string` | No |  |
+| `dst_offset` | `int` | No |  |
+| `dst_until` | `string` | No |  |
+| `raw_offset` | `int` | No |  |
+| `timezone` | `string` | No |  |
+| `unixtime` | `int` | No |  |
+| `utc_datetime` | `string` | No |  |
+| `utc_offset` | `string` | No |  |
+| `week_number` | `int` | No |  |
 
 ### Operations
 
@@ -158,7 +158,7 @@ ipn2 := client.Ipn2(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Ipn2(nil).Load(map[string]any{"id": "ipn2_id"}, nil)
+result, err := client.Ipn2(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -195,21 +195,21 @@ timezone := client.Timezone(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `abbreviation` | ``$STRING`` | No |  |
-| `client_ip` | ``$STRING`` | No |  |
-| `datetime` | ``$STRING`` | No |  |
-| `day_of_week` | ``$INTEGER`` | No |  |
-| `day_of_year` | ``$INTEGER`` | No |  |
-| `dst` | ``$BOOLEAN`` | No |  |
-| `dst_from` | ``$STRING`` | No |  |
-| `dst_offset` | ``$INTEGER`` | No |  |
-| `dst_until` | ``$STRING`` | No |  |
-| `raw_offset` | ``$INTEGER`` | No |  |
-| `timezone` | ``$STRING`` | No |  |
-| `unixtime` | ``$INTEGER`` | No |  |
-| `utc_datetime` | ``$STRING`` | No |  |
-| `utc_offset` | ``$STRING`` | No |  |
-| `week_number` | ``$INTEGER`` | No |  |
+| `abbreviation` | `string` | No |  |
+| `client_ip` | `string` | No |  |
+| `datetime` | `string` | No |  |
+| `day_of_week` | `int` | No |  |
+| `day_of_year` | `int` | No |  |
+| `dst` | `bool` | No |  |
+| `dst_from` | `string` | No |  |
+| `dst_offset` | `int` | No |  |
+| `dst_until` | `string` | No |  |
+| `raw_offset` | `int` | No |  |
+| `timezone` | `string` | No |  |
+| `unixtime` | `int` | No |  |
+| `utc_datetime` | `string` | No |  |
+| `utc_offset` | `string` | No |  |
+| `week_number` | `int` | No |  |
 
 ### Operations
 
