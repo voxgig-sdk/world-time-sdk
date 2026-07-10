@@ -18,9 +18,9 @@ main: {
           url: "https://worldtimeapi.org/api"
         }
       ]
+      summary: "Simple JSON/plain-text API to obtain the current time in, and related data about, a timezone."
       title: "World Time API"
       version: "1.0.0"
+      website: "https://worldtimeapi.org"
     }
   }
-}
-

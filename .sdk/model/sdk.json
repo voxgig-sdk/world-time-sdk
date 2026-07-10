@@ -6,9 +6,6 @@
     },
     "kit": {
       "config": {
-        "auth": {
-          "prefix": "Bearer"
-        },
         "docs_order": [
           "ts",
           "py",
@@ -597,14 +594,17 @@
         "license": {
           "name": "Public Domain"
         },
+        "meta_source": "https://www.freepublicapis.com",
         "servers": [
           {
             "description": "Production server",
             "url": "https://worldtimeapi.org/api"
           }
         ],
+        "summary": "Simple JSON/plain-text API to obtain the current time in, and related data about, a timezone.",
         "title": "World Time API",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "website": "https://worldtimeapi.org"
       },
       "option": {},
       "target": {
@@ -657,6 +657,9 @@
           },
           "name": "go-cli",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
@@ -707,6 +710,9 @@
           },
           "name": "go-mcp",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },

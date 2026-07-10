@@ -99,6 +99,7 @@ same parameters as `Direct()`.
 
 ```go
 ipn := client.Ipn(nil)
+fmt.Println(ipn.GetName()) // "ipn"
 ```
 
 ### Common Methods
@@ -129,6 +130,7 @@ Return the entity name.
 
 ```go
 ipn2 := client.Ipn2(nil)
+fmt.Println(ipn2.GetName()) // "ipn2"
 ```
 
 ### Fields
@@ -159,6 +161,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Ipn2(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -189,6 +195,7 @@ Return the entity name.
 
 ```go
 timezone := client.Timezone(nil)
+fmt.Println(timezone.GetName()) // "timezone"
 ```
 
 ### Fields
@@ -219,6 +226,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Timezone(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
@@ -227,6 +238,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Timezone(nil).Load(map[string]any{"id": "timezone_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods

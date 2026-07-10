@@ -39,7 +39,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $ipn = $client->Ipn()->load();
+    $ipn2 = $client->Ipn2()->load();
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -112,8 +112,8 @@ Create a mock client for unit testing — no server required:
 $client = WorldTimeSDK::test();
 
 // Entity ops return the bare mock record (throws on error).
-$ipn = $client->Ipn()->load();
-print_r($ipn);
+$ipn2 = $client->Ipn2()->load();
+print_r($ipn2);
 ```
 
 ### Use a custom fetch function
@@ -458,11 +458,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$ipn = $client->Ipn();
-$ipn->load();
+$ipn2 = $client->Ipn2();
+$ipn2->load();
 
-// $ipn->data_get() now returns the ipn data from the last load
-// $ipn->match_get() returns the last match criteria
+// $ipn2->data_get() now returns the ipn2 data from the last load
+// $ipn2->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

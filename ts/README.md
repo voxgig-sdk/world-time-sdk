@@ -40,8 +40,8 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const ipn = await client.Ipn().load()
-  console.log(ipn)
+  const ipn2 = await client.Ipn2().load()
+  console.log(ipn2)
 } catch (err) {
   console.error('load failed:', err)
 }
@@ -107,9 +107,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = WorldTimeSDK.test()
 
-const ipn = await client.Ipn().load()
-// ipn is a bare entity populated with mock response data
-console.log(ipn)
+const ipn2 = await client.Ipn2().load()
+// ipn2 is a bare entity populated with mock response data
+console.log(ipn2)
 ```
 
 You can also use the instance method:
@@ -124,7 +124,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Ipn()
+const entity = client.Ipn2()
 
 // First call runs the operation and stores its result
 await entity.load()
@@ -489,11 +489,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const ipn = client.Ipn()
-await ipn.load()
+const ipn2 = client.Ipn2()
+await ipn2.load()
 
-// ipn.data() now returns the ipn data from the last `load`
-// ipn.match() returns the last match criteria
+// ipn2.data() now returns the ipn2 data from the last `load`
+// ipn2.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

@@ -40,7 +40,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local ipn, err = client:Ipn():load()
+local ipn2, err = client:Ipn2():load()
 if err then error(err) end
 ```
 
@@ -98,7 +98,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Ipn():load()
+local result, err = client:Ipn2():load()
 -- result is the returned data; err is set on failure
 ```
 
@@ -441,11 +441,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local ipn = client:Ipn()
-ipn:load()
+local ipn2 = client:Ipn2()
+ipn2:load()
 
--- ipn:data_get() now returns the ipn data from the last load
--- ipn:match_get() returns the last match criteria
+-- ipn2:data_get() now returns the ipn2 data from the last load
+-- ipn2:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

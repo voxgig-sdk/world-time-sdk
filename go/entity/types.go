@@ -33,7 +33,7 @@ type Ipn2 struct {
 
 // Ipn2LoadMatch is the typed request payload for Ipn2.LoadTyped.
 type Ipn2LoadMatch struct {
-	Ipv4 string `json:"ipv4"`
+	Ipv4 *string `json:"ipv4,omitempty"`
 }
 
 // Timezone is the typed data model for the timezone entity.
@@ -57,9 +57,9 @@ type Timezone struct {
 
 // TimezoneLoadMatch is the typed request payload for Timezone.LoadTyped.
 type TimezoneLoadMatch struct {
-	Area string `json:"area"`
-	Location string `json:"location"`
-	Id string `json:"id"`
+	Area *string `json:"area,omitempty"`
+	Location *string `json:"location,omitempty"`
+	Id *string `json:"id,omitempty"`
 }
 
 // TimezoneListMatch is the typed request payload for Timezone.ListTyped.

@@ -60,12 +60,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-ipn, err := client.Ipn(nil).Load(nil, nil)
+ipn2, err := client.Ipn2(nil).Load(nil, nil)
 if err != nil {
     // handle err
     return
 }
-_ = ipn
+_ = ipn2
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -129,13 +129,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-ipn, err := client.Ipn(nil).Load(
+ipn2, err := client.Ipn2(nil).Load(
     nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(ipn) // the returned mock data
+fmt.Println(ipn2) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -243,9 +243,9 @@ Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
 slice):
 
-    ipn, err := client.Ipn(nil).Load(nil, nil)
+    ipn2, err := client.Ipn2(nil).Load(nil, nil)
     if err != nil { /* handle */ }
-    // ipn is the returned record
+    // ipn2 is the returned record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -485,11 +485,11 @@ Entity instances are stateful. After a successful `Load`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-ipn := client.Ipn(nil)
-ipn.Load(nil, nil)
+ipn2 := client.Ipn2(nil)
+ipn2.Load(nil, nil)
 
-// ipn.Data() now returns the ipn data from the last load
-// ipn.Match() returns the last match criteria
+// ipn2.Data() now returns the ipn2 data from the last load
+// ipn2.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

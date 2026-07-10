@@ -38,7 +38,7 @@ class Ipn2(TypedDict, total=False):
     week_number: int
 
 
-class Ipn2LoadMatch(TypedDict):
+class Ipn2LoadMatch(TypedDict, total=False):
     ipv4: str
 
 
@@ -60,7 +60,7 @@ class Timezone(TypedDict, total=False):
     week_number: int
 
 
-class TimezoneLoadMatch(TypedDict):
+class TimezoneLoadMatch(TypedDict, total=False):
     area: str
     location: str
     id: str

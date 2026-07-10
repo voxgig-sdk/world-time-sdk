@@ -37,7 +37,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  ipn = client.Ipn.load()
+  ipn2 = client.Ipn2.load()
 rescue => err
   warn "load failed: #{err}"
 end
@@ -106,8 +106,8 @@ Create a mock client for unit testing — no server required:
 client = WorldTimeSDK.test
 
 # Entity ops return the bare mock record (raises on error).
-ipn = client.Ipn.load()
-puts ipn
+ipn2 = client.Ipn2.load()
+puts ipn2
 ```
 
 ### Use a custom fetch function
@@ -448,11 +448,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-ipn = client.Ipn
-ipn.load()
+ipn2 = client.Ipn2
+ipn2.load()
 
-# ipn.data_get now returns the ipn data from the last load
-# ipn.match_get returns the last match criteria
+# ipn2.data_get now returns the ipn2 data from the last load
+# ipn2.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

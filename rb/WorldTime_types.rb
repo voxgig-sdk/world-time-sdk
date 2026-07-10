@@ -80,7 +80,7 @@ Ipn2 = Struct.new(
 # Request payload for Ipn2#load.
 #
 # @!attribute [rw] ipv4
-#   @return [String]
+#   @return [String, nil]
 Ipn2LoadMatch = Struct.new(
   :ipv4,
   keyword_init: true
@@ -154,13 +154,13 @@ Timezone = Struct.new(
 # Request payload for Timezone#load.
 #
 # @!attribute [rw] area
-#   @return [String]
+#   @return [String, nil]
 #
 # @!attribute [rw] location
-#   @return [String]
+#   @return [String, nil]
 #
 # @!attribute [rw] id
-#   @return [String]
+#   @return [String, nil]
 TimezoneLoadMatch = Struct.new(
   :area,
   :location,
