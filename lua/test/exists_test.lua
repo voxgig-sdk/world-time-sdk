@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- WorldTime SDK exists test
 
 local sdk = require("world-time_sdk")
 
