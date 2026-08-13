@@ -16,7 +16,7 @@ import (
 // reqdata map passed through to the SDK. For load, `query` should be
 // `{"id": <value>}`. For list, omit `query` or pass an empty map.
 type Args struct {
-	Entity string         `json:"entity" jsonschema:"ipn | ipn2 | timezone"`
+	Entity string         `json:"entity" jsonschema:"ipn | timezone"`
 	Query  map[string]any `json:"query,omitempty" jsonschema:"optional match map e.g. {\"id\":1} for load, omit for list"`
 }
 
@@ -79,8 +79,6 @@ func entityFor(client *sdk.WorldTimeSDK, name string) (sdk.WorldTimeEntity, erro
 	switch strings.ToLower(name) {
 	case "ipn":
 		return client.Ipn(nil), nil
-	case "ipn2":
-		return client.Ipn2(nil), nil
 	case "timezone":
 		return client.Timezone(nil), nil
 

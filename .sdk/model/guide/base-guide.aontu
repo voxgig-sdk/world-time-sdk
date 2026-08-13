@@ -1,14 +1,11 @@
 # Guide
 
 guide: {
-  metrics: count: entity: 3
+  metrics: count: entity: 2
   metrics: count: path: 5
   metrics: count: method: 5
 
   entity: ipn: {
-  }
-
-  entity: ipn2: {
     path: "/ip": {
       op: load: method: *GET
     }

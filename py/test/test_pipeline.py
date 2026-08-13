@@ -16,11 +16,11 @@
 import pytest
 
 from worldtime_sdk import WorldTimeSDK
-from core.error import WorldTimeError
-from core.result import WorldTimeResult
-from core.response import WorldTimeResponse
-from core.spec import WorldTimeSpec
-from feature.base_feature import WorldTimeBaseFeature
+from worldtime_sdk.core.error import WorldTimeError
+from worldtime_sdk.core.result import WorldTimeResult
+from worldtime_sdk.core.response import WorldTimeResponse
+from worldtime_sdk.core.spec import WorldTimeSpec
+from worldtime_sdk.feature.base_feature import WorldTimeBaseFeature
 
 
 def _client():

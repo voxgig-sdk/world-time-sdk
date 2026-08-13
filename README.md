@@ -16,13 +16,14 @@ Metadata kindly supplied by [www.freepublicapis.com](https://www.freepublicapis.
 
 ## Entities, not endpoints
 
-This SDK exposes the API as a small set of **semantic entities** — Ipn, Ipn2 and Timezone — that you
+This SDK exposes the API as a small set of **semantic entities** — Ipn and Timezone — that you
 call directly, instead of assembling URL paths and query strings. Entities are
 **Capitalised** to mark them as the primary surface, each with the operations they
 support (`list`, `load`):
 
 ```ts
 const client = new WorldTimeSDK()
+const ipn = await client.Ipn().load()
 ```
 
 Thinking in entities keeps the mental model small — for people and AI agents alike —
@@ -37,18 +38,27 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = WorldTimeSDK.test()
-const ipn2 = await client.Ipn2().load()
-// ipn2 is a bare Ipn2 populated with mock data
-console.log(ipn2)
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = WorldTimeSDK.test({
+  entity: {
+    ipn: {
+      test01: { id: 'test01' },
+    },
+  },
+})
+const ipn = await client.Ipn().load()
+// ipn is the Ipn entity, populated with mock data
+// — call ipn.data() for the record itself
+console.log(ipn)
 ```
 
 ### Python
 
 ```python
 client = WorldTimeSDK.test()
-ipn2 = client.Ipn2().load()
-print(ipn2)
+ipn = client.Ipn().load()
+print(ipn)
 ```
 
 ### PHP
@@ -56,16 +66,16 @@ print(ipn2)
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = WorldTimeSDK::test([
-    "entity" => ["ipn2" => ["test01" => []]],
+    "entity" => ["ipn" => ["test01" => []]],
 ]);
-$ipn2 = $client->Ipn2()->load();
+$ipn = $client->Ipn()->load();
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.Ipn2(nil).Load(
+result, err := client.Ipn(nil).Load(
     nil, nil,
 )
 ```
@@ -75,16 +85,16 @@ result, err := client.Ipn2(nil).Load(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = WorldTimeSDK.test({
-  "entity" => { "ipn2" => { "test01" => {} } },
+  "entity" => { "ipn" => { "test01" => {} } },
 })
-ipn2 = client.Ipn2.load()
+ipn = client.Ipn.load()
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:Ipn2():load()
+local result, err = client:Ipn():load()
 ```
 
 ## Packages
@@ -109,6 +119,9 @@ import { WorldTimeSDK } from '@voxgig-sdk/world-time'
 
 const client = new WorldTimeSDK()
 
+// Load ipn data (returns a Ipn)
+const ipn = await client.Ipn().load()
+console.log(ipn)
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -145,12 +158,11 @@ Then add it to your agent's MCP config (Claude Desktop, Cursor, etc.):
 
 ## Entities
 
-The API exposes 3 entities:
+The API exposes 2 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Ipn** | The Ipn entity. | `` |
-| **Ipn2** | The Ipn2 entity (load). | `/ip/{ipv4}` |
+| **Ipn** | The Ipn entity (load). | `/ip/{ipv4}` |
 | **Timezone** | The Timezone entity (list, load). | `/timezone` |
 
 The operations available across these entities are **load**, **list** — see each entity's
@@ -165,6 +177,10 @@ from worldtime_sdk import WorldTimeSDK
 
 client = WorldTimeSDK()
 
+
+# Load a specific ipn (returns the record, raises on error)
+ipn = client.Ipn().load()
+print(ipn)
 ```
 
 ### PHP
@@ -175,6 +191,10 @@ require_once 'worldtime_sdk.php';
 
 $client = new WorldTimeSDK();
 
+
+// Load a specific ipn (returns the ENTITY; call data_get() for the record; throws on error)
+$ipn = $client->Ipn()->load();
+print_r($ipn);
 ```
 
 ### Golang
@@ -184,6 +204,12 @@ import sdk "github.com/voxgig-sdk/world-time-sdk/go"
 
 client := sdk.New()
 
+// Load ipn data
+ipn, err := client.Ipn(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(ipn)
 ```
 
 ### Ruby
@@ -193,6 +219,10 @@ require_relative "WorldTime_sdk"
 
 client = WorldTimeSDK.new
 
+
+# Load a specific ipn (returns the ENTITY; call data_get for the record)
+ipn = client.Ipn.load()
+puts ipn
 ```
 
 ### Lua
@@ -202,6 +232,10 @@ local sdk = require("world-time_sdk")
 
 local client = sdk.new()
 
+
+-- Load a specific ipn
+local ipn, err = client:Ipn():load()
+print(ipn)
 ```
 
 ## Direct and prepare
@@ -320,6 +354,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://worldtimeapi.org](https://worldtimeapi.org)
 

@@ -60,18 +60,6 @@ Create a new `Ipn` entity instance.
 
 **Returns:** `IpnEntity` instance.
 
-#### `Ipn2(data?: object)`
-
-Create a new `Ipn2` entity instance.
-
-**Parameters:**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| `data` | `object` | Initial entity data. |
-
-**Returns:** `Ipn2Entity` instance.
-
 #### `Timezone(data?: object)`
 
 Create a new `Timezone` entity instance.
@@ -136,40 +124,6 @@ Alias for `WorldTimeSDK.test()`.
 const ipn = client.Ipn()
 ```
 
-### Common Methods
-
-#### `data(data?: object)`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `match(match?: object)`
-
-Get or set the entity match criteria. Works the same as `data()`.
-
-#### `make()`
-
-Create a new `IpnEntity` instance with the same client and
-options.
-
-#### `client()`
-
-Return the parent `WorldTimeSDK` instance.
-
-#### `entopts()`
-
-Return a copy of the entity options.
-
-
----
-
-## Ipn2Entity
-
-```ts
-const ipn2 = client.Ipn2()
-```
-
 ### Fields
 
 | Field | Type | Required | Description |
@@ -197,7 +151,7 @@ const ipn2 = client.Ipn2()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Ipn2().load()
+const result = await client.Ipn().load()
 ```
 
 ### Common Methods
@@ -214,7 +168,7 @@ Get or set the entity match criteria. Works the same as `data()`.
 
 #### `make()`
 
-Create a new `Ipn2Entity` instance with the same client and
+Create a new `IpnEntity` instance with the same client and
 options.
 
 #### `client()`

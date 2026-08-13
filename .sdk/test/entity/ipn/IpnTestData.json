@@ -1,14 +1,84 @@
 {
   "existing": {
     "ipn": {
-      "IPN00": {},
-      "IPN01": {},
-      "IPN02": {}
+      "IPN00": {
+        "abbreviation": "s96",
+        "client_ip": "s97",
+        "datetime": "s98",
+        "day_of_week": "s99",
+        "day_of_year": "s9a",
+        "dst": false,
+        "dst_from": "s9c",
+        "dst_offset": "s9d",
+        "dst_until": "s9e",
+        "raw_offset": "s9f",
+        "timezone": "sa0",
+        "unixtime": "sa1",
+        "utc_datetime": "sa2",
+        "utc_offset": "sa3",
+        "week_number": "sa4",
+        "ipv4": "IPV401",
+        "id": "IPN00"
+      },
+      "IPN01": {
+        "abbreviation": "s12c",
+        "client_ip": "s12d",
+        "datetime": "s12e",
+        "day_of_week": "s12f",
+        "day_of_year": "s130",
+        "dst": false,
+        "dst_from": "s132",
+        "dst_offset": "s133",
+        "dst_until": "s134",
+        "raw_offset": "s135",
+        "timezone": "s136",
+        "unixtime": "s137",
+        "utc_datetime": "s138",
+        "utc_offset": "s139",
+        "week_number": "s13a",
+        "ipv4": "IPV401",
+        "id": "IPN01"
+      },
+      "IPN02": {
+        "abbreviation": "s1c2",
+        "client_ip": "s1c3",
+        "datetime": "s1c4",
+        "day_of_week": "s1c5",
+        "day_of_year": "s1c6",
+        "dst": false,
+        "dst_from": "s1c8",
+        "dst_offset": "s1c9",
+        "dst_until": "s1ca",
+        "raw_offset": "s1cb",
+        "timezone": "s1cc",
+        "unixtime": "s1cd",
+        "utc_datetime": "s1ce",
+        "utc_offset": "s1cf",
+        "week_number": "s1d0",
+        "ipv4": "IPV401",
+        "id": "IPN02"
+      }
     }
   },
   "new": {
     "ipn": {
-      "ipn_ref01": {}
+      "ipn_ref01": {
+        "abbreviation": "s258",
+        "client_ip": "s259",
+        "datetime": "s25a",
+        "day_of_week": "s25b",
+        "day_of_year": "s25c",
+        "dst": false,
+        "dst_from": "s25e",
+        "dst_offset": "s25f",
+        "dst_until": "s260",
+        "raw_offset": "s261",
+        "timezone": "s262",
+        "unixtime": "s263",
+        "utc_datetime": "s264",
+        "utc_offset": "s265",
+        "week_number": "s266"
+      }
     }
   }
 }

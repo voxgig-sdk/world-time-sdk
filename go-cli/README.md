@@ -1,9 +1,9 @@
 # world-time-cli
 
-AQL-driven command-line client **and** interactive REPL for the WorldTime
-SDK. Each command line is parsed as a single [AQL](https://github.com/aql-lang/aql)
+boru-driven command-line client **and** interactive REPL for the WorldTime
+SDK. Each command line is parsed as a single [boru](https://github.com/boru-lang/boru)
 expression and evaluated against the live API; run it with no arguments to drop
-into a REPL. Built on `github.com/aql-lang/aql/eng/go` and the sibling Go SDK
+into a REPL. Built on `github.com/boru-lang/boru/eng/go` and the sibling Go SDK
 at `../go`.
 
 ## Examples
@@ -18,14 +18,16 @@ make build
 # 3. Provide credentials once, via the environment
 export WORLD_TIME_APIKEY=sk_live_xxx
 
-# 4. Each command line is ONE AQL expression, run against the API:
+# 4. Each command line is ONE boru expression, run against the API:
+./world-time-cli load 1 ipn            # {id:1} shorthand
+./world-time-cli load '{id:1}' ipn       # explicit match map
 
 # 5. Override the API base URL for a single call
-WORLD_TIME_BASE=https://api.example.com ./world-time-cli --help
+WORLD_TIME_BASE=https://api.example.com ./world-time-cli load 1 ipn
 
 # 6. No arguments -> interactive REPL
 ./world-time-cli
-world-time> /help
+world-time> load 1 ipn
 world-time> /quit
 ```
 
@@ -47,19 +49,29 @@ world-time> /quit
    export WORLD_TIME_APIKEY=sk_live_xxx
    ```
 
-3. **Run a query.** Evaluate an AQL expression against the API (or run with no
+3. **Run a query.** Evaluate an boru expression against the API (or run with no
    arguments to open the REPL):
 
    ```sh
-   ./dist/*/world-time-cli --help
+   ./dist/*/world-time-cli load 1 ipn
    ```
 
 4. **Go interactive.** Run the binary with no arguments to open the REPL, then
    type `/help` for the word and entity lists and `/quit` to leave.
 
-That is the whole loop: *build → set key → evaluate AQL expressions*.
+That is the whole loop: *build → set key → evaluate boru expressions*.
 
 ## How-to guides
+
+### Load a single record
+
+```sh
+./world-time-cli load 1 ipn          # scalar shorthand for {id:1}
+./world-time-cli load '{id:1}' ipn     # explicit match map
+```
+
+The query is either a **scalar** (`1`, treated as `{id:1}`) or a **match map**
+(`{id:1}`, `{slug:"acme"}`). Quote the map so your shell passes it through intact.
 
 ### Authenticate and choose an environment
 
@@ -68,7 +80,7 @@ Configuration is read from the environment — nothing is written to disk:
 ```sh
 export WORLD_TIME_APIKEY=sk_live_xxx            # API key
 export WORLD_TIME_BASE=https://api.example.com  # optional: override the API base URL
-./world-time-cli --help
+./world-time-cli load 1 ipn
 ```
 
 Both are injectable by a secrets vault, so the key never has to be typed inline.
@@ -76,10 +88,11 @@ Both are injectable by a secrets vault, so the key never has to be typed inline.
 ### Explore interactively with the REPL
 
 Run with no arguments to open a REPL (prompt `world-time>`). Each line is
-evaluated as its own AQL expression:
+evaluated as its own boru expression:
 
 ```text
 $ ./world-time-cli
+world-time> load 1 ipn
 world-time> /help
 world-time> /quit
 ```
@@ -94,20 +107,20 @@ make build-all   # linux/darwin/windows x amd64/arm64, under dist/<os>-<arch>/
 ### Discover the available entities
 
 `/help` in the REPL prints the full entity list, or see [Entities](#entities)
-below — this SDK exposes 3 entities.
+below — this SDK exposes 2 entities.
 
 ## Reference
 
 ### Words
 
-The CLI registers these AQL words, each bound to the SDK:
+The CLI registers these boru words, each bound to the SDK:
 
 | Word     | Signatures                                    | Returns                        |
 |----------|-----------------------------------------------|--------------------------------|
 | `list`   | `list <entity>` · `list <query> <entity>`     | First page of records          |
 | `load`   | `load <entity>` · `load <query> <entity>`     | A single record                |
 
-- `<entity>` is a bareword, auto-quoted as an AQL atom (e.g. `ipn`).
+- `<entity>` is a bareword, auto-quoted as an boru atom (e.g. `ipn`).
 - `<query>` is either a **Map** (`{id:1}`) or a **Scalar** (`1`, treated as
   `{id:1}`). A scalar is always wrapped as `{id:<value>}`.
 
@@ -126,7 +139,7 @@ Unset variables fall back to the SDK's built-in defaults.
 
 ### REPL commands
 
-Meta-commands use the `/` prefix (everything else on a line is evaluated as AQL):
+Meta-commands use the `/` prefix (everything else on a line is evaluated as boru):
 
 - `/quit` / `/q` / `/exit` — exit the REPL
 - `/help` / `/h` / `/?`     — show the word list, entity list and meta commands
@@ -148,31 +161,31 @@ Meta-commands use the `/` prefix (everything else on a line is evaluated as AQL)
 
 ### Entities
 
-The 3 entities this SDK exposes (any is valid as `<entity>`):
+The 2 entities this SDK exposes (any is valid as `<entity>`):
 
-ipn ipn2 timezone
+ipn timezone
 
 ## Explanation
 
-### Why AQL?
+### Why boru?
 
-The whole command line is one [AQL](https://github.com/aql-lang/aql) expression,
+The whole command line is one [boru](https://github.com/boru-lang/boru) expression,
 not a fixed `verb --flag` grammar. That means the same binary works one-shot
 (`./world-time-cli <expr>`) and interactively (the REPL), and expressions compose the
-same way in both. `list` / `load` / `update` are ordinary AQL *words* bound to
+same way in both. `list` / `load` / `update` are ordinary boru *words* bound to
 the SDK — adding SDK operations is adding words, not re-parsing flags.
 
 ### How it is wired
 
 `main.go` builds the SDK client (configured from the environment), creates an
-AQL registry, and `words.go` registers `list` / `load` / `update` as native
+boru registry, and `words.go` registers `list` / `load` / `update` as native
 words that dispatch on the entity atom and call the sibling Go SDK at `../go`.
 Results are unwrapped from their `Entity` wrappers to plain data before being
 printed.
 
 ### Output format
 
-Each result value is printed as its AQL string form (a JSON-like rendering of
+Each result value is printed as its boru string form (a JSON-like rendering of
 the record or list of records). One-shot mode prints to stdout; errors go to
 stderr with a non-zero exit code.
 

@@ -43,8 +43,8 @@ class WorldTimeTestRunner
 
     public static function env_override(array $m): array
     {
-        $live = self::getenv('WORLDTIME_TEST_LIVE');
-        $override = self::getenv('WORLDTIME_TEST_OVERRIDE');
+        $live = self::getenv('WORLD_TIME_TEST_LIVE');
+        $override = self::getenv('WORLD_TIME_TEST_OVERRIDE');
 
         if ($live === 'TRUE' || $override === 'TRUE') {
             foreach (array_keys($m) as $key) {
@@ -63,9 +63,9 @@ class WorldTimeTestRunner
             }
         }
 
-        $explain = self::getenv('WORLDTIME_TEST_EXPLAIN');
+        $explain = self::getenv('WORLD_TIME_TEST_EXPLAIN');
         if ($explain !== null && $explain !== '') {
-            $m['WORLDTIME_TEST_EXPLAIN'] = $explain;
+            $m['WORLD_TIME_TEST_EXPLAIN'] = $explain;
         }
 
         return $m;

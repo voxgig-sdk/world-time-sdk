@@ -45,10 +45,6 @@ client = WorldTimeSDK.test()
 
 Create a new `IpnEntity` instance. Pass `None` for no initial data.
 
-#### `Ipn2(data=None)`
-
-Create a new `Ipn2Entity` instance. Pass `None` for no initial data.
-
 #### `Timezone(data=None)`
 
 Create a new `TimezoneEntity` instance. Pass `None` for no initial data.
@@ -91,41 +87,6 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 ipn = client.Ipn()
 ```
 
-### Common Methods
-
-#### `data_get() -> dict`
-
-Get the entity data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> dict`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `IpnEntity` instance with the same options.
-
-#### `get_name() -> str`
-
-Return the entity name.
-
-
----
-
-## Ipn2Entity
-
-```python
-ipn2 = client.Ipn2()
-```
-
 ### Fields
 
 | Field | Type | Required | Description |
@@ -153,7 +114,7 @@ ipn2 = client.Ipn2()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Ipn2().load()
+result = client.Ipn().load()
 ```
 
 ### Common Methods
@@ -176,7 +137,7 @@ Set the entity match criteria.
 
 #### `make() -> Entity`
 
-Create a new `Ipn2Entity` instance with the same options.
+Create a new `IpnEntity` instance with the same options.
 
 #### `get_name() -> str`
 

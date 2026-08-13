@@ -51,10 +51,6 @@ client := sdk.TestSDK(testopts, sdkopts)
 
 Create a new `Ipn` entity instance. Pass `nil` for no initial data.
 
-#### `Ipn2(data map[string]any) WorldTimeEntity`
-
-Create a new `Ipn2` entity instance. Pass `nil` for no initial data.
-
 #### `Timezone(data map[string]any) WorldTimeEntity`
 
 Create a new `Timezone` entity instance. Pass `nil` for no initial data.
@@ -102,37 +98,6 @@ ipn := client.Ipn(nil)
 fmt.Println(ipn.GetName()) // "ipn"
 ```
 
-### Common Methods
-
-#### `Data(args ...any) any`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `Match(args ...any) any`
-
-Get or set the entity match criteria. Works the same as `Data()`.
-
-#### `Make() Entity`
-
-Create a new `IpnEntity` instance with the same client and
-options.
-
-#### `GetName() string`
-
-Return the entity name.
-
-
----
-
-## Ipn2Entity
-
-```go
-ipn2 := client.Ipn2(nil)
-fmt.Println(ipn2.GetName()) // "ipn2"
-```
-
 ### Fields
 
 | Field | Type | Required | Description |
@@ -160,7 +125,7 @@ fmt.Println(ipn2.GetName()) // "ipn2"
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Ipn2(nil).Load(nil, nil)
+result, err := client.Ipn(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
@@ -181,7 +146,7 @@ Get or set the entity match criteria. Works the same as `Data()`.
 
 #### `Make() Entity`
 
-Create a new `Ipn2Entity` instance with the same client and
+Create a new `IpnEntity` instance with the same client and
 options.
 
 #### `GetName() string`

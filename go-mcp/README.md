@@ -31,7 +31,7 @@ Tool-call arguments (what an agent sends):
 { "entity": "timezone", "query": { } }
 
 // world-time_load: one record by id
-{ "entity": "ipn2", "query": { "id": 1 } }
+{ "entity": "ipn", "query": { "id": 1 } }
 ```
 
 > The rest of this guide follows the [Diátaxis](https://diataxis.fr) framework:
@@ -101,7 +101,7 @@ Args: `entity` (required), `query` = `{"id":N}` (required). Returns the single
 record as JSON:
 
 ```jsonc
-{ "entity": "ipn2", "query": { "id": 1 } }
+{ "entity": "ipn", "query": { "id": 1 } }
 ```
 
 ### Cross-compile release binaries
@@ -129,7 +129,7 @@ Both tools take the same argument object:
 
 | Field | Type | Notes |
 |-------|------|-------|
-| `entity` | string | One of the 3 supported entities (see below). |
+| `entity` | string | One of the 2 supported entities (see below). |
 | `query` | object | Optional match map. `{"id":N}` for load; omit or `{}` for list. |
 
 JSON schemas are emitted by the SDK from the `Args` struct's `json` /
@@ -151,9 +151,9 @@ JSON schemas are emitted by the SDK from the `Args` struct's `json` /
 
 ### Entities
 
-The 3 entities valid as the `entity` argument:
+The 2 entities valid as the `entity` argument:
 
-ipn | ipn2 | timezone
+ipn | timezone
 
 ### Smoke test via HTTP (raw JSON-RPC)
 
@@ -173,7 +173,7 @@ curl -sN -X POST http://localhost:18080 \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json, text/event-stream' \
   -H "Mcp-Session-Id: $SESSION" \
-  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"world-time_load","arguments":{"entity":"ipn2","query":{"id":1}}}}'
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"world-time_load","arguments":{"entity":"ipn","query":{"id":1}}}}'
 ```
 
 ## Explanation

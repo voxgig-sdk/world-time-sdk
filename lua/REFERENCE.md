@@ -44,10 +44,6 @@ local client = sdk.test()
 
 Create a new `Ipn` entity instance. Pass `nil` for no initial data.
 
-#### `Ipn2(data)`
-
-Create a new `Ipn2` entity instance. Pass `nil` for no initial data.
-
 #### `Timezone(data)`
 
 Create a new `Timezone` entity instance. Pass `nil` for no initial data.
@@ -94,42 +90,6 @@ same parameters as `direct()`.
 local ipn = client:Ipn(nil)
 ```
 
-### Common Methods
-
-#### `data_get() -> table`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> table`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `IpnEntity` instance with the same client and
-options.
-
-#### `get_name() -> string`
-
-Return the entity name.
-
-
----
-
-## Ipn2Entity
-
-```lua
-local ipn2 = client:Ipn2(nil)
-```
-
 ### Fields
 
 | Field | Type | Required | Description |
@@ -157,7 +117,7 @@ local ipn2 = client:Ipn2(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Ipn2():load()
+local result, err = client:Ipn():load()
 ```
 
 ### Common Methods
@@ -180,7 +140,7 @@ Set the entity match criteria.
 
 #### `make() -> Entity`
 
-Create a new `Ipn2Entity` instance with the same client and
+Create a new `IpnEntity` instance with the same client and
 options.
 
 #### `get_name() -> string`

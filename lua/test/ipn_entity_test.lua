@@ -19,7 +19,7 @@ describe("IpnEntity", function()
     local setup = ipn_basic_setup(nil)
     -- Per-op sdk-test-control.json skip.
     local _live = setup.live or false
-    for _, _op in ipairs({}) do
+    for _, _op in ipairs({"load"}) do
       local _should_skip, _reason = runner.is_control_skipped("entityOp", "ipn." .. _op, _live and "live" or "unit")
       if _should_skip then
         pending(_reason or "skipped via sdk-test-control.json")
@@ -29,7 +29,7 @@ describe("IpnEntity", function()
     -- The basic flow consumes synthetic IDs from the fixture. In live mode
     -- without an *_ENTID env override, those IDs hit the live API and 4xx.
     if setup.synthetic_only then
-      pending("live entity test uses synthetic IDs from fixture — set WORLDTIME_TEST_IPN_ENTID JSON to run live")
+      pending("live entity test uses synthetic IDs from fixture — set WORLD_TIME_TEST_IPN_ENTID JSON to run live")
       return
     end
     local client = setup.client
@@ -41,6 +41,13 @@ describe("IpnEntity", function()
     if #ipn_ref01_data_raw > 0 then
       ipn_ref01_data = helpers.to_map(ipn_ref01_data_raw[1][2])
     end
+
+    -- LOAD
+    local ipn_ref01_ent = client:Ipn(nil)
+    local ipn_ref01_match_dt0 = {}
+    local ipn_ref01_data_dt0_loaded, err = ipn_ref01_ent:load(ipn_ref01_match_dt0, nil)
+    assert.is_nil(err)
+    assert.is_not_nil(ipn_ref01_data_dt0_loaded)
 
   end)
 end)
@@ -65,7 +72,7 @@ function ipn_basic_setup(extra)
 
   -- Generate idmap via transform.
   local idmap = vs.transform(
-    { "ipn01", "ipn02", "ipn03" },
+    { "ipn01", "ipn02", "ipn03", "ip01", "ip02", "ip03" },
     {
       ["`$PACK`"] = { "", {
         ["`$KEY`"] = "`$COPY`",
@@ -77,22 +84,22 @@ function ipn_basic_setup(extra)
   -- Detect ENTID env override before envOverride consumes it. When live
   -- mode is on without a real override, the basic test runs against synthetic
   -- IDs from the fixture and 4xx's. Surface this so the test can skip.
-  local entid_env_raw = os.getenv("WORLDTIME_TEST_IPN_ENTID")
+  local entid_env_raw = os.getenv("WORLD_TIME_TEST_IPN_ENTID")
   local idmap_overridden = entid_env_raw ~= nil and entid_env_raw:match("^%s*{") ~= nil
 
   local env = runner.env_override({
-    ["WORLDTIME_TEST_IPN_ENTID"] = idmap,
-    ["WORLDTIME_TEST_LIVE"] = "FALSE",
-    ["WORLDTIME_TEST_EXPLAIN"] = "FALSE",
+    ["WORLD_TIME_TEST_IPN_ENTID"] = idmap,
+    ["WORLD_TIME_TEST_LIVE"] = "FALSE",
+    ["WORLD_TIME_TEST_EXPLAIN"] = "FALSE",
   })
 
   local idmap_resolved = helpers.to_map(
-    env["WORLDTIME_TEST_IPN_ENTID"])
+    env["WORLD_TIME_TEST_IPN_ENTID"])
   if idmap_resolved == nil then
     idmap_resolved = helpers.to_map(idmap)
   end
 
-  if env["WORLDTIME_TEST_LIVE"] == "TRUE" then
+  if env["WORLD_TIME_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
       },
@@ -101,13 +108,13 @@ function ipn_basic_setup(extra)
     client = sdk.new(helpers.to_map(merged_opts))
   end
 
-  local live = env["WORLDTIME_TEST_LIVE"] == "TRUE"
+  local live = env["WORLD_TIME_TEST_LIVE"] == "TRUE"
   return {
     client = client,
     data = entity_data,
     idmap = idmap_resolved,
     env = env,
-    explain = env["WORLDTIME_TEST_EXPLAIN"] == "TRUE",
+    explain = env["WORLD_TIME_TEST_EXPLAIN"] == "TRUE",
     live = live,
     synthetic_only = live and not idmap_overridden,
     now = os.time() * 1000,

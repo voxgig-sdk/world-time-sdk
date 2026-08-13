@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from worldtime_sdk.utility.voxgig_struct import voxgig_struct as vs
 from worldtime_sdk import WorldTimeSDK
-from core import helpers
+from worldtime_sdk.core import helpers
 from test import runner
 
 
@@ -104,11 +104,11 @@ def _timezone_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "WORLDTIME_TEST_TIMEZONE_ENTID": {},
-        "WORLDTIME_TEST_LIVE": "FALSE",
+        "WORLD_TIME_TEST_TIMEZONE_ENTID": {},
+        "WORLD_TIME_TEST_LIVE": "FALSE",
     })
 
-    live = env.get("WORLDTIME_TEST_LIVE") == "TRUE"
+    live = env.get("WORLD_TIME_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {

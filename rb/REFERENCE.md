@@ -45,10 +45,6 @@ client = WorldTimeSDK.test
 
 Create a new `Ipn` entity instance. Pass `nil` for no initial data.
 
-#### `Ipn2(data = nil)`
-
-Create a new `Ipn2` entity instance. Pass `nil` for no initial data.
-
 #### `Timezone(data = nil)`
 
 Create a new `Timezone` entity instance. Pass `nil` for no initial data.
@@ -97,42 +93,6 @@ same parameters as `direct()`. Raises on error.
 ipn = client.Ipn
 ```
 
-### Common Methods
-
-#### `data_get -> Hash`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get -> Hash`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make -> Entity`
-
-Create a new `IpnEntity` instance with the same client and
-options.
-
-#### `get_name -> String`
-
-Return the entity name.
-
-
----
-
-## Ipn2Entity
-
-```ruby
-ipn2 = client.Ipn2
-```
-
 ### Fields
 
 | Field | Type | Required | Description |
@@ -160,7 +120,7 @@ ipn2 = client.Ipn2
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Ipn2.load()
+result = client.Ipn.load()
 ```
 
 ### Common Methods
@@ -183,7 +143,7 @@ Set the entity match criteria.
 
 #### `make -> Entity`
 
-Create a new `Ipn2Entity` instance with the same client and
+Create a new `IpnEntity` instance with the same client and
 options.
 
 #### `get_name -> String`

@@ -32,7 +32,7 @@ func TestIpnEntity(t *testing.T) {
 		if setup.live {
 			_mode = "live"
 		}
-		for _, _op := range []string{} {
+		for _, _op := range []string{"load"} {
 			if _shouldSkip, _reason := isControlSkipped("entityOp", "ipn." + _op, _mode); _shouldSkip {
 				if _reason == "" {
 					_reason = "skipped via sdk-test-control.json"
@@ -44,9 +44,11 @@ func TestIpnEntity(t *testing.T) {
 		// The basic flow consumes synthetic IDs from the fixture. In live mode
 		// without an *_ENTID env override, those IDs hit the live API and 4xx.
 		if setup.syntheticOnly {
-			t.Skip("live entity test uses synthetic IDs from fixture — set WORLDTIME_TEST_IPN_ENTID JSON to run live")
+			t.Skip("live entity test uses synthetic IDs from fixture — set WORLD_TIME_TEST_IPN_ENTID JSON to run live")
 			return
 		}
+		client := setup.client
+
 		// Bootstrap entity data from existing test data (no create step in flow).
 		ipnRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath("existing.ipn", setup.data)))
 		var ipnRef01Data map[string]any
@@ -56,6 +58,17 @@ func TestIpnEntity(t *testing.T) {
 		// Discard guards against Go's unused-var check when the flow's steps
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = ipnRef01Data
+
+		// LOAD
+		ipnRef01Ent := client.Ipn(nil)
+		ipnRef01MatchDt0 := map[string]any{}
+		ipnRef01DataDt0Loaded, err := ipnRef01Ent.Load(ipnRef01MatchDt0, nil)
+		if err != nil {
+			t.Fatalf("load failed: %v", err)
+		}
+		if ipnRef01DataDt0Loaded == nil {
+			t.Fatal("expected load result to be non-nil")
+		}
 
 	})
 }
@@ -85,7 +98,7 @@ func ipnBasicSetup(extra map[string]any) *entityTestSetup {
 
 	// Generate idmap via transform, matching TS pattern.
 	idmap := vs.Transform(
-		[]any{"ipn01", "ipn02", "ipn03"},
+		[]any{"ipn01", "ipn02", "ipn03", "ip01", "ip02", "ip03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
 				"`$KEY`": "`$COPY`",
@@ -97,21 +110,21 @@ func ipnBasicSetup(extra map[string]any) *entityTestSetup {
 	// Detect ENTID env override before envOverride consumes it. When live
 	// mode is on without a real override, the basic test runs against synthetic
 	// IDs from the fixture and 4xx's. Surface this so the test can skip.
-	entidEnvRaw := os.Getenv("WORLDTIME_TEST_IPN_ENTID")
+	entidEnvRaw := os.Getenv("WORLD_TIME_TEST_IPN_ENTID")
 	idmapOverridden := entidEnvRaw != "" && strings.HasPrefix(strings.TrimSpace(entidEnvRaw), "{")
 
 	env := envOverride(map[string]any{
-		"WORLDTIME_TEST_IPN_ENTID": idmap,
-		"WORLDTIME_TEST_LIVE":      "FALSE",
-		"WORLDTIME_TEST_EXPLAIN":   "FALSE",
+		"WORLD_TIME_TEST_IPN_ENTID": idmap,
+		"WORLD_TIME_TEST_LIVE":      "FALSE",
+		"WORLD_TIME_TEST_EXPLAIN":   "FALSE",
 	})
 
-	idmapResolved := core.ToMapAny(env["WORLDTIME_TEST_IPN_ENTID"])
+	idmapResolved := core.ToMapAny(env["WORLD_TIME_TEST_IPN_ENTID"])
 	if idmapResolved == nil {
 		idmapResolved = core.ToMapAny(idmap)
 	}
 
-	if env["WORLDTIME_TEST_LIVE"] == "TRUE" {
+	if env["WORLD_TIME_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
 			},
@@ -120,13 +133,13 @@ func ipnBasicSetup(extra map[string]any) *entityTestSetup {
 		client = sdk.NewWorldTimeSDK(core.ToMapAny(mergedOpts))
 	}
 
-	live := env["WORLDTIME_TEST_LIVE"] == "TRUE"
+	live := env["WORLD_TIME_TEST_LIVE"] == "TRUE"
 	return &entityTestSetup{
 		client:        client,
 		data:          entityData,
 		idmap:         idmapResolved,
 		env:           env,
-		explain:       env["WORLDTIME_TEST_EXPLAIN"] == "TRUE",
+		explain:       env["WORLD_TIME_TEST_EXPLAIN"] == "TRUE",
 		live:          live,
 		syntheticOnly: live && !idmapOverridden,
 		now:           time.Now().UnixMilli(),

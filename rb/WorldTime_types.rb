@@ -9,10 +9,6 @@
 # annotations document the shapes. Do not edit by hand.
 
 # Ipn entity data model.
-class Ipn
-end
-
-# Ipn2 entity data model.
 #
 # @!attribute [rw] abbreviation
 #   @return [String, nil]
@@ -58,7 +54,7 @@ end
 #
 # @!attribute [rw] week_number
 #   @return [Integer, nil]
-Ipn2 = Struct.new(
+Ipn = Struct.new(
   :abbreviation,
   :client_ip,
   :datetime,
@@ -77,11 +73,11 @@ Ipn2 = Struct.new(
   keyword_init: true
 )
 
-# Request payload for Ipn2#load.
+# Request payload for Ipn#load.
 #
 # @!attribute [rw] ipv4
 #   @return [String, nil]
-Ipn2LoadMatch = Struct.new(
+IpnLoadMatch = Struct.new(
   :ipv4,
   keyword_init: true
 )

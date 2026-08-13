@@ -6,9 +6,6 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 
 export interface Ipn {
-}
-
-export interface Ipn2 {
   abbreviation?: string
   client_ip?: string
   datetime?: string
@@ -26,7 +23,7 @@ export interface Ipn2 {
   week_number?: number
 }
 
-export interface Ipn2LoadMatch {
+export interface IpnLoadMatch {
   ipv4?: string
 }
 

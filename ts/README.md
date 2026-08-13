@@ -33,6 +33,19 @@ import { WorldTimeSDK } from '@voxgig-sdk/world-time'
 const client = new WorldTimeSDK()
 ```
 
+### 3. Load an ipn
+
+`load()` returns the entity directly and throws on failure:
+
+```ts
+try {
+  const ipn = await client.Ipn().load()
+  console.log(ipn)
+} catch (err) {
+  console.error('load failed:', err)
+}
+```
+
 
 ## Error handling
 
@@ -40,8 +53,8 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const ipn2 = await client.Ipn2().load()
-  console.log(ipn2)
+  const ipn = await client.Ipn().load()
+  console.log(ipn)
 } catch (err) {
   console.error('load failed:', err)
 }
@@ -107,9 +120,10 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = WorldTimeSDK.test()
 
-const ipn2 = await client.Ipn2().load()
-// ipn2 is a bare entity populated with mock response data
-console.log(ipn2)
+const ipn = await client.Ipn().load()
+// ipn is the entity, populated with mock response data
+// — call ipn.data() for the record itself
+console.log(ipn)
 ```
 
 You can also use the instance method:
@@ -124,7 +138,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Ipn2()
+const entity = client.Ipn()
 
 // First call runs the operation and stores its result
 await entity.load()
@@ -203,7 +217,6 @@ new WorldTimeSDK(options?: {
 | `prepare(fetchargs?)` | `Promise<FetchDef>` | Build an HTTP request definition without sending it. |
 | `direct(fetchargs?)` | `Promise<DirectResult>` | Build and send an HTTP request. |
 | `Ipn(data?)` | `IpnEntity` | Create an Ipn entity instance. |
-| `Ipn2(data?)` | `Ipn2Entity` | Create an Ipn2 entity instance. |
 | `Timezone(data?)` | `TimezoneEntity` | Create a Timezone entity instance. |
 | `tester(testopts?, sdkopts?)` | `WorldTimeSDK` | Create a test-mode client instance. |
 
@@ -276,15 +289,6 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-
-Operations: .
-
-API path: ``
-
-#### Ipn2
-
-| Field | Description |
-| --- | --- |
 | `abbreviation` |  |
 | `client_ip` |  |
 | `datetime` |  |
@@ -338,11 +342,6 @@ API path: `/timezone`
 
 Create an instance: `const ipn = client.Ipn()`
 
-
-### Ipn2
-
-Create an instance: `const ipn2 = client.Ipn2()`
-
 #### Operations
 
 | Method | Description |
@@ -372,7 +371,7 @@ Create an instance: `const ipn2 = client.Ipn2()`
 #### Example: Load
 
 ```ts
-const ipn2 = await client.Ipn2().load()
+const ipn = await client.Ipn().load()
 ```
 
 
@@ -489,11 +488,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const ipn2 = client.Ipn2()
-await ipn2.load()
+const ipn = client.Ipn()
+await ipn.load()
 
-// ipn2.data() now returns the ipn2 data from the last `load`
-// ipn2.match() returns the last match criteria
+// ipn.data() now returns the ipn data from the last `load`
+// ipn.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

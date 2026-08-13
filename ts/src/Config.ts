@@ -21,7 +21,7 @@ class Config {
 
 
   main = {
-    name: 'ProjectName',
+    name: 'WorldTime',
   }
 
 
@@ -47,9 +47,6 @@ class Config {
       ipn: {
       },
 
-      ipn2: {
-      },
-
       timezone: {
       },
 
@@ -59,14 +56,6 @@ class Config {
 
   entity = {
     "ipn": {
-      "fields": [],
-      "name": "ipn",
-      "op": {},
-      "relations": {
-        "ancestors": []
-      }
-    },
-    "ipn2": {
       "fields": [
         {
           "active": true,
@@ -174,7 +163,7 @@ class Config {
           "index$": 14
         }
       ],
-      "name": "ipn2",
+      "name": "ipn",
       "op": {
         "load": {
           "input": "data",
@@ -196,6 +185,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/ip/{ipv4}",
               "parts": [
@@ -216,6 +206,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "GET",
               "orig": "/ip",
               "parts": [
@@ -357,6 +348,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "GET",
               "orig": "/timezone",
               "parts": [
@@ -402,6 +394,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/timezone/{area}/{location}",
               "parts": [
@@ -437,6 +430,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/timezone/{area}",
               "parts": [

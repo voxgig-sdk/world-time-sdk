@@ -23,8 +23,8 @@ module WorldTimeTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("WORLDTIME_TEST_LIVE")
-    override = getenv("WORLDTIME_TEST_OVERRIDE")
+    live = getenv("WORLD_TIME_TEST_LIVE")
+    override = getenv("WORLD_TIME_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module WorldTimeTestRunner
       end
     end
 
-    explain = getenv("WORLDTIME_TEST_EXPLAIN")
-    m["WORLDTIME_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("WORLD_TIME_TEST_EXPLAIN")
+    m["WORLD_TIME_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

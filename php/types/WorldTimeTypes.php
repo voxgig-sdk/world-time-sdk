@@ -15,11 +15,6 @@ declare(strict_types=1);
 /** Ipn entity data model. */
 class Ipn
 {
-}
-
-/** Ipn2 entity data model. */
-class Ipn2
-{
     public ?string $abbreviation = null;
     public ?string $client_ip = null;
     public ?string $datetime = null;
@@ -37,8 +32,8 @@ class Ipn2
     public ?int $week_number = null;
 }
 
-/** Request payload for Ipn2#load. */
-class Ipn2LoadMatch
+/** Request payload for Ipn#load. */
+class IpnLoadMatch
 {
     public ?string $ipv4 = null;
 }

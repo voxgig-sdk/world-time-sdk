@@ -26,8 +26,8 @@ import {
 describe('TimezoneEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when WORLDTIME_TEST_LIVE=TRUE.
-  afterEach(liveDelay('WORLDTIME_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when WORLD_TIME_TEST_LIVE=TRUE.
+  afterEach(liveDelay('WORLD_TIME_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = WorldTimeSDK.test()
@@ -63,7 +63,7 @@ describe('TimezoneEntity', async () => {
     const timezone_ref01_ent = client.Timezone()
     const timezone_ref01_match: any = {}
 
-    const timezone_ref01_list = await timezone_ref01_ent.list(timezone_ref01_match)
+    const timezone_ref01_list = (await timezone_ref01_ent.list(timezone_ref01_match)).map((e: any) => e.data())
 
 
 

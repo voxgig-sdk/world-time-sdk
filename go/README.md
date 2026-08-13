@@ -43,13 +43,19 @@ directly.
 package main
 
 import (
+    "fmt"
     sdk "github.com/voxgig-sdk/world-time-sdk/go"
 )
 
 func main() {
     client := sdk.New()
 
-    _ = client
+    // Load a single ipn — the value is the loaded record.
+    ipn, err := client.Ipn(nil).Load(nil, nil)
+    if err != nil {
+        panic(err)
+    }
+    fmt.Println(ipn)
 }
 ```
 
@@ -60,12 +66,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-ipn2, err := client.Ipn2(nil).Load(nil, nil)
+ipn, err := client.Ipn(nil).Load(nil, nil)
 if err != nil {
     // handle err
     return
 }
-_ = ipn2
+_ = ipn
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -129,13 +135,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-ipn2, err := client.Ipn2(nil).Load(
+ipn, err := client.Ipn(nil).Load(
     nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(ipn2) // the returned mock data
+fmt.Println(ipn) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -213,7 +219,6 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `Prepare` | `(fetchargs map[string]any) (map[string]any, error)` | Build an HTTP request definition without sending. |
 | `Direct` | `(fetchargs map[string]any) (map[string]any, error)` | Build and send an HTTP request. |
 | `Ipn` | `(data map[string]any) WorldTimeEntity` | Create an Ipn entity instance. |
-| `Ipn2` | `(data map[string]any) WorldTimeEntity` | Create an Ipn2 entity instance. |
 | `Timezone` | `(data map[string]any) WorldTimeEntity` | Create a Timezone entity instance. |
 
 ### Entity interface (WorldTimeEntity)
@@ -243,9 +248,9 @@ Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
 slice):
 
-    ipn2, err := client.Ipn2(nil).Load(nil, nil)
+    ipn, err := client.Ipn(nil).Load(nil, nil)
     if err != nil { /* handle */ }
-    // ipn2 is the returned record
+    // ipn is the returned record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -253,15 +258,6 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 ### Entities
 
 #### Ipn
-
-| Field | Description |
-| --- | --- |
-
-Operations: .
-
-API path: ``
-
-#### Ipn2
 
 | Field | Description |
 | --- | --- |
@@ -318,11 +314,6 @@ API path: `/timezone`
 
 Create an instance: `ipn := client.Ipn(nil)`
 
-
-### Ipn2
-
-Create an instance: `ipn2 := client.Ipn2(nil)`
-
 #### Operations
 
 | Method | Description |
@@ -352,11 +343,11 @@ Create an instance: `ipn2 := client.Ipn2(nil)`
 #### Example: Load
 
 ```go
-ipn2, err := client.Ipn2(nil).Load(nil, nil)
+ipn, err := client.Ipn(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(ipn2) // the loaded record
+fmt.Println(ipn) // the loaded record
 ```
 
 
@@ -485,11 +476,11 @@ Entity instances are stateful. After a successful `Load`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-ipn2 := client.Ipn2(nil)
-ipn2.Load(nil, nil)
+ipn := client.Ipn(nil)
+ipn.Load(nil, nil)
 
-// ipn2.Data() now returns the ipn2 data from the last load
-// ipn2.Match() returns the last match criteria
+// ipn.Data() now returns the ipn data from the last load
+// ipn.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

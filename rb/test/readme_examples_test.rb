@@ -43,7 +43,6 @@ class ReadmeExamplesTest < Minitest::Test
   # Entity accessor (client.<Name>) => fixture storage key (lowercase name).
   ENTITIES = {
     "Ipn" => "ipn",
-    "Ipn2" => "ipn2",
     "Timezone" => "timezone",
   }
 

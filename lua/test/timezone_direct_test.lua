@@ -115,11 +115,11 @@ function timezone_direct_setup(mockres)
   local calls = {}
 
   local env = runner.env_override({
-    ["WORLDTIME_TEST_TIMEZONE_ENTID"] = {},
-    ["WORLDTIME_TEST_LIVE"] = "FALSE",
+    ["WORLD_TIME_TEST_TIMEZONE_ENTID"] = {},
+    ["WORLD_TIME_TEST_LIVE"] = "FALSE",
   })
 
-  local live = env["WORLDTIME_TEST_LIVE"] == "TRUE"
+  local live = env["WORLD_TIME_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {

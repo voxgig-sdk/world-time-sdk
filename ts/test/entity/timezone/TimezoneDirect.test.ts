@@ -19,11 +19,15 @@ import {
 describe('TimezoneDirect', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when WORLDTIME_TEST_LIVE=TRUE.
-  afterEach(liveDelay('WORLDTIME_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when WORLD_TIME_TEST_LIVE=TRUE.
+  afterEach(liveDelay('WORLD_TIME_TEST_LIVE'))
 
   test('direct-exists', async () => {
     const sdk = new WorldTimeSDK({
+      // Concrete base: a live construction must satisfy any server
+      // variables a templated base URL declares; overriding base with a
+      // literal (as the direct flow tests do) sidesteps the requirement.
+      base: 'http://localhost:8080',
       system: { fetch: async () => ({}) }
     })
     assert('function' === typeof sdk.direct)
@@ -118,17 +122,17 @@ function directSetup(mockres?: any) {
   const calls: any[] = []
 
   const env = envOverride({
-    'WORLDTIME_TEST_TIMEZONE_ENTID': {},
-    'WORLDTIME_TEST_LIVE': 'FALSE',
+    'WORLD_TIME_TEST_TIMEZONE_ENTID': {},
+    'WORLD_TIME_TEST_LIVE': 'FALSE',
   })
 
-  const live = 'TRUE' === env.WORLDTIME_TEST_LIVE
+  const live = 'TRUE' === env.WORLD_TIME_TEST_LIVE
 
   if (live) {
     const client = new WorldTimeSDK({
     })
 
-    let idmap: any = env['WORLDTIME_TEST_TIMEZONE_ENTID']
+    let idmap: any = env['WORLD_TIME_TEST_TIMEZONE_ENTID']
     if ('string' === typeof idmap && idmap.startsWith('{')) {
       idmap = JSON.parse(idmap)
     }

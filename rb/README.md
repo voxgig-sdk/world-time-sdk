@@ -30,6 +30,18 @@ require_relative "WorldTime_sdk"
 client = WorldTimeSDK.new
 ```
 
+### 3. Load an ipn
+
+```ruby
+begin
+  # load returns the ENTITY — call data_get for the Ipn record (raises on error).
+  ipn = client.Ipn.load()
+  puts ipn
+rescue => err
+  warn "load failed: #{err}"
+end
+```
+
 
 ## Error handling
 
@@ -37,7 +49,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  ipn2 = client.Ipn2.load()
+  ipn = client.Ipn.load()
 rescue => err
   warn "load failed: #{err}"
 end
@@ -105,9 +117,10 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = WorldTimeSDK.test
 
-# Entity ops return the bare mock record (raises on error).
-ipn2 = client.Ipn2.load()
-puts ipn2
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
+ipn = client.Ipn.load()
+puts ipn
 ```
 
 ### Use a custom fetch function
@@ -184,7 +197,6 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `prepare` | `(fetchargs) -> Hash` | Build an HTTP request definition without sending. Raises on error. |
 | `direct` | `(fetchargs) -> Hash` | Build and send an HTTP request. Returns a result hash (`result["ok"]`); does not raise. |
 | `Ipn` | `(data) -> IpnEntity` | Create an Ipn entity instance. |
-| `Ipn2` | `(data) -> Ipn2Entity` | Create an Ipn2 entity instance. |
 | `Timezone` | `(data) -> TimezoneEntity` | Create a Timezone entity instance. |
 
 ### Entity interface
@@ -222,15 +234,6 @@ returns a result `Hash` with these keys:
 ### Entities
 
 #### Ipn
-
-| Field | Description |
-| --- | --- |
-
-Operations: .
-
-API path: ``
-
-#### Ipn2
 
 | Field | Description |
 | --- | --- |
@@ -287,11 +290,6 @@ API path: `/timezone`
 
 Create an instance: `ipn = client.Ipn`
 
-
-### Ipn2
-
-Create an instance: `ipn2 = client.Ipn2`
-
 #### Operations
 
 | Method | Description |
@@ -321,8 +319,8 @@ Create an instance: `ipn2 = client.Ipn2`
 #### Example: Load
 
 ```ruby
-# load returns the bare Ipn2 record (raises on error).
-ipn2 = client.Ipn2.load()
+# load returns the ENTITY — call data_get for the Ipn record (raises on error).
+ipn = client.Ipn.load()
 ```
 
 
@@ -360,7 +358,7 @@ Create an instance: `timezone = client.Timezone`
 #### Example: Load
 
 ```ruby
-# load returns the bare Timezone record (raises on error).
+# load returns the ENTITY — call data_get for the Timezone record (raises on error).
 timezone = client.Timezone.load({ "id" => "timezone_id" })
 ```
 
@@ -448,11 +446,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-ipn2 = client.Ipn2
-ipn2.load()
+ipn = client.Ipn
+ipn.load()
 
-# ipn2.data_get now returns the ipn2 data from the last load
-# ipn2.match_get returns the last match criteria
+# ipn.data_get now returns the ipn data from the last load
+# ipn.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

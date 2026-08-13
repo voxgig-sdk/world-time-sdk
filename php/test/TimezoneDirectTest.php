@@ -121,11 +121,11 @@ function timezone_direct_setup($mockres)
     $calls = new \ArrayObject();
 
     $env = Runner::env_override([
-        "WORLDTIME_TEST_TIMEZONE_ENTID" => [],
-        "WORLDTIME_TEST_LIVE" => "FALSE",
+        "WORLD_TIME_TEST_TIMEZONE_ENTID" => [],
+        "WORLD_TIME_TEST_LIVE" => "FALSE",
     ]);
 
-    $live = $env["WORLDTIME_TEST_LIVE"] === "TRUE";
+    $live = $env["WORLD_TIME_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [

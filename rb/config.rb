@@ -20,20 +20,11 @@ module WorldTimeConfig
         },
         "entity" => {
           "ipn" => {},
-          "ipn2" => {},
           "timezone" => {},
         },
       },
       "entity" => {
         "ipn" => {
-          "fields" => [],
-          "name" => "ipn",
-          "op" => {},
-          "relations" => {
-            "ancestors" => [],
-          },
-        },
-        "ipn2" => {
           "fields" => [
             {
               "active" => true,
@@ -141,7 +132,7 @@ module WorldTimeConfig
               "index$" => 14,
             },
           ],
-          "name" => "ipn2",
+          "name" => "ipn",
           "op" => {
             "load" => {
               "input" => "data",
@@ -163,6 +154,7 @@ module WorldTimeConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/ip/{ipv4}",
                   "parts" => [
@@ -183,6 +175,7 @@ module WorldTimeConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/ip",
                   "parts" => [
@@ -324,6 +317,7 @@ module WorldTimeConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/timezone",
                   "parts" => [
@@ -369,6 +363,7 @@ module WorldTimeConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/timezone/{area}/{location}",
                   "parts" => [
@@ -404,6 +399,7 @@ module WorldTimeConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/timezone/{area}",
                   "parts" => [

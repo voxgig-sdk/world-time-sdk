@@ -24,6 +24,7 @@ require_relative 'prepare_method'
 require_relative 'prepare_params'
 require_relative 'prepare_path'
 require_relative 'prepare_query'
+require_relative 'graphql'
 require_relative 'result_basic'
 require_relative 'result_body'
 require_relative 'result_headers'
@@ -55,6 +56,8 @@ WorldTimeUtility.registrar = ->(u) {
   u.prepare_params = WorldTimeUtilities::PrepareParams
   u.prepare_path = WorldTimeUtilities::PreparePath
   u.prepare_query = WorldTimeUtilities::PrepareQuery
+  u.graphql_body = WorldTimeUtilities::GraphqlBody
+  u.graphql_errors = WorldTimeUtilities::GraphqlErrors
   u.result_basic = WorldTimeUtilities::ResultBasic
   u.result_body = WorldTimeUtilities::ResultBody
   u.result_headers = WorldTimeUtilities::ResultHeaders

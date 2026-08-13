@@ -35,9 +35,6 @@ func init() {
 	core.NewIpnEntityFunc = func(client *core.WorldTimeSDK, entopts map[string]any) core.WorldTimeEntity {
 		return entity.NewIpnEntity(client, entopts)
 	}
-	core.NewIpn2EntityFunc = func(client *core.WorldTimeSDK, entopts map[string]any) core.WorldTimeEntity {
-		return entity.NewIpn2Entity(client, entopts)
-	}
 	core.NewTimezoneEntityFunc = func(client *core.WorldTimeSDK, entopts map[string]any) core.WorldTimeEntity {
 		return entity.NewTimezoneEntity(client, entopts)
 	}

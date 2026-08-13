@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# WorldTime SDK exists test
 
 import pytest
 from worldtime_sdk import WorldTimeSDK

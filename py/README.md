@@ -36,6 +36,18 @@ from worldtime_sdk import WorldTimeSDK
 client = WorldTimeSDK()
 ```
 
+### 3. Load an ipn
+
+`load()` returns the ENTITY — call data_get() for the record — and raises on error.
+
+```python
+try:
+    ipn = client.Ipn().load()
+    print(ipn)
+except Exception as err:
+    print(f"load failed: {err}")
+```
+
 
 ## Error handling
 
@@ -43,8 +55,8 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    ipn2 = client.Ipn2().load()
-    print(ipn2)
+    ipn = client.Ipn().load()
+    print(ipn)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -110,9 +122,10 @@ Create a mock client for unit testing — no server required:
 ```python
 client = WorldTimeSDK.test()
 
-# Entity ops return the bare record and raise on error.
-ipn2 = client.Ipn2().load()
-# ipn2 contains the mock response record
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
+ipn = client.Ipn().load()
+# ipn contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -189,7 +202,6 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | `prepare` | `(fetchargs) -> dict` | Build an HTTP request definition without sending. Raises on error. |
 | `direct` | `(fetchargs) -> dict` | Build and send an HTTP request. Returns a result dict (branch on `ok`). |
 | `Ipn` | `(data) -> IpnEntity` | Create an Ipn entity instance. |
-| `Ipn2` | `(data) -> Ipn2Entity` | Create an Ipn2 entity instance. |
 | `Timezone` | `(data) -> TimezoneEntity` | Create a Timezone entity instance. |
 
 ### Entity interface
@@ -209,7 +221,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -228,15 +240,6 @@ On error, `ok` is `False` and `err` contains the error value.
 ### Entities
 
 #### Ipn
-
-| Field | Description |
-| --- | --- |
-
-Operations: .
-
-API path: ``
-
-#### Ipn2
 
 | Field | Description |
 | --- | --- |
@@ -293,11 +296,6 @@ API path: `/timezone`
 
 Create an instance: `ipn = client.Ipn()`
 
-
-### Ipn2
-
-Create an instance: `ipn2 = client.Ipn2()`
-
 #### Operations
 
 | Method | Description |
@@ -327,7 +325,7 @@ Create an instance: `ipn2 = client.Ipn2()`
 #### Example: Load
 
 ```python
-ipn2 = client.Ipn2().load()
+ipn = client.Ipn().load()
 ```
 
 
@@ -450,11 +448,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-ipn2 = client.Ipn2()
-ipn2.load()
+ipn = client.Ipn()
+ipn.load()
 
-# ipn2.data_get() now returns the ipn2 data from the last load
-# ipn2.match_get() returns the last match criteria
+# ipn.data_get() now returns the ipn data from the last load
+# ipn.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

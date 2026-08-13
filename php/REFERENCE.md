@@ -45,10 +45,6 @@ $client = WorldTimeSDK::test();
 
 Create a new `IpnEntity` instance. Pass `null` for no initial data.
 
-#### `Ipn2($data = null)`
-
-Create a new `Ipn2Entity` instance. Pass `null` for no initial data.
-
 #### `Timezone($data = null)`
 
 Create a new `TimezoneEntity` instance. Pass `null` for no initial data.
@@ -96,42 +92,6 @@ Prepare a fetch definition without sending the request. Returns the
 $ipn = $client->Ipn();
 ```
 
-### Common Methods
-
-#### `data_get(): array`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set($data): void`
-
-Set the entity data.
-
-#### `match_get(): array`
-
-Get the entity match criteria.
-
-#### `match_set($match): void`
-
-Set the entity match criteria.
-
-#### `make(): IpnEntity`
-
-Create a new `IpnEntity` instance with the same client and
-options.
-
-#### `get_name(): string`
-
-Return the entity name.
-
-
----
-
-## Ipn2Entity
-
-```php
-$ipn2 = $client->Ipn2();
-```
-
 ### Fields
 
 | Field | Type | Required | Description |
@@ -159,7 +119,7 @@ $ipn2 = $client->Ipn2();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Ipn2()->load();
+$result = $client->Ipn()->load();
 ```
 
 ### Common Methods
@@ -180,9 +140,9 @@ Get the entity match criteria.
 
 Set the entity match criteria.
 
-#### `make(): Ipn2Entity`
+#### `make(): IpnEntity`
 
-Create a new `Ipn2Entity` instance with the same client and
+Create a new `IpnEntity` instance with the same client and
 options.
 
 #### `get_name(): string`

@@ -23,7 +23,7 @@ class IpnEntityTest extends TestCase
         $setup = ipn_basic_setup(null);
         // Per-op sdk-test-control.json skip.
         $_live = !empty($setup["live"]);
-        foreach ([] as $_op) {
+        foreach (["load"] as $_op) {
             [$_shouldSkip, $_reason] = Runner::is_control_skipped("entityOp", "ipn." . $_op, $_live ? "live" : "unit");
             if ($_shouldSkip) {
                 $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
@@ -33,7 +33,7 @@ class IpnEntityTest extends TestCase
         // The basic flow consumes synthetic IDs from the fixture. In live mode
         // without an *_ENTID env override, those IDs hit the live API and 4xx.
         if (!empty($setup["synthetic_only"])) {
-            $this->markTestSkipped("live entity test uses synthetic IDs from fixture — set WORLDTIME_TEST_IPN_ENTID JSON to run live");
+            $this->markTestSkipped("live entity test uses synthetic IDs from fixture — set WORLD_TIME_TEST_IPN_ENTID JSON to run live");
             return;
         }
         $client = $setup["client"];
@@ -45,6 +45,12 @@ class IpnEntityTest extends TestCase
         if (count($ipn_ref01_data_raw) > 0) {
             $ipn_ref01_data = Helpers::to_map($ipn_ref01_data_raw[0][1]);
         }
+
+        // LOAD
+        $ipn_ref01_ent = $client->Ipn(null);
+        $ipn_ref01_match_dt0 = [];
+        $ipn_ref01_data_dt0_loaded = $ipn_ref01_ent->load($ipn_ref01_match_dt0, null);
+        $this->assertNotNull($ipn_ref01_data_dt0_loaded);
 
     }
 }
@@ -64,29 +70,29 @@ function ipn_basic_setup($extra)
 
     // Generate idmap.
     $idmap = [];
-    foreach (["ipn01", "ipn02", "ipn03"] as $k) {
+    foreach (["ipn01", "ipn02", "ipn03", "ip01", "ip02", "ip03"] as $k) {
         $idmap[$k] = strtoupper($k);
     }
 
     // Detect ENTID env override before envOverride consumes it. When live
     // mode is on without a real override, the basic test runs against synthetic
     // IDs from the fixture and 4xx's. Surface this so the test can skip.
-    $entid_env_raw = getenv("WORLDTIME_TEST_IPN_ENTID");
+    $entid_env_raw = getenv("WORLD_TIME_TEST_IPN_ENTID");
     $idmap_overridden = $entid_env_raw !== false && str_starts_with(trim($entid_env_raw), "{");
 
     $env = Runner::env_override([
-        "WORLDTIME_TEST_IPN_ENTID" => $idmap,
-        "WORLDTIME_TEST_LIVE" => "FALSE",
-        "WORLDTIME_TEST_EXPLAIN" => "FALSE",
+        "WORLD_TIME_TEST_IPN_ENTID" => $idmap,
+        "WORLD_TIME_TEST_LIVE" => "FALSE",
+        "WORLD_TIME_TEST_EXPLAIN" => "FALSE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
-        $env["WORLDTIME_TEST_IPN_ENTID"]);
+        $env["WORLD_TIME_TEST_IPN_ENTID"]);
     if ($idmap_resolved === null) {
         $idmap_resolved = Helpers::to_map($idmap);
     }
 
-    if ($env["WORLDTIME_TEST_LIVE"] === "TRUE") {
+    if ($env["WORLD_TIME_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
             ],
@@ -95,13 +101,13 @@ function ipn_basic_setup($extra)
         $client = new WorldTimeSDK(Helpers::to_map($merged_opts));
     }
 
-    $live = $env["WORLDTIME_TEST_LIVE"] === "TRUE";
+    $live = $env["WORLD_TIME_TEST_LIVE"] === "TRUE";
     return [
         "client" => $client,
         "data" => $entity_data,
         "idmap" => $idmap_resolved,
         "env" => $env,
-        "explain" => $env["WORLDTIME_TEST_EXPLAIN"] === "TRUE",
+        "explain" => $env["WORLD_TIME_TEST_EXPLAIN"] === "TRUE",
         "live" => $live,
         "synthetic_only" => $live && !$idmap_overridden,
         "now" => (int)(microtime(true) * 1000),

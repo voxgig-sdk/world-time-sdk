@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import WorldTimeControl
-from core.error import WorldTimeError
-from core.result import WorldTimeResult
-from core.spec import WorldTimeSpec
+from worldtime_sdk.config import make_config
+from worldtime_sdk.features import _make_feature
+from worldtime_sdk.core.control import WorldTimeControl
+from worldtime_sdk.core.error import WorldTimeError
+from worldtime_sdk.core.result import WorldTimeResult
+from worldtime_sdk.core.spec import WorldTimeSpec
 
 
 # True when this SDK was generated with the named feature.

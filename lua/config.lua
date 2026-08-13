@@ -19,20 +19,11 @@ local function make_config()
       },
       entity = {
         ["ipn"] = {},
-        ["ipn2"] = {},
         ["timezone"] = {},
       },
     },
     entity = {
       ["ipn"] = {
-        ["fields"] = {},
-        ["name"] = "ipn",
-        ["op"] = {},
-        ["relations"] = {
-          ["ancestors"] = {},
-        },
-      },
-      ["ipn2"] = {
         ["fields"] = {
           {
             ["active"] = true,
@@ -140,7 +131,7 @@ local function make_config()
             ["index$"] = 14,
           },
         },
-        ["name"] = "ipn2",
+        ["name"] = "ipn",
         ["op"] = {
           ["load"] = {
             ["input"] = "data",
@@ -162,6 +153,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/ip/{ipv4}",
                 ["parts"] = {
@@ -182,6 +174,7 @@ local function make_config()
               {
                 ["active"] = true,
                 ["args"] = {},
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/ip",
                 ["parts"] = {
@@ -323,6 +316,7 @@ local function make_config()
               {
                 ["active"] = true,
                 ["args"] = {},
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/timezone",
                 ["parts"] = {
@@ -368,6 +362,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/timezone/{area}/{location}",
                 ["parts"] = {
@@ -403,6 +398,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/timezone/{area}",
                 ["parts"] = {

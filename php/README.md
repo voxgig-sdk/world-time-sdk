@@ -31,6 +31,18 @@ require_once 'worldtime_sdk.php';
 $client = new WorldTimeSDK();
 ```
 
+### 3. Load an ipn
+
+```php
+try {
+    // load() returns the ENTITY — call data_get() for the Ipn record (throws on error).
+    $ipn = $client->Ipn()->load();
+    print_r($ipn);
+} catch (\Throwable $err) {
+    echo "Error: " . $err->getMessage();
+}
+```
+
 
 ## Error handling
 
@@ -39,7 +51,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $ipn2 = $client->Ipn2()->load();
+    $ipn = $client->Ipn()->load();
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -111,9 +123,10 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = WorldTimeSDK::test();
 
-// Entity ops return the bare mock record (throws on error).
-$ipn2 = $client->Ipn2()->load();
-print_r($ipn2);
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
+$ipn = $client->Ipn()->load();
+print_r($ipn);
 ```
 
 ### Use a custom fetch function
@@ -193,7 +206,6 @@ Creates a test-mode client with mock transport. Both arguments may be `null`.
 | `prepare` | `(array $fetchargs): array` | Build an HTTP request definition without sending. |
 | `direct` | `(array $fetchargs): array` | Build and send an HTTP request. |
 | `Ipn` | `($data): IpnEntity` | Create an Ipn entity instance. |
-| `Ipn2` | `($data): Ipn2Entity` | Create an Ipn2 entity instance. |
 | `Timezone` | `($data): TimezoneEntity` | Create a Timezone entity instance. |
 
 ### Entity interface
@@ -213,7 +225,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -232,15 +244,6 @@ On error, `ok` is `false` and `$err` contains the error value.
 ### Entities
 
 #### Ipn
-
-| Field | Description |
-| --- | --- |
-
-Operations: .
-
-API path: ``
-
-#### Ipn2
 
 | Field | Description |
 | --- | --- |
@@ -297,11 +300,6 @@ API path: `/timezone`
 
 Create an instance: `$ipn = $client->Ipn();`
 
-
-### Ipn2
-
-Create an instance: `$ipn2 = $client->Ipn2();`
-
 #### Operations
 
 | Method | Description |
@@ -331,8 +329,8 @@ Create an instance: `$ipn2 = $client->Ipn2();`
 #### Example: Load
 
 ```php
-// load() returns the bare Ipn2 record (throws on error).
-$ipn2 = $client->Ipn2()->load();
+// load() returns the ENTITY — call data_get() for the Ipn record (throws on error).
+$ipn = $client->Ipn()->load();
 ```
 
 
@@ -370,7 +368,7 @@ Create an instance: `$timezone = $client->Timezone();`
 #### Example: Load
 
 ```php
-// load() returns the bare Timezone record (throws on error).
+// load() returns the ENTITY — call data_get() for the Timezone record (throws on error).
 $timezone = $client->Timezone()->load(["id" => "timezone_id"]);
 ```
 
@@ -458,11 +456,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$ipn2 = $client->Ipn2();
-$ipn2->load();
+$ipn = $client->Ipn();
+$ipn->load();
 
-// $ipn2->data_get() now returns the ipn2 data from the last load
-// $ipn2->match_get() returns the last match criteria
+// $ipn->data_get() now returns the ipn data from the last load
+// $ipn->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

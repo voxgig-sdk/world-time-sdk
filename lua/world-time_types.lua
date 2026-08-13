@@ -7,8 +7,6 @@
 -- edit by hand.
 
 ---@class Ipn
-
----@class Ipn2
 ---@field abbreviation? string
 ---@field client_ip? string
 ---@field datetime? string
@@ -25,7 +23,7 @@
 ---@field utc_offset? string
 ---@field week_number? number
 
----@class Ipn2LoadMatch
+---@class IpnLoadMatch
 ---@field ipv4? string
 
 ---@class Timezone

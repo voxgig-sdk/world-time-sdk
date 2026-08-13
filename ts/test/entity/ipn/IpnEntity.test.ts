@@ -26,8 +26,8 @@ import {
 describe('IpnEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when WORLDTIME_TEST_LIVE=TRUE.
-  afterEach(liveDelay('WORLDTIME_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when WORLD_TIME_TEST_LIVE=TRUE.
+  afterEach(liveDelay('WORLD_TIME_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = WorldTimeSDK.test()
@@ -39,7 +39,7 @@ describe('IpnEntity', async () => {
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.WORLD_TIME_TEST_LIVE
-    for (const op of []) {
+    for (const op of ['load']) {
       if (maybeSkipControl(t, 'entityOp', 'ipn.' + op, live)) return
     }
 
@@ -58,6 +58,11 @@ describe('IpnEntity', async () => {
     const select = struct.select
 
     let ipn_ref01_data = Object.values(setup.data.existing.ipn)[0] as any
+
+    // LOAD: skipped — no entity id field and load requires path params.
+    // Entity-var is declared here so later flow steps still compile.
+    const ipn_ref01_ent = client.Ipn()
+
 
   })
 })
@@ -87,7 +92,7 @@ function basicSetup(extra?: any) {
   const transform = struct.transform
 
   let idmap = transform(
-    ['ipn01','ipn02','ipn03'],
+    ['ipn01','ipn02','ipn03','ip01','ip02','ip03'],
     {
       '`$PACK`': ['', {
         '`$KEY`': '`$COPY`',

@@ -33,6 +33,14 @@ local sdk = require("world-time_sdk")
 local client = sdk.new()
 ```
 
+### 3. Load an ipn
+
+```lua
+local ipn, err = client:Ipn():load()
+if err then error(err) end
+print(ipn)
+```
+
 
 ## Error handling
 
@@ -40,7 +48,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local ipn2, err = client:Ipn2():load()
+local ipn, err = client:Ipn():load()
 if err then error(err) end
 ```
 
@@ -98,7 +106,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Ipn2():load()
+local result, err = client:Ipn():load()
 -- result is the returned data; err is set on failure
 ```
 
@@ -178,7 +186,6 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `prepare` | `(fetchargs) -> table, err` | Build an HTTP request definition without sending. |
 | `direct` | `(fetchargs) -> table, err` | Build and send an HTTP request. |
 | `Ipn` | `(data) -> IpnEntity` | Create an Ipn entity instance. |
-| `Ipn2` | `(data) -> Ipn2Entity` | Create an Ipn2 entity instance. |
 | `Timezone` | `(data) -> TimezoneEntity` | Create a Timezone entity instance. |
 
 ### Entity interface
@@ -218,15 +225,6 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 ### Entities
 
 #### Ipn
-
-| Field | Description |
-| --- | --- |
-
-Operations: .
-
-API path: ``
-
-#### Ipn2
 
 | Field | Description |
 | --- | --- |
@@ -283,11 +281,6 @@ API path: `/timezone`
 
 Create an instance: `local ipn = client:Ipn(nil)`
 
-
-### Ipn2
-
-Create an instance: `local ipn2 = client:Ipn2(nil)`
-
 #### Operations
 
 | Method | Description |
@@ -317,7 +310,7 @@ Create an instance: `local ipn2 = client:Ipn2(nil)`
 #### Example: Load
 
 ```lua
-local ipn2, err = client:Ipn2():load()
+local ipn, err = client:Ipn():load()
 ```
 
 
@@ -441,11 +434,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local ipn2 = client:Ipn2()
-ipn2:load()
+local ipn = client:Ipn()
+ipn:load()
 
--- ipn2:data_get() now returns the ipn2 data from the last load
--- ipn2:match_get() returns the last match criteria
+-- ipn:data_get() now returns the ipn data from the last load
+-- ipn:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

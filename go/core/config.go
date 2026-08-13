@@ -19,20 +19,11 @@ func MakeConfig() map[string]any {
 			},
 			"entity": map[string]any{
 				"ipn": map[string]any{},
-				"ipn2": map[string]any{},
 				"timezone": map[string]any{},
 			},
 		},
 		"entity": map[string]any{
 			"ipn": map[string]any{
-				"fields": []any{},
-				"name": "ipn",
-				"op": map[string]any{},
-				"relations": map[string]any{
-					"ancestors": []any{},
-				},
-			},
-			"ipn2": map[string]any{
 				"fields": []any{
 					map[string]any{
 						"active": true,
@@ -140,7 +131,7 @@ func MakeConfig() map[string]any {
 						"index$": 14,
 					},
 				},
-				"name": "ipn2",
+				"name": "ipn",
 				"op": map[string]any{
 					"load": map[string]any{
 						"input": "data",
@@ -162,6 +153,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/ip/{ipv4}",
 								"parts": []any{
@@ -182,6 +174,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/ip",
 								"parts": []any{
@@ -195,7 +188,6 @@ func MakeConfig() map[string]any {
 								"index$": 1,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -323,6 +315,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/timezone",
 								"parts": []any{
@@ -336,7 +329,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 					"load": map[string]any{
 						"input": "data",
@@ -368,6 +360,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/timezone/{area}/{location}",
 								"parts": []any{
@@ -403,6 +396,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/timezone/{area}",
 								"parts": []any{
@@ -426,7 +420,6 @@ func MakeConfig() map[string]any {
 								"index$": 1,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
