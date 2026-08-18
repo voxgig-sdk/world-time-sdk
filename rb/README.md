@@ -32,10 +32,12 @@ client = WorldTimeSDK.new
 
 ### 3. Load an ipn
 
+Ipn is nested under ipv4, so provide the `ipv4`.
+
 ```ruby
 begin
   # load returns the ENTITY — call data_get for the Ipn record (raises on error).
-  ipn = client.Ipn.load()
+  ipn = client.Ipn.load({ "ipv4" => "example_ipv4" })
   puts ipn
 rescue => err
   warn "load failed: #{err}"
@@ -49,7 +51,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  ipn = client.Ipn.load()
+  ipn = client.Ipn.load({ "ipv4" => "example" })
 rescue => err
   warn "load failed: #{err}"
 end
@@ -119,7 +121,7 @@ client = WorldTimeSDK.test
 
 # Entity ops return the ENTITY (raises on error);
 # call data_get for the mock record.
-ipn = client.Ipn.load()
+ipn = client.Ipn.load({ "ipv4" => "example" })
 puts ipn
 ```
 
@@ -320,7 +322,7 @@ Create an instance: `ipn = client.Ipn`
 
 ```ruby
 # load returns the ENTITY — call data_get for the Ipn record (raises on error).
-ipn = client.Ipn.load()
+ipn = client.Ipn.load({ "ipv4" => "ipv4" })
 ```
 
 
@@ -447,7 +449,7 @@ stores the returned data and match criteria internally.
 
 ```ruby
 ipn = client.Ipn
-ipn.load()
+ipn.load({ "ipv4" => "example" })
 
 # ipn.data_get now returns the ipn data from the last load
 # ipn.match_get returns the last match criteria

@@ -151,7 +151,7 @@ const ipn = client.Ipn()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Ipn().load()
+const result = await client.Ipn().load({ ipv4: 'ipv4' })
 ```
 
 ### Common Methods

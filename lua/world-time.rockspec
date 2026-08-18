@@ -23,6 +23,7 @@ build = {
   modules = {
     ["world-time_sdk"] = "world-time_sdk.lua",
     ["config"] = "config.lua",
+    ["config_shared"] = "config_shared.lua",
     ["features"] = "features.lua",
   }
 }

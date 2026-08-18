@@ -117,7 +117,7 @@ local ipn = client:Ipn(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Ipn():load()
+local result, err = client:Ipn():load({ ipv4 = "ipv4" })
 ```
 
 ### Common Methods

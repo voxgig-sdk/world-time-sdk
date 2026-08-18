@@ -23,7 +23,7 @@ support (`list`, `load`):
 
 ```ts
 const client = new WorldTimeSDK()
-const ipn = await client.Ipn().load()
+const ipn = await client.Ipn().load({ ipv4: "example" })
 ```
 
 Thinking in entities keeps the mental model small — for people and AI agents alike —
@@ -47,7 +47,7 @@ const client = WorldTimeSDK.test({
     },
   },
 })
-const ipn = await client.Ipn().load()
+const ipn = await client.Ipn().load({ ipv4: 'example_ipv4' })
 // ipn is the Ipn entity, populated with mock data
 // — call ipn.data() for the record itself
 console.log(ipn)
@@ -57,7 +57,7 @@ console.log(ipn)
 
 ```python
 client = WorldTimeSDK.test()
-ipn = client.Ipn().load()
+ipn = client.Ipn().load({"ipv4": "example"})
 print(ipn)
 ```
 
@@ -68,7 +68,7 @@ print(ipn)
 $client = WorldTimeSDK::test([
     "entity" => ["ipn" => ["test01" => []]],
 ]);
-$ipn = $client->Ipn()->load();
+$ipn = $client->Ipn()->load(["ipv4" => "example"]);
 ```
 
 ### Golang
@@ -87,14 +87,14 @@ result, err := client.Ipn(nil).Load(
 client = WorldTimeSDK.test({
   "entity" => { "ipn" => { "test01" => {} } },
 })
-ipn = client.Ipn.load()
+ipn = client.Ipn.load({ "ipv4" => "example" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:Ipn():load()
+local result, err = client:Ipn():load({ ipv4 = "example" })
 ```
 
 ## Packages
@@ -119,8 +119,11 @@ import { WorldTimeSDK } from '@voxgig-sdk/world-time'
 
 const client = new WorldTimeSDK()
 
-// Load ipn data (returns a Ipn)
-const ipn = await client.Ipn().load()
+
+// Load a specific ipn (returns a Ipn)
+const ipn = await client.Ipn().load({
+  ipv4: 'example_ipv4',
+})
 console.log(ipn)
 ```
 
@@ -179,7 +182,7 @@ client = WorldTimeSDK()
 
 
 # Load a specific ipn (returns the record, raises on error)
-ipn = client.Ipn().load()
+ipn = client.Ipn().load({"ipv4": "example_ipv4"})
 print(ipn)
 ```
 
@@ -193,7 +196,7 @@ $client = new WorldTimeSDK();
 
 
 // Load a specific ipn (returns the ENTITY; call data_get() for the record; throws on error)
-$ipn = $client->Ipn()->load();
+$ipn = $client->Ipn()->load(["ipv4" => "example_ipv4"]);
 print_r($ipn);
 ```
 
@@ -204,8 +207,11 @@ import sdk "github.com/voxgig-sdk/world-time-sdk/go"
 
 client := sdk.New()
 
-// Load ipn data
-ipn, err := client.Ipn(nil).Load(nil, nil)
+
+// Load a specific ipn
+ipn, err := client.Ipn(nil).Load(
+    map[string]any{"ipv4": "example_ipv4"}, nil,
+)
 if err != nil {
     panic(err)
 }
@@ -221,7 +227,7 @@ client = WorldTimeSDK.new
 
 
 # Load a specific ipn (returns the ENTITY; call data_get for the record)
-ipn = client.Ipn.load()
+ipn = client.Ipn.load({ "ipv4" => "example_ipv4" })
 puts ipn
 ```
 
@@ -234,7 +240,7 @@ local client = sdk.new()
 
 
 -- Load a specific ipn
-local ipn, err = client:Ipn():load()
+local ipn, err = client:Ipn():load({ ipv4 = "example_ipv4" })
 print(ipn)
 ```
 

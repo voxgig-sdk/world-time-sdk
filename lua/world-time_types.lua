@@ -24,7 +24,7 @@
 ---@field week_number? number
 
 ---@class IpnLoadMatch
----@field ipv4? string
+---@field ipv4 string
 
 ---@class Timezone
 ---@field abbreviation? string
@@ -44,9 +44,7 @@
 ---@field week_number? number
 
 ---@class TimezoneLoadMatch
----@field area? string
----@field location? string
----@field id? string
+---@field id string
 
 ---@class TimezoneListMatch
 ---@field abbreviation? string

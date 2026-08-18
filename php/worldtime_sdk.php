@@ -40,7 +40,7 @@ class WorldTimeSDK
         $utility = new WorldTimeUtility();
         $this->_utility = $utility;
 
-        $config = WorldTimeConfig::make_config();
+        $config = WorldTimeConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

@@ -35,8 +35,10 @@ local client = sdk.new()
 
 ### 3. Load an ipn
 
+Ipn is nested under ipv4, so provide the `ipv4`.
+
 ```lua
-local ipn, err = client:Ipn():load()
+local ipn, err = client:Ipn():load({ ipv4 = "example_ipv4" })
 if err then error(err) end
 print(ipn)
 ```
@@ -48,7 +50,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local ipn, err = client:Ipn():load()
+local ipn, err = client:Ipn():load({ ipv4 = "example" })
 if err then error(err) end
 ```
 
@@ -106,7 +108,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Ipn():load()
+local result, err = client:Ipn():load({ ipv4 = "example" })
 -- result is the returned data; err is set on failure
 ```
 
@@ -310,7 +312,7 @@ Create an instance: `local ipn = client:Ipn(nil)`
 #### Example: Load
 
 ```lua
-local ipn, err = client:Ipn():load()
+local ipn, err = client:Ipn():load({ ipv4 = "ipv4" })
 ```
 
 
@@ -435,7 +437,7 @@ stores the returned data and match criteria internally.
 
 ```lua
 local ipn = client:Ipn()
-ipn:load()
+ipn:load({ ipv4 = "example" })
 
 -- ipn:data_get() now returns the ipn data from the last load
 -- ipn:match_get() returns the last match criteria

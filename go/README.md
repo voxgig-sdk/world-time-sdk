@@ -51,7 +51,7 @@ func main() {
     client := sdk.New()
 
     // Load a single ipn — the value is the loaded record.
-    ipn, err := client.Ipn(nil).Load(nil, nil)
+    ipn, err := client.Ipn(nil).Load(map[string]any{"ipv4": "example_ipv4"}, nil)
     if err != nil {
         panic(err)
     }
@@ -66,7 +66,7 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-ipn, err := client.Ipn(nil).Load(nil, nil)
+ipn, err := client.Ipn(nil).Load(map[string]any{"ipv4": "example"}, nil)
 if err != nil {
     // handle err
     return
@@ -136,7 +136,7 @@ Create a mock client for unit testing — no server required:
 client := sdk.Test()
 
 ipn, err := client.Ipn(nil).Load(
-    nil, nil,
+    map[string]any{"ipv4": "example"}, nil,
 )
 if err != nil {
     panic(err)
@@ -343,7 +343,7 @@ Create an instance: `ipn := client.Ipn(nil)`
 #### Example: Load
 
 ```go
-ipn, err := client.Ipn(nil).Load(nil, nil)
+ipn, err := client.Ipn(nil).Load(map[string]any{"ipv4": "ipv4"}, nil)
 if err != nil {
     panic(err)
 }
@@ -477,7 +477,7 @@ stores the returned data and match criteria internally.
 
 ```go
 ipn := client.Ipn(nil)
-ipn.Load(nil, nil)
+ipn.Load(map[string]any{"ipv4": "example"}, nil)
 
 // ipn.Data() now returns the ipn data from the last load
 // ipn.Match() returns the last match criteria

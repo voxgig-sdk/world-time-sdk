@@ -35,11 +35,14 @@ const client = new WorldTimeSDK()
 
 ### 3. Load an ipn
 
+Ipn is nested under ipv4, so provide the `ipv4`.
 `load()` returns the entity directly and throws on failure:
 
 ```ts
 try {
-  const ipn = await client.Ipn().load()
+  const ipn = await client.Ipn().load({
+    ipv4: 'example_ipv4',
+  })
   console.log(ipn)
 } catch (err) {
   console.error('load failed:', err)
@@ -53,7 +56,7 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const ipn = await client.Ipn().load()
+  const ipn = await client.Ipn().load({ ipv4: "example" })
   console.log(ipn)
 } catch (err) {
   console.error('load failed:', err)
@@ -120,7 +123,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = WorldTimeSDK.test()
 
-const ipn = await client.Ipn().load()
+const ipn = await client.Ipn().load({ ipv4: 'example_ipv4' })
 // ipn is the entity, populated with mock response data
 // — call ipn.data() for the record itself
 console.log(ipn)
@@ -141,7 +144,7 @@ Entity instances remember their last match and data:
 const entity = client.Ipn()
 
 // First call runs the operation and stores its result
-await entity.load()
+await entity.load({ ipv4: 'example_ipv4' })
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
@@ -371,7 +374,7 @@ Create an instance: `const ipn = client.Ipn()`
 #### Example: Load
 
 ```ts
-const ipn = await client.Ipn().load()
+const ipn = await client.Ipn().load({ ipv4: 'ipv4' })
 ```
 
 
@@ -489,7 +492,7 @@ calls on the same instance can rely on this state.
 
 ```ts
 const ipn = client.Ipn()
-await ipn.load()
+await ipn.load({ ipv4: "example" })
 
 // ipn.data() now returns the ipn data from the last `load`
 // ipn.match() returns the last match criteria

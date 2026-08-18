@@ -33,10 +33,12 @@ $client = new WorldTimeSDK();
 
 ### 3. Load an ipn
 
+Ipn is nested under ipv4, so provide the `ipv4`.
+
 ```php
 try {
     // load() returns the ENTITY — call data_get() for the Ipn record (throws on error).
-    $ipn = $client->Ipn()->load();
+    $ipn = $client->Ipn()->load(["ipv4" => "example_ipv4"]);
     print_r($ipn);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
@@ -51,7 +53,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $ipn = $client->Ipn()->load();
+    $ipn = $client->Ipn()->load(["ipv4" => "example"]);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -125,7 +127,7 @@ $client = WorldTimeSDK::test();
 
 // Entity ops return the ENTITY (throws on error);
 // call data_get() for the mock record.
-$ipn = $client->Ipn()->load();
+$ipn = $client->Ipn()->load(["ipv4" => "example"]);
 print_r($ipn);
 ```
 
@@ -330,7 +332,7 @@ Create an instance: `$ipn = $client->Ipn();`
 
 ```php
 // load() returns the ENTITY — call data_get() for the Ipn record (throws on error).
-$ipn = $client->Ipn()->load();
+$ipn = $client->Ipn()->load(["ipv4" => "ipv4"]);
 ```
 
 
@@ -457,7 +459,7 @@ stores the returned data and match criteria internally.
 
 ```php
 $ipn = $client->Ipn();
-$ipn->load();
+$ipn->load(["ipv4" => "example"]);
 
 // $ipn->data_get() now returns the ipn data from the last load
 // $ipn->match_get() returns the last match criteria

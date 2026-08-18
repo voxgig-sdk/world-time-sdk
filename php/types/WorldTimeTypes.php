@@ -35,7 +35,7 @@ class Ipn
 /** Request payload for Ipn#load. */
 class IpnLoadMatch
 {
-    public ?string $ipv4 = null;
+    public string $ipv4;
 }
 
 /** Timezone entity data model. */
@@ -61,9 +61,7 @@ class Timezone
 /** Request payload for Timezone#load. */
 class TimezoneLoadMatch
 {
-    public ?string $area = null;
-    public ?string $location = null;
-    public ?string $id = null;
+    public string $id;
 }
 
 /** Request payload for Timezone#list. */

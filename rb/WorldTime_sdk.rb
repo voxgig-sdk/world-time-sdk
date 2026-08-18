@@ -28,7 +28,7 @@ class WorldTimeSDK
     utility = WorldTimeUtility.new
     @_utility = utility
 
-    config = WorldTimeConfig.make_config
+    config = WorldTimeConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,

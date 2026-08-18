@@ -24,7 +24,7 @@ export interface Ipn {
 }
 
 export interface IpnLoadMatch {
-  ipv4?: string
+  ipv4: string
 }
 
 export interface Timezone {
@@ -46,9 +46,7 @@ export interface Timezone {
 }
 
 export interface TimezoneLoadMatch {
-  area?: string
-  location?: string
-  id?: string
+  id: string
 }
 
 export interface TimezoneListMatch {

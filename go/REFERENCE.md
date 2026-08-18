@@ -125,7 +125,7 @@ fmt.Println(ipn.GetName()) // "ipn"
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Ipn(nil).Load(nil, nil)
+result, err := client.Ipn(nil).Load(map[string]any{"ipv4": "ipv4"}, nil)
 if err != nil {
     panic(err)
 }

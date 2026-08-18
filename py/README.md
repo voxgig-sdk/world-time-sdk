@@ -38,11 +38,12 @@ client = WorldTimeSDK()
 
 ### 3. Load an ipn
 
+Ipn is nested under ipv4, so provide the `ipv4`.
 `load()` returns the ENTITY — call data_get() for the record — and raises on error.
 
 ```python
 try:
-    ipn = client.Ipn().load()
+    ipn = client.Ipn().load({"ipv4": "example_ipv4"})
     print(ipn)
 except Exception as err:
     print(f"load failed: {err}")
@@ -55,7 +56,7 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    ipn = client.Ipn().load()
+    ipn = client.Ipn().load({"ipv4": "example"})
     print(ipn)
 except Exception as err:
     print(f"load failed: {err}")
@@ -124,7 +125,7 @@ client = WorldTimeSDK.test()
 
 # Entity ops return the ENTITY and raises on error;
 # call data_get() for the record.
-ipn = client.Ipn().load()
+ipn = client.Ipn().load({"ipv4": "example"})
 # ipn contains the mock response record
 ```
 
@@ -325,7 +326,7 @@ Create an instance: `ipn = client.Ipn()`
 #### Example: Load
 
 ```python
-ipn = client.Ipn().load()
+ipn = client.Ipn().load({"ipv4": "ipv4"})
 ```
 
 
@@ -449,7 +450,7 @@ stores the returned data and match criteria internally.
 
 ```python
 ipn = client.Ipn()
-ipn.load()
+ipn.load({"ipv4": "example"})
 
 # ipn.data_get() now returns the ipn data from the last load
 # ipn.match_get() returns the last match criteria
