@@ -36,90 +36,105 @@
               "active": true,
               "name": "abbreviation",
               "req": false,
+              "short": "The abbreviated name of the timezone",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "client_ip",
               "req": false,
+              "short": "The IP address of the client",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "datetime",
               "req": false,
+              "short": "The current datetime in ISO 8601 format",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "day_of_week",
               "req": false,
+              "short": "The day of the week (0-6, where 0 is Sunday)",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "day_of_year",
               "req": false,
+              "short": "The day of the year (1-365/366)",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "dst",
               "req": false,
+              "short": "Whether daylight saving time is currently in effect",
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
               "name": "dst_from",
               "req": false,
+              "short": "The datetime when DST starts",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "dst_offset",
               "req": false,
+              "short": "The DST offset in seconds",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "dst_until",
               "req": false,
+              "short": "The datetime when DST ends",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "raw_offset",
               "req": false,
+              "short": "The raw offset from UTC in seconds",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "timezone",
               "req": false,
+              "short": "The IANA timezone identifier",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "unixtime",
               "req": false,
+              "short": "The current Unix timestamp",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "utc_datetime",
               "req": false,
+              "short": "The current UTC datetime in ISO 8601 format",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "utc_offset",
               "req": false,
+              "short": "The UTC offset in ±HH:MM format",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "week_number",
               "req": false,
+              "short": "The ISO week number of the year",
               "type": "`$INTEGER`"
             }
           ],
@@ -197,90 +212,105 @@
               "active": true,
               "name": "abbreviation",
               "req": false,
+              "short": "The abbreviated name of the timezone",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "client_ip",
               "req": false,
+              "short": "The IP address of the client",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "datetime",
               "req": false,
+              "short": "The current datetime in ISO 8601 format",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "day_of_week",
               "req": false,
+              "short": "The day of the week (0-6, where 0 is Sunday)",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "day_of_year",
               "req": false,
+              "short": "The day of the year (1-365/366)",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "dst",
               "req": false,
+              "short": "Whether daylight saving time is currently in effect",
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
               "name": "dst_from",
               "req": false,
+              "short": "The datetime when DST starts",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "dst_offset",
               "req": false,
+              "short": "The DST offset in seconds",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "dst_until",
               "req": false,
+              "short": "The datetime when DST ends",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "raw_offset",
               "req": false,
+              "short": "The raw offset from UTC in seconds",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "timezone",
               "req": false,
+              "short": "The IANA timezone identifier",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "unixtime",
               "req": false,
+              "short": "The current Unix timestamp",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "utc_datetime",
               "req": false,
+              "short": "The current UTC datetime in ISO 8601 format",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "utc_offset",
               "req": false,
+              "short": "The UTC offset in ±HH:MM format",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "week_number",
               "req": false,
+              "short": "The ISO week number of the year",
               "type": "`$INTEGER`"
             }
           ],

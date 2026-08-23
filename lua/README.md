@@ -230,21 +230,21 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `abbreviation` |  |
-| `client_ip` |  |
-| `datetime` |  |
-| `day_of_week` |  |
-| `day_of_year` |  |
-| `dst` |  |
-| `dst_from` |  |
-| `dst_offset` |  |
-| `dst_until` |  |
-| `raw_offset` |  |
-| `timezone` |  |
-| `unixtime` |  |
-| `utc_datetime` |  |
-| `utc_offset` |  |
-| `week_number` |  |
+| `abbreviation` | The abbreviated name of the timezone |
+| `client_ip` | The IP address of the client |
+| `datetime` | The current datetime in ISO 8601 format |
+| `day_of_week` | The day of the week (0-6, where 0 is Sunday) |
+| `day_of_year` | The day of the year (1-365/366) |
+| `dst` | Whether daylight saving time is currently in effect |
+| `dst_from` | The datetime when DST starts |
+| `dst_offset` | The DST offset in seconds |
+| `dst_until` | The datetime when DST ends |
+| `raw_offset` | The raw offset from UTC in seconds |
+| `timezone` | The IANA timezone identifier |
+| `unixtime` | The current Unix timestamp |
+| `utc_datetime` | The current UTC datetime in ISO 8601 format |
+| `utc_offset` | The UTC offset in ±HH:MM format |
+| `week_number` | The ISO week number of the year |
 
 Operations: Load.
 
@@ -254,21 +254,21 @@ API path: `/ip/{ipv4}`
 
 | Field | Description |
 | --- | --- |
-| `abbreviation` |  |
-| `client_ip` |  |
-| `datetime` |  |
-| `day_of_week` |  |
-| `day_of_year` |  |
-| `dst` |  |
-| `dst_from` |  |
-| `dst_offset` |  |
-| `dst_until` |  |
-| `raw_offset` |  |
-| `timezone` |  |
-| `unixtime` |  |
-| `utc_datetime` |  |
-| `utc_offset` |  |
-| `week_number` |  |
+| `abbreviation` | The abbreviated name of the timezone |
+| `client_ip` | The IP address of the client |
+| `datetime` | The current datetime in ISO 8601 format |
+| `day_of_week` | The day of the week (0-6, where 0 is Sunday) |
+| `day_of_year` | The day of the year (1-365/366) |
+| `dst` | Whether daylight saving time is currently in effect |
+| `dst_from` | The datetime when DST starts |
+| `dst_offset` | The DST offset in seconds |
+| `dst_until` | The datetime when DST ends |
+| `raw_offset` | The raw offset from UTC in seconds |
+| `timezone` | The IANA timezone identifier |
+| `unixtime` | The current Unix timestamp |
+| `utc_datetime` | The current UTC datetime in ISO 8601 format |
+| `utc_offset` | The UTC offset in ±HH:MM format |
+| `week_number` | The ISO week number of the year |
 
 Operations: List, Load.
 
@@ -293,21 +293,21 @@ Create an instance: `local ipn = client:Ipn(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `abbreviation` | `string` |  |
-| `client_ip` | `string` |  |
-| `datetime` | `string` |  |
-| `day_of_week` | `number` |  |
-| `day_of_year` | `number` |  |
-| `dst` | `boolean` |  |
-| `dst_from` | `string` |  |
-| `dst_offset` | `number` |  |
-| `dst_until` | `string` |  |
-| `raw_offset` | `number` |  |
-| `timezone` | `string` |  |
-| `unixtime` | `number` |  |
-| `utc_datetime` | `string` |  |
-| `utc_offset` | `string` |  |
-| `week_number` | `number` |  |
+| `abbreviation` | `string` | The abbreviated name of the timezone |
+| `client_ip` | `string` | The IP address of the client |
+| `datetime` | `string` | The current datetime in ISO 8601 format |
+| `day_of_week` | `number` | The day of the week (0-6, where 0 is Sunday) |
+| `day_of_year` | `number` | The day of the year (1-365/366) |
+| `dst` | `boolean` | Whether daylight saving time is currently in effect |
+| `dst_from` | `string` | The datetime when DST starts |
+| `dst_offset` | `number` | The DST offset in seconds |
+| `dst_until` | `string` | The datetime when DST ends |
+| `raw_offset` | `number` | The raw offset from UTC in seconds |
+| `timezone` | `string` | The IANA timezone identifier |
+| `unixtime` | `number` | The current Unix timestamp |
+| `utc_datetime` | `string` | The current UTC datetime in ISO 8601 format |
+| `utc_offset` | `string` | The UTC offset in ±HH:MM format |
+| `week_number` | `number` | The ISO week number of the year |
 
 #### Example: Load
 
@@ -331,21 +331,21 @@ Create an instance: `local timezone = client:Timezone(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `abbreviation` | `string` |  |
-| `client_ip` | `string` |  |
-| `datetime` | `string` |  |
-| `day_of_week` | `number` |  |
-| `day_of_year` | `number` |  |
-| `dst` | `boolean` |  |
-| `dst_from` | `string` |  |
-| `dst_offset` | `number` |  |
-| `dst_until` | `string` |  |
-| `raw_offset` | `number` |  |
-| `timezone` | `string` |  |
-| `unixtime` | `number` |  |
-| `utc_datetime` | `string` |  |
-| `utc_offset` | `string` |  |
-| `week_number` | `number` |  |
+| `abbreviation` | `string` | The abbreviated name of the timezone |
+| `client_ip` | `string` | The IP address of the client |
+| `datetime` | `string` | The current datetime in ISO 8601 format |
+| `day_of_week` | `number` | The day of the week (0-6, where 0 is Sunday) |
+| `day_of_year` | `number` | The day of the year (1-365/366) |
+| `dst` | `boolean` | Whether daylight saving time is currently in effect |
+| `dst_from` | `string` | The datetime when DST starts |
+| `dst_offset` | `number` | The DST offset in seconds |
+| `dst_until` | `string` | The datetime when DST ends |
+| `raw_offset` | `number` | The raw offset from UTC in seconds |
+| `timezone` | `string` | The IANA timezone identifier |
+| `unixtime` | `number` | The current Unix timestamp |
+| `utc_datetime` | `string` | The current UTC datetime in ISO 8601 format |
+| `utc_offset` | `string` | The UTC offset in ±HH:MM format |
+| `week_number` | `number` | The ISO week number of the year |
 
 #### Example: Load
 

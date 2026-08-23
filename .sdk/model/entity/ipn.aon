@@ -1,6 +1,6 @@
-# Entity: timezone
+# Entity: ipn
 
-main: kit: entity: timezone: {
+main: kit: entity: ipn: {
 
   alias: field: {}
 
@@ -8,98 +8,97 @@ main: kit: entity: timezone: {
     {
       name: "abbreviation"
       req: false
+      short: "The abbreviated name of the timezone"
       type: "`$STRING`"
     }
     {
       name: "client_ip"
       req: false
+      short: "The IP address of the client"
       type: "`$STRING`"
     }
     {
       name: "datetime"
       req: false
+      short: "The current datetime in ISO 8601 format"
       type: "`$STRING`"
     }
     {
       name: "day_of_week"
       req: false
+      short: "The day of the week (0-6, where 0 is Sunday)"
       type: "`$INTEGER`"
     }
     {
       name: "day_of_year"
       req: false
+      short: "The day of the year (1-365/366)"
       type: "`$INTEGER`"
     }
     {
       name: "dst"
       req: false
+      short: "Whether daylight saving time is currently in effect"
       type: "`$BOOLEAN`"
     }
     {
       name: "dst_from"
       req: false
+      short: "The datetime when DST starts"
       type: "`$STRING`"
     }
     {
       name: "dst_offset"
       req: false
+      short: "The DST offset in seconds"
       type: "`$INTEGER`"
     }
     {
       name: "dst_until"
       req: false
+      short: "The datetime when DST ends"
       type: "`$STRING`"
     }
     {
       name: "raw_offset"
       req: false
+      short: "The raw offset from UTC in seconds"
       type: "`$INTEGER`"
     }
     {
       name: "timezone"
       req: false
+      short: "The IANA timezone identifier"
       type: "`$STRING`"
     }
     {
       name: "unixtime"
       req: false
+      short: "The current Unix timestamp"
       type: "`$INTEGER`"
     }
     {
       name: "utc_datetime"
       req: false
+      short: "The current UTC datetime in ISO 8601 format"
       type: "`$STRING`"
     }
     {
       name: "utc_offset"
       req: false
+      short: "The UTC offset in ±HH:MM format"
       type: "`$STRING`"
     }
     {
       name: "week_number"
       req: false
+      short: "The ISO week number of the year"
       type: "`$INTEGER`"
     }
   ]
 
-  name: "timezone"
+  name: "ipn"
   op: {
-    list: {
-      name: "list"
-      points: [
-        {
-          method: "GET"
-          orig: "/timezone"
-          parts: [
-            "timezone"
-          ]
-          transform: {
-            req: "`reqdata`"
-            res: "`body`"
-          }
-        }
-      ]
-    }
     load: {
       name: "load"
       points: [
@@ -107,34 +106,24 @@ main: kit: entity: timezone: {
           args: {
             params: [
               {
-                example: "America"
+                example: "8.8.8.8"
                 kind: "param"
-                name: "area"
-                orig: "area"
-                reqd: true
-                type: "`$STRING`"
-              }
-              {
-                example: "New_York"
-                kind: "param"
-                name: "location"
-                orig: "location"
+                name: "ipv4"
+                orig: "ipv4"
                 reqd: true
                 type: "`$STRING`"
               }
             ]
           }
           method: "GET"
-          orig: "/timezone/{area}/{location}"
+          orig: "/ip/{ipv4}"
           parts: [
-            "timezone"
-            "{area}"
-            "{location}"
+            "ip"
+            "{ipv4}"
           ]
           select: {
             exist: [
-              "area"
-              "location"
+              "ipv4"
             ]
           }
           transform: {
@@ -143,34 +132,11 @@ main: kit: entity: timezone: {
           }
         }
         {
-          args: {
-            params: [
-              {
-                example: "Europe"
-                kind: "param"
-                name: "id"
-                orig: "area"
-                reqd: true
-                type: "`$STRING`"
-              }
-            ]
-          }
           method: "GET"
-          orig: "/timezone/{area}"
+          orig: "/ip"
           parts: [
-            "timezone"
-            "{id}"
+            "ip"
           ]
-          rename: {
-            param: {
-              area: "id"
-            }
-          }
-          select: {
-            exist: [
-              "id"
-            ]
-          }
           transform: {
             req: "`reqdata`"
             res: "`body`"
@@ -183,7 +149,7 @@ main: kit: entity: timezone: {
   relations: {
     ancestors: [
       [
-        "timezone"
+        "ip"
       ]
     ]
   }

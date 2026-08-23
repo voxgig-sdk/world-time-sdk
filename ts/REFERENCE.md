@@ -128,21 +128,21 @@ const ipn = client.Ipn()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `abbreviation` | `string` | No |  |
-| `client_ip` | `string` | No |  |
-| `datetime` | `string` | No |  |
-| `day_of_week` | `number` | No |  |
-| `day_of_year` | `number` | No |  |
-| `dst` | `boolean` | No |  |
-| `dst_from` | `string` | No |  |
-| `dst_offset` | `number` | No |  |
-| `dst_until` | `string` | No |  |
-| `raw_offset` | `number` | No |  |
-| `timezone` | `string` | No |  |
-| `unixtime` | `number` | No |  |
-| `utc_datetime` | `string` | No |  |
-| `utc_offset` | `string` | No |  |
-| `week_number` | `number` | No |  |
+| `abbreviation` | `string` | No | The abbreviated name of the timezone |
+| `client_ip` | `string` | No | The IP address of the client |
+| `datetime` | `string` | No | The current datetime in ISO 8601 format |
+| `day_of_week` | `number` | No | The day of the week (0-6, where 0 is Sunday) |
+| `day_of_year` | `number` | No | The day of the year (1-365/366) |
+| `dst` | `boolean` | No | Whether daylight saving time is currently in effect |
+| `dst_from` | `string` | No | The datetime when DST starts |
+| `dst_offset` | `number` | No | The DST offset in seconds |
+| `dst_until` | `string` | No | The datetime when DST ends |
+| `raw_offset` | `number` | No | The raw offset from UTC in seconds |
+| `timezone` | `string` | No | The IANA timezone identifier |
+| `unixtime` | `number` | No | The current Unix timestamp |
+| `utc_datetime` | `string` | No | The current UTC datetime in ISO 8601 format |
+| `utc_offset` | `string` | No | The UTC offset in ±HH:MM format |
+| `week_number` | `number` | No | The ISO week number of the year |
 
 ### Operations
 
@@ -192,21 +192,21 @@ const timezone = client.Timezone()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `abbreviation` | `string` | No |  |
-| `client_ip` | `string` | No |  |
-| `datetime` | `string` | No |  |
-| `day_of_week` | `number` | No |  |
-| `day_of_year` | `number` | No |  |
-| `dst` | `boolean` | No |  |
-| `dst_from` | `string` | No |  |
-| `dst_offset` | `number` | No |  |
-| `dst_until` | `string` | No |  |
-| `raw_offset` | `number` | No |  |
-| `timezone` | `string` | No |  |
-| `unixtime` | `number` | No |  |
-| `utc_datetime` | `string` | No |  |
-| `utc_offset` | `string` | No |  |
-| `week_number` | `number` | No |  |
+| `abbreviation` | `string` | No | The abbreviated name of the timezone |
+| `client_ip` | `string` | No | The IP address of the client |
+| `datetime` | `string` | No | The current datetime in ISO 8601 format |
+| `day_of_week` | `number` | No | The day of the week (0-6, where 0 is Sunday) |
+| `day_of_year` | `number` | No | The day of the year (1-365/366) |
+| `dst` | `boolean` | No | Whether daylight saving time is currently in effect |
+| `dst_from` | `string` | No | The datetime when DST starts |
+| `dst_offset` | `number` | No | The DST offset in seconds |
+| `dst_until` | `string` | No | The datetime when DST ends |
+| `raw_offset` | `number` | No | The raw offset from UTC in seconds |
+| `timezone` | `string` | No | The IANA timezone identifier |
+| `unixtime` | `number` | No | The current Unix timestamp |
+| `utc_datetime` | `string` | No | The current UTC datetime in ISO 8601 format |
+| `utc_offset` | `string` | No | The UTC offset in ±HH:MM format |
+| `week_number` | `number` | No | The ISO week number of the year |
 
 ### Operations
 

@@ -11,6 +11,9 @@ func MakeConfig() map[string]any {
 	return map[string]any{
 		"main": map[string]any{
 			"name": "WorldTime",
+			"slug": "world-time",
+			"version": "0.0.1",
+			"target": "go",
 		},
 		"feature": map[string]any{
 			"test": map[string]any{
@@ -34,62 +37,77 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "abbreviation",
+						"short": "The abbreviated name of the timezone",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "client_ip",
+						"short": "The IP address of the client",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "datetime",
+						"short": "The current datetime in ISO 8601 format",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "day_of_week",
+						"short": "The day of the week (0-6, where 0 is Sunday)",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "day_of_year",
+						"short": "The day of the year (1-365/366)",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "dst",
+						"short": "Whether daylight saving time is currently in effect",
 						"type": "`$BOOLEAN`",
 					},
 					map[string]any{
 						"name": "dst_from",
+						"short": "The datetime when DST starts",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "dst_offset",
+						"short": "The DST offset in seconds",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "dst_until",
+						"short": "The datetime when DST ends",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "raw_offset",
+						"short": "The raw offset from UTC in seconds",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "timezone",
+						"short": "The IANA timezone identifier",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "unixtime",
+						"short": "The current Unix timestamp",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "utc_datetime",
+						"short": "The current UTC datetime in ISO 8601 format",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "utc_offset",
+						"short": "The UTC offset in ±HH:MM format",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "week_number",
+						"short": "The ISO week number of the year",
 						"type": "`$INTEGER`",
 					},
 				},
@@ -158,62 +176,77 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "abbreviation",
+						"short": "The abbreviated name of the timezone",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "client_ip",
+						"short": "The IP address of the client",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "datetime",
+						"short": "The current datetime in ISO 8601 format",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "day_of_week",
+						"short": "The day of the week (0-6, where 0 is Sunday)",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "day_of_year",
+						"short": "The day of the year (1-365/366)",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "dst",
+						"short": "Whether daylight saving time is currently in effect",
 						"type": "`$BOOLEAN`",
 					},
 					map[string]any{
 						"name": "dst_from",
+						"short": "The datetime when DST starts",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "dst_offset",
+						"short": "The DST offset in seconds",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "dst_until",
+						"short": "The datetime when DST ends",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "raw_offset",
+						"short": "The raw offset from UTC in seconds",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "timezone",
+						"short": "The IANA timezone identifier",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "unixtime",
+						"short": "The current Unix timestamp",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "utc_datetime",
+						"short": "The current UTC datetime in ISO 8601 format",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "utc_offset",
+						"short": "The UTC offset in ±HH:MM format",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "week_number",
+						"short": "The ISO week number of the year",
 						"type": "`$INTEGER`",
 					},
 				},

@@ -19,9 +19,20 @@ class Config {
     return fi
   }
 
+  // False for a feature added at runtime via options.extend (station's
+  // adopt path) - the constructor uses this to skip makeFeature for names
+  // no generated class backs.
+  hasFeature(this: any, fn: string) {
+    return null != FEATURE_CLASS[fn]
+  }
+
 
   main = {
     name: 'WorldTime',
+        slug: "world-time",
+    version: "0.0.1",
+    target: "ts",
+
   }
 
 
@@ -59,62 +70,77 @@ class Config {
       "fields": [
         {
           "name": "abbreviation",
+          "short": "The abbreviated name of the timezone",
           "type": "`$STRING`"
         },
         {
           "name": "client_ip",
+          "short": "The IP address of the client",
           "type": "`$STRING`"
         },
         {
           "name": "datetime",
+          "short": "The current datetime in ISO 8601 format",
           "type": "`$STRING`"
         },
         {
           "name": "day_of_week",
+          "short": "The day of the week (0-6, where 0 is Sunday)",
           "type": "`$INTEGER`"
         },
         {
           "name": "day_of_year",
+          "short": "The day of the year (1-365/366)",
           "type": "`$INTEGER`"
         },
         {
           "name": "dst",
+          "short": "Whether daylight saving time is currently in effect",
           "type": "`$BOOLEAN`"
         },
         {
           "name": "dst_from",
+          "short": "The datetime when DST starts",
           "type": "`$STRING`"
         },
         {
           "name": "dst_offset",
+          "short": "The DST offset in seconds",
           "type": "`$INTEGER`"
         },
         {
           "name": "dst_until",
+          "short": "The datetime when DST ends",
           "type": "`$STRING`"
         },
         {
           "name": "raw_offset",
+          "short": "The raw offset from UTC in seconds",
           "type": "`$INTEGER`"
         },
         {
           "name": "timezone",
+          "short": "The IANA timezone identifier",
           "type": "`$STRING`"
         },
         {
           "name": "unixtime",
+          "short": "The current Unix timestamp",
           "type": "`$INTEGER`"
         },
         {
           "name": "utc_datetime",
+          "short": "The current UTC datetime in ISO 8601 format",
           "type": "`$STRING`"
         },
         {
           "name": "utc_offset",
+          "short": "The UTC offset in ±HH:MM format",
           "type": "`$STRING`"
         },
         {
           "name": "week_number",
+          "short": "The ISO week number of the year",
           "type": "`$INTEGER`"
         }
       ],
@@ -183,62 +209,77 @@ class Config {
       "fields": [
         {
           "name": "abbreviation",
+          "short": "The abbreviated name of the timezone",
           "type": "`$STRING`"
         },
         {
           "name": "client_ip",
+          "short": "The IP address of the client",
           "type": "`$STRING`"
         },
         {
           "name": "datetime",
+          "short": "The current datetime in ISO 8601 format",
           "type": "`$STRING`"
         },
         {
           "name": "day_of_week",
+          "short": "The day of the week (0-6, where 0 is Sunday)",
           "type": "`$INTEGER`"
         },
         {
           "name": "day_of_year",
+          "short": "The day of the year (1-365/366)",
           "type": "`$INTEGER`"
         },
         {
           "name": "dst",
+          "short": "Whether daylight saving time is currently in effect",
           "type": "`$BOOLEAN`"
         },
         {
           "name": "dst_from",
+          "short": "The datetime when DST starts",
           "type": "`$STRING`"
         },
         {
           "name": "dst_offset",
+          "short": "The DST offset in seconds",
           "type": "`$INTEGER`"
         },
         {
           "name": "dst_until",
+          "short": "The datetime when DST ends",
           "type": "`$STRING`"
         },
         {
           "name": "raw_offset",
+          "short": "The raw offset from UTC in seconds",
           "type": "`$INTEGER`"
         },
         {
           "name": "timezone",
+          "short": "The IANA timezone identifier",
           "type": "`$STRING`"
         },
         {
           "name": "unixtime",
+          "short": "The current Unix timestamp",
           "type": "`$INTEGER`"
         },
         {
           "name": "utc_datetime",
+          "short": "The current UTC datetime in ISO 8601 format",
           "type": "`$STRING`"
         },
         {
           "name": "utc_offset",
+          "short": "The UTC offset in ±HH:MM format",
           "type": "`$STRING`"
         },
         {
           "name": "week_number",
+          "short": "The ISO week number of the year",
           "type": "`$INTEGER`"
         }
       ],

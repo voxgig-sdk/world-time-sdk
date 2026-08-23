@@ -6,7 +6,7 @@ The Golang SDK for the WorldTime API — an entity-oriented client using standar
 
 It exposes the API as capitalised, semantic **Entities** — e.g. `client.Ipn(nil)` — each with the same small set of operations (`List`, `Load`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb`, `ts` — see
 > the [top-level README](../README.md).
 
 
@@ -261,21 +261,21 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"abbreviation"` |  |
-| `"client_ip"` |  |
-| `"datetime"` |  |
-| `"day_of_week"` |  |
-| `"day_of_year"` |  |
-| `"dst"` |  |
-| `"dst_from"` |  |
-| `"dst_offset"` |  |
-| `"dst_until"` |  |
-| `"raw_offset"` |  |
-| `"timezone"` |  |
-| `"unixtime"` |  |
-| `"utc_datetime"` |  |
-| `"utc_offset"` |  |
-| `"week_number"` |  |
+| `"abbreviation"` | The abbreviated name of the timezone |
+| `"client_ip"` | The IP address of the client |
+| `"datetime"` | The current datetime in ISO 8601 format |
+| `"day_of_week"` | The day of the week (0-6, where 0 is Sunday) |
+| `"day_of_year"` | The day of the year (1-365/366) |
+| `"dst"` | Whether daylight saving time is currently in effect |
+| `"dst_from"` | The datetime when DST starts |
+| `"dst_offset"` | The DST offset in seconds |
+| `"dst_until"` | The datetime when DST ends |
+| `"raw_offset"` | The raw offset from UTC in seconds |
+| `"timezone"` | The IANA timezone identifier |
+| `"unixtime"` | The current Unix timestamp |
+| `"utc_datetime"` | The current UTC datetime in ISO 8601 format |
+| `"utc_offset"` | The UTC offset in ±HH:MM format |
+| `"week_number"` | The ISO week number of the year |
 
 Operations: Load.
 
@@ -285,21 +285,21 @@ API path: `/ip/{ipv4}`
 
 | Field | Description |
 | --- | --- |
-| `"abbreviation"` |  |
-| `"client_ip"` |  |
-| `"datetime"` |  |
-| `"day_of_week"` |  |
-| `"day_of_year"` |  |
-| `"dst"` |  |
-| `"dst_from"` |  |
-| `"dst_offset"` |  |
-| `"dst_until"` |  |
-| `"raw_offset"` |  |
-| `"timezone"` |  |
-| `"unixtime"` |  |
-| `"utc_datetime"` |  |
-| `"utc_offset"` |  |
-| `"week_number"` |  |
+| `"abbreviation"` | The abbreviated name of the timezone |
+| `"client_ip"` | The IP address of the client |
+| `"datetime"` | The current datetime in ISO 8601 format |
+| `"day_of_week"` | The day of the week (0-6, where 0 is Sunday) |
+| `"day_of_year"` | The day of the year (1-365/366) |
+| `"dst"` | Whether daylight saving time is currently in effect |
+| `"dst_from"` | The datetime when DST starts |
+| `"dst_offset"` | The DST offset in seconds |
+| `"dst_until"` | The datetime when DST ends |
+| `"raw_offset"` | The raw offset from UTC in seconds |
+| `"timezone"` | The IANA timezone identifier |
+| `"unixtime"` | The current Unix timestamp |
+| `"utc_datetime"` | The current UTC datetime in ISO 8601 format |
+| `"utc_offset"` | The UTC offset in ±HH:MM format |
+| `"week_number"` | The ISO week number of the year |
 
 Operations: List, Load.
 
@@ -324,21 +324,21 @@ Create an instance: `ipn := client.Ipn(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `abbreviation` | `string` |  |
-| `client_ip` | `string` |  |
-| `datetime` | `string` |  |
-| `day_of_week` | `int` |  |
-| `day_of_year` | `int` |  |
-| `dst` | `bool` |  |
-| `dst_from` | `string` |  |
-| `dst_offset` | `int` |  |
-| `dst_until` | `string` |  |
-| `raw_offset` | `int` |  |
-| `timezone` | `string` |  |
-| `unixtime` | `int` |  |
-| `utc_datetime` | `string` |  |
-| `utc_offset` | `string` |  |
-| `week_number` | `int` |  |
+| `abbreviation` | `string` | The abbreviated name of the timezone |
+| `client_ip` | `string` | The IP address of the client |
+| `datetime` | `string` | The current datetime in ISO 8601 format |
+| `day_of_week` | `int` | The day of the week (0-6, where 0 is Sunday) |
+| `day_of_year` | `int` | The day of the year (1-365/366) |
+| `dst` | `bool` | Whether daylight saving time is currently in effect |
+| `dst_from` | `string` | The datetime when DST starts |
+| `dst_offset` | `int` | The DST offset in seconds |
+| `dst_until` | `string` | The datetime when DST ends |
+| `raw_offset` | `int` | The raw offset from UTC in seconds |
+| `timezone` | `string` | The IANA timezone identifier |
+| `unixtime` | `int` | The current Unix timestamp |
+| `utc_datetime` | `string` | The current UTC datetime in ISO 8601 format |
+| `utc_offset` | `string` | The UTC offset in ±HH:MM format |
+| `week_number` | `int` | The ISO week number of the year |
 
 #### Example: Load
 
@@ -366,21 +366,21 @@ Create an instance: `timezone := client.Timezone(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `abbreviation` | `string` |  |
-| `client_ip` | `string` |  |
-| `datetime` | `string` |  |
-| `day_of_week` | `int` |  |
-| `day_of_year` | `int` |  |
-| `dst` | `bool` |  |
-| `dst_from` | `string` |  |
-| `dst_offset` | `int` |  |
-| `dst_until` | `string` |  |
-| `raw_offset` | `int` |  |
-| `timezone` | `string` |  |
-| `unixtime` | `int` |  |
-| `utc_datetime` | `string` |  |
-| `utc_offset` | `string` |  |
-| `week_number` | `int` |  |
+| `abbreviation` | `string` | The abbreviated name of the timezone |
+| `client_ip` | `string` | The IP address of the client |
+| `datetime` | `string` | The current datetime in ISO 8601 format |
+| `day_of_week` | `int` | The day of the week (0-6, where 0 is Sunday) |
+| `day_of_year` | `int` | The day of the year (1-365/366) |
+| `dst` | `bool` | Whether daylight saving time is currently in effect |
+| `dst_from` | `string` | The datetime when DST starts |
+| `dst_offset` | `int` | The DST offset in seconds |
+| `dst_until` | `string` | The datetime when DST ends |
+| `raw_offset` | `int` | The raw offset from UTC in seconds |
+| `timezone` | `string` | The IANA timezone identifier |
+| `unixtime` | `int` | The current Unix timestamp |
+| `utc_datetime` | `string` | The current UTC datetime in ISO 8601 format |
+| `utc_offset` | `string` | The UTC offset in ±HH:MM format |
+| `week_number` | `int` | The ISO week number of the year |
 
 #### Example: Load
 
