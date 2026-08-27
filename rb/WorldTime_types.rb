@@ -111,6 +111,9 @@ IpnLoadMatch = Struct.new(
 # @!attribute [rw] dst_until
 #   @return [String, nil]
 #
+# @!attribute [rw] id
+#   @return [String, nil]
+#
 # @!attribute [rw] raw_offset
 #   @return [Integer, nil]
 #
@@ -138,6 +141,7 @@ Timezone = Struct.new(
   :dst_from,
   :dst_offset,
   :dst_until,
+  :id,
   :raw_offset,
   :timezone,
   :unixtime,
@@ -185,6 +189,9 @@ TimezoneLoadMatch = Struct.new(
 # @!attribute [rw] dst_until
 #   @return [String, nil]
 #
+# @!attribute [rw] id
+#   @return [String, nil]
+#
 # @!attribute [rw] raw_offset
 #   @return [Integer, nil]
 #
@@ -212,6 +219,7 @@ TimezoneListMatch = Struct.new(
   :dst_from,
   :dst_offset,
   :dst_until,
+  :id,
   :raw_offset,
   :timezone,
   :unixtime,

@@ -165,6 +165,7 @@ timezone = client.Timezone()
 | `dst_from` | `str` | No | The datetime when DST starts |
 | `dst_offset` | `int` | No | The DST offset in seconds |
 | `dst_until` | `str` | No | The datetime when DST ends |
+| `id` | `str` | No |  |
 | `raw_offset` | `int` | No | The raw offset from UTC in seconds |
 | `timezone` | `str` | No | The IANA timezone identifier |
 | `unixtime` | `int` | No | The current Unix timestamp |

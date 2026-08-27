@@ -37,6 +37,7 @@ export interface Timezone {
   dst_from?: string
   dst_offset?: number
   dst_until?: string
+  id?: string
   raw_offset?: number
   timezone?: string
   unixtime?: number
@@ -59,6 +60,7 @@ export interface TimezoneListMatch {
   dst_from?: string
   dst_offset?: number
   dst_until?: string
+  id?: string
   raw_offset?: number
   timezone?: string
   unixtime?: number

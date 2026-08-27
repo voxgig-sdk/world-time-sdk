@@ -172,6 +172,7 @@ timezone = client.Timezone
 | `dst_from` | `String` | No | The datetime when DST starts |
 | `dst_offset` | `Integer` | No | The DST offset in seconds |
 | `dst_until` | `String` | No | The datetime when DST ends |
+| `id` | `String` | No |  |
 | `raw_offset` | `Integer` | No | The raw offset from UTC in seconds |
 | `timezone` | `String` | No | The IANA timezone identifier |
 | `unixtime` | `Integer` | No | The current Unix timestamp |

@@ -92,10 +92,14 @@ describe("TimezoneEntity", function()
     assert.is_table(timezone_ref01_list_result)
 
     -- LOAD
-    local timezone_ref01_match_dt0 = {}
+    local timezone_ref01_match_dt0 = {
+      id = timezone_ref01_data["id"],
+    }
     local timezone_ref01_data_dt0_loaded, err = timezone_ref01_ent:load(timezone_ref01_match_dt0, nil)
     assert.is_nil(err)
-    assert.is_not_nil(timezone_ref01_data_dt0_loaded)
+    local timezone_ref01_data_dt0_load_result = helpers.to_map(type(timezone_ref01_data_dt0_loaded) == 'table' and timezone_ref01_data_dt0_loaded.data_get and timezone_ref01_data_dt0_loaded:data_get() or timezone_ref01_data_dt0_loaded)
+    assert.is_not_nil(timezone_ref01_data_dt0_load_result)
+    assert.are.equal(timezone_ref01_data_dt0_load_result["id"], timezone_ref01_data["id"])
 
   end)
 end)

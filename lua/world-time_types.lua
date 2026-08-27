@@ -36,6 +36,7 @@
 ---@field dst_from? string
 ---@field dst_offset? number
 ---@field dst_until? string
+---@field id? string
 ---@field raw_offset? number
 ---@field timezone? string
 ---@field unixtime? number
@@ -56,6 +57,7 @@
 ---@field dst_from? string
 ---@field dst_offset? number
 ---@field dst_until? string
+---@field id? string
 ---@field raw_offset? number
 ---@field timezone? string
 ---@field unixtime? number

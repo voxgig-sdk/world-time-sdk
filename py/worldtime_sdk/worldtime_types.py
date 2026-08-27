@@ -48,6 +48,7 @@ class Timezone(TypedDict, total=False):
     dst_from: str
     dst_offset: int
     dst_until: str
+    id: str
     raw_offset: int
     timezone: str
     unixtime: int
@@ -70,6 +71,7 @@ class TimezoneListMatch(TypedDict, total=False):
     dst_from: str
     dst_offset: int
     dst_until: str
+    id: str
     raw_offset: int
     timezone: str
     unixtime: int

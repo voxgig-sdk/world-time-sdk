@@ -201,6 +201,7 @@ const timezone = client.Timezone()
 | `dst_from` | `string` | No | The datetime when DST starts |
 | `dst_offset` | `number` | No | The DST offset in seconds |
 | `dst_until` | `string` | No | The datetime when DST ends |
+| `id` | `string` | No |  |
 | `raw_offset` | `number` | No | The raw offset from UTC in seconds |
 | `timezone` | `string` | No | The IANA timezone identifier |
 | `unixtime` | `number` | No | The current Unix timestamp |

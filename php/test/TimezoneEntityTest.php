@@ -93,9 +93,13 @@ class TimezoneEntityTest extends TestCase
         $this->assertIsArray($timezone_ref01_list_result);
 
         // LOAD
-        $timezone_ref01_match_dt0 = [];
+        $timezone_ref01_match_dt0 = [
+            "id" => $timezone_ref01_data["id"],
+        ];
         $timezone_ref01_data_dt0_loaded = $timezone_ref01_ent->load($timezone_ref01_match_dt0, null);
-        $this->assertNotNull($timezone_ref01_data_dt0_loaded);
+        $timezone_ref01_data_dt0_load_result = Helpers::to_map(is_object($timezone_ref01_data_dt0_loaded) && method_exists($timezone_ref01_data_dt0_loaded, 'data_get') ? $timezone_ref01_data_dt0_loaded->data_get() : $timezone_ref01_data_dt0_loaded);
+        $this->assertNotNull($timezone_ref01_data_dt0_load_result);
+        $this->assertEquals($timezone_ref01_data_dt0_load_result["id"], $timezone_ref01_data["id"]);
 
     }
 }

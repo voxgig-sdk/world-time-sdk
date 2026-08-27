@@ -88,9 +88,13 @@ class TestTimezoneEntity:
         assert isinstance(timezone_ref01_list_result, list)
 
         # LOAD
-        timezone_ref01_match_dt0 = {}
+        timezone_ref01_match_dt0 = {
+            "id": timezone_ref01_data["id"],
+        }
         timezone_ref01_data_dt0_loaded = timezone_ref01_ent.load(timezone_ref01_match_dt0, None)
-        assert timezone_ref01_data_dt0_loaded is not None
+        timezone_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(timezone_ref01_data_dt0_loaded))
+        assert timezone_ref01_data_dt0_load_result is not None
+        assert timezone_ref01_data_dt0_load_result["id"] == timezone_ref01_data["id"]
 
 
 

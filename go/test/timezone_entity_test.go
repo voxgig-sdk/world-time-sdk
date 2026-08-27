@@ -121,13 +121,19 @@ func TestTimezoneEntity(t *testing.T) {
 		}
 
 		// LOAD
-		timezoneRef01MatchDt0 := map[string]any{}
+		timezoneRef01MatchDt0 := map[string]any{
+			"id": timezoneRef01Data["id"],
+		}
 		timezoneRef01DataDt0Loaded, err := timezoneRef01Ent.Load(timezoneRef01MatchDt0, nil)
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		if timezoneRef01DataDt0Loaded == nil {
-			t.Fatal("expected load result to be non-nil")
+		timezoneRef01DataDt0LoadResult := core.ToMapAny(entityData(timezoneRef01DataDt0Loaded))
+		if timezoneRef01DataDt0LoadResult == nil {
+			t.Fatal("expected load result to be a map")
+		}
+		if timezoneRef01DataDt0LoadResult["id"] != timezoneRef01Data["id"] {
+			t.Fatal("expected load result id to match")
 		}
 
 	})

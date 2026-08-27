@@ -47,6 +47,7 @@ type Timezone struct {
 	DstFrom *string `json:"dst_from,omitempty"`
 	DstOffset *int `json:"dst_offset,omitempty"`
 	DstUntil *string `json:"dst_until,omitempty"`
+	Id *string `json:"id,omitempty"`
 	RawOffset *int `json:"raw_offset,omitempty"`
 	Timezone *string `json:"timezone,omitempty"`
 	Unixtime *int `json:"unixtime,omitempty"`
@@ -71,6 +72,7 @@ type TimezoneListMatch struct {
 	DstFrom *string `json:"dst_from,omitempty"`
 	DstOffset *int `json:"dst_offset,omitempty"`
 	DstUntil *string `json:"dst_until,omitempty"`
+	Id *string `json:"id,omitempty"`
 	RawOffset *int `json:"raw_offset,omitempty"`
 	Timezone *string `json:"timezone,omitempty"`
 	Unixtime *int `json:"unixtime,omitempty"`

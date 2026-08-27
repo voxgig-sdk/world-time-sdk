@@ -60,6 +60,11 @@ main: kit: entity: timezone: {
       type: "`$STRING`"
     }
     {
+      name: "id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
       name: "raw_offset"
       req: false
       short: "The raw offset from UTC in seconds"
@@ -96,6 +101,11 @@ main: kit: entity: timezone: {
       type: "`$INTEGER`"
     }
   ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
 
   name: "timezone"
   op: {

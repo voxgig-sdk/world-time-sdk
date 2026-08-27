@@ -50,6 +50,7 @@ class Timezone
     public ?string $dst_from = null;
     public ?int $dst_offset = null;
     public ?string $dst_until = null;
+    public ?string $id = null;
     public ?int $raw_offset = null;
     public ?string $timezone = null;
     public ?int $unixtime = null;
@@ -76,6 +77,7 @@ class TimezoneListMatch
     public ?string $dst_from = null;
     public ?int $dst_offset = null;
     public ?string $dst_until = null;
+    public ?string $id = null;
     public ?int $raw_offset = null;
     public ?string $timezone = null;
     public ?int $unixtime = null;

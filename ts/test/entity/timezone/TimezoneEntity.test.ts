@@ -66,6 +66,12 @@ describe('TimezoneEntity', async () => {
     const timezone_ref01_list = (await timezone_ref01_ent.list(timezone_ref01_match)).map((e: any) => e.data())
 
 
+    // LOAD
+    const timezone_ref01_match_dt0: any = {}
+    timezone_ref01_match_dt0.id = timezone_ref01_data.id
+    const timezone_ref01_data_dt0 = (await timezone_ref01_ent.load(timezone_ref01_match_dt0)).data()
+    assert(timezone_ref01_data_dt0.id === timezone_ref01_data.id)
+
 
   })
 })

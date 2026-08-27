@@ -272,6 +272,7 @@ API path: `/ip/{ipv4}`
 | `dst_from` | The datetime when DST starts |
 | `dst_offset` | The DST offset in seconds |
 | `dst_until` | The datetime when DST ends |
+| `id` |  |
 | `raw_offset` | The raw offset from UTC in seconds |
 | `timezone` | The IANA timezone identifier |
 | `unixtime` | The current Unix timestamp |
@@ -350,6 +351,7 @@ Create an instance: `timezone = client.Timezone`
 | `dst_from` | `String` | The datetime when DST starts |
 | `dst_offset` | `Integer` | The DST offset in seconds |
 | `dst_until` | `String` | The datetime when DST ends |
+| `id` | `String` |  |
 | `raw_offset` | `Integer` | The raw offset from UTC in seconds |
 | `timezone` | `String` | The IANA timezone identifier |
 | `unixtime` | `Integer` | The current Unix timestamp |
