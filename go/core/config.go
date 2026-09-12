@@ -47,6 +47,7 @@ func MakeConfig() map[string]any {
 						"type": "`$STRING`",
 					},
 					map[string]any{
+						"format": "date-time",
 						"name": "datetime",
 						"short": "The current datetime in ISO 8601 format",
 						"type": "`$STRING`",
@@ -67,6 +68,7 @@ func MakeConfig() map[string]any {
 						"type": "`$BOOLEAN`",
 					},
 					map[string]any{
+						"format": "date-time",
 						"name": "dst_from",
 						"short": "The datetime when DST starts",
 						"type": "`$STRING`",
@@ -77,6 +79,7 @@ func MakeConfig() map[string]any {
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
+						"format": "date-time",
 						"name": "dst_until",
 						"short": "The datetime when DST ends",
 						"type": "`$STRING`",
@@ -97,6 +100,7 @@ func MakeConfig() map[string]any {
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
+						"format": "date-time",
 						"name": "utc_datetime",
 						"short": "The current UTC datetime in ISO 8601 format",
 						"type": "`$STRING`",
@@ -134,9 +138,13 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/ip/{ipv4}",
-								"parts": []any{
-									"ip",
-									"{ipv4}",
+								"segments": []any{
+									map[string]any{
+										"lit": "ip",
+									},
+									map[string]any{
+										"var": "ipv4",
+									},
 								},
 								"select": map[string]any{
 									"exist": []any{
@@ -147,19 +155,28 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
+								"parts": []any{
+									"ip",
+									"{ipv4}",
+								},
 							},
 							map[string]any{
 								"args": map[string]any{},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/ip",
-								"parts": []any{
-									"ip",
+								"segments": []any{
+									map[string]any{
+										"lit": "ip",
+									},
 								},
 								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
+								},
+								"parts": []any{
+									"ip",
 								},
 							},
 						},
@@ -186,6 +203,7 @@ func MakeConfig() map[string]any {
 						"type": "`$STRING`",
 					},
 					map[string]any{
+						"format": "date-time",
 						"name": "datetime",
 						"short": "The current datetime in ISO 8601 format",
 						"type": "`$STRING`",
@@ -206,6 +224,7 @@ func MakeConfig() map[string]any {
 						"type": "`$BOOLEAN`",
 					},
 					map[string]any{
+						"format": "date-time",
 						"name": "dst_from",
 						"short": "The datetime when DST starts",
 						"type": "`$STRING`",
@@ -216,6 +235,7 @@ func MakeConfig() map[string]any {
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
+						"format": "date-time",
 						"name": "dst_until",
 						"short": "The datetime when DST ends",
 						"type": "`$STRING`",
@@ -240,6 +260,7 @@ func MakeConfig() map[string]any {
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
+						"format": "date-time",
 						"name": "utc_datetime",
 						"short": "The current UTC datetime in ISO 8601 format",
 						"type": "`$STRING`",
@@ -255,6 +276,10 @@ func MakeConfig() map[string]any {
 						"type": "`$INTEGER`",
 					},
 				},
+				"id": map[string]any{
+					"field": "id",
+					"name": "id",
+				},
 				"name": "timezone",
 				"op": map[string]any{
 					"list": map[string]any{
@@ -266,13 +291,18 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/timezone",
-								"parts": []any{
-									"timezone",
+								"segments": []any{
+									map[string]any{
+										"lit": "timezone",
+									},
 								},
 								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
+								},
+								"parts": []any{
+									"timezone",
 								},
 							},
 						},
@@ -305,10 +335,16 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/timezone/{area}/{location}",
-								"parts": []any{
-									"timezone",
-									"{area}",
-									"{location}",
+								"segments": []any{
+									map[string]any{
+										"lit": "timezone",
+									},
+									map[string]any{
+										"var": "area",
+									},
+									map[string]any{
+										"var": "location",
+									},
 								},
 								"select": map[string]any{
 									"exist": []any{
@@ -319,6 +355,11 @@ func MakeConfig() map[string]any {
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
+								},
+								"parts": []any{
+									"timezone",
+									"{area}",
+									"{location}",
 								},
 							},
 							map[string]any{
@@ -337,13 +378,17 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/timezone/{area}",
-								"parts": []any{
-									"timezone",
-									"{id}",
-								},
 								"rename": map[string]any{
 									"param": map[string]any{
 										"area": "id",
+									},
+								},
+								"segments": []any{
+									map[string]any{
+										"lit": "timezone",
+									},
+									map[string]any{
+										"var": "id",
 									},
 								},
 								"select": map[string]any{
@@ -354,6 +399,10 @@ func MakeConfig() map[string]any {
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
+								},
+								"parts": []any{
+									"timezone",
+									"{id}",
 								},
 							},
 						},
@@ -369,6 +418,17 @@ func MakeConfig() map[string]any {
 			},
 		},
 	}
+}
+
+// The plugin definitions the model selected per feature, as []any so a
+// feature package can consume them without core naming its types. Empty
+// when no active feature declares active plugin groups for this target.
+var featurePlugins = map[string][]any{
+}
+
+// FeaturePlugins is the definitions list for one feature's chain.
+func FeaturePlugins(name string) []any {
+	return featurePlugins[name]
 }
 
 var (

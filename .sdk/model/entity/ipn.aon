@@ -18,6 +18,7 @@ main: kit: entity: ipn: {
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "datetime"
       req: false
       short: "The current datetime in ISO 8601 format"
@@ -42,6 +43,7 @@ main: kit: entity: ipn: {
       type: "`$BOOLEAN`"
     }
     {
+      format: "date-time"
       name: "dst_from"
       req: false
       short: "The datetime when DST starts"
@@ -54,6 +56,7 @@ main: kit: entity: ipn: {
       type: "`$INTEGER`"
     }
     {
+      format: "date-time"
       name: "dst_until"
       req: false
       short: "The datetime when DST ends"
@@ -78,6 +81,7 @@ main: kit: entity: ipn: {
       type: "`$INTEGER`"
     }
     {
+      format: "date-time"
       name: "utc_datetime"
       req: false
       short: "The current UTC datetime in ISO 8601 format"
@@ -117,9 +121,13 @@ main: kit: entity: ipn: {
           }
           method: "GET"
           orig: "/ip/{ipv4}"
-          parts: [
-            "ip"
-            "{ipv4}"
+          segments: [
+            {
+              lit: "ip"
+            }
+            {
+              var: "ipv4"
+            }
           ]
           select: {
             exist: [
@@ -134,8 +142,10 @@ main: kit: entity: ipn: {
         {
           method: "GET"
           orig: "/ip"
-          parts: [
-            "ip"
+          segments: [
+            {
+              lit: "ip"
+            }
           ]
           transform: {
             req: "`reqdata`"

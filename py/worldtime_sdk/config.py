@@ -1,6 +1,14 @@
 # WorldTime SDK configuration
 
 
+# The sekreto plugin DEFINITIONS the model selected per feature, imported
+# above by name from the modules the catalogue's active `plugin.def`
+# entries declare. Handed to each feature (secrets builds its Sekreto
+# with them): a provider kind not listed here is unknown to that SDK.
+FEATURE_PLUGINS = {
+}
+
+
 _shared_config = None
 
 
@@ -64,6 +72,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "datetime",
             "short": "The current datetime in ISO 8601 format",
             "type": "`$STRING`",
@@ -84,6 +93,7 @@ def make_config():
             "type": "`$BOOLEAN`",
           },
           {
+            "format": "date-time",
             "name": "dst_from",
             "short": "The datetime when DST starts",
             "type": "`$STRING`",
@@ -94,6 +104,7 @@ def make_config():
             "type": "`$INTEGER`",
           },
           {
+            "format": "date-time",
             "name": "dst_until",
             "short": "The datetime when DST ends",
             "type": "`$STRING`",
@@ -114,6 +125,7 @@ def make_config():
             "type": "`$INTEGER`",
           },
           {
+            "format": "date-time",
             "name": "utc_datetime",
             "short": "The current UTC datetime in ISO 8601 format",
             "type": "`$STRING`",
@@ -151,9 +163,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/ip/{ipv4}",
-                "parts": [
-                  "ip",
-                  "{ipv4}",
+                "segments": [
+                  {
+                    "lit": "ip",
+                  },
+                  {
+                    "var": "ipv4",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -164,20 +180,29 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "ip",
+                  "{ipv4}",
+                ],
               },
               {
                 "args": {},
                 "kind": "http",
                 "method": "GET",
                 "orig": "/ip",
-                "parts": [
-                  "ip",
+                "segments": [
+                  {
+                    "lit": "ip",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "ip",
+                ],
               },
             ],
           },
@@ -203,6 +228,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "datetime",
             "short": "The current datetime in ISO 8601 format",
             "type": "`$STRING`",
@@ -223,6 +249,7 @@ def make_config():
             "type": "`$BOOLEAN`",
           },
           {
+            "format": "date-time",
             "name": "dst_from",
             "short": "The datetime when DST starts",
             "type": "`$STRING`",
@@ -233,6 +260,7 @@ def make_config():
             "type": "`$INTEGER`",
           },
           {
+            "format": "date-time",
             "name": "dst_until",
             "short": "The datetime when DST ends",
             "type": "`$STRING`",
@@ -257,6 +285,7 @@ def make_config():
             "type": "`$INTEGER`",
           },
           {
+            "format": "date-time",
             "name": "utc_datetime",
             "short": "The current UTC datetime in ISO 8601 format",
             "type": "`$STRING`",
@@ -272,6 +301,10 @@ def make_config():
             "type": "`$INTEGER`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "timezone",
         "op": {
           "list": {
@@ -283,14 +316,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/timezone",
-                "parts": [
-                  "timezone",
+                "segments": [
+                  {
+                    "lit": "timezone",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "timezone",
+                ],
               },
             ],
           },
@@ -322,10 +360,16 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/timezone/{area}/{location}",
-                "parts": [
-                  "timezone",
-                  "{area}",
-                  "{location}",
+                "segments": [
+                  {
+                    "lit": "timezone",
+                  },
+                  {
+                    "var": "area",
+                  },
+                  {
+                    "var": "location",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -337,6 +381,11 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "timezone",
+                  "{area}",
+                  "{location}",
+                ],
               },
               {
                 "args": {
@@ -354,15 +403,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/timezone/{area}",
-                "parts": [
-                  "timezone",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "area": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "timezone",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -372,6 +425,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "timezone",
+                  "{id}",
+                ],
               },
             ],
           },

@@ -69,6 +69,7 @@ class WorldTimeConfig
               'type' => '`$STRING`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'datetime',
               'short' => 'The current datetime in ISO 8601 format',
               'type' => '`$STRING`',
@@ -89,6 +90,7 @@ class WorldTimeConfig
               'type' => '`$BOOLEAN`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'dst_from',
               'short' => 'The datetime when DST starts',
               'type' => '`$STRING`',
@@ -99,6 +101,7 @@ class WorldTimeConfig
               'type' => '`$INTEGER`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'dst_until',
               'short' => 'The datetime when DST ends',
               'type' => '`$STRING`',
@@ -119,6 +122,7 @@ class WorldTimeConfig
               'type' => '`$INTEGER`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'utc_datetime',
               'short' => 'The current UTC datetime in ISO 8601 format',
               'type' => '`$STRING`',
@@ -156,9 +160,13 @@ class WorldTimeConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/ip/{ipv4}',
-                  'parts' => [
-                    'ip',
-                    '{ipv4}',
+                  'segments' => [
+                    [
+                      'lit' => 'ip',
+                    ],
+                    [
+                      'var' => 'ipv4',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -169,19 +177,28 @@ class WorldTimeConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
+                  'parts' => [
+                    'ip',
+                    '{ipv4}',
+                  ],
                 ],
                 [
                   'args' => [],
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/ip',
-                  'parts' => [
-                    'ip',
+                  'segments' => [
+                    [
+                      'lit' => 'ip',
+                    ],
                   ],
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'ip',
                   ],
                 ],
               ],
@@ -208,6 +225,7 @@ class WorldTimeConfig
               'type' => '`$STRING`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'datetime',
               'short' => 'The current datetime in ISO 8601 format',
               'type' => '`$STRING`',
@@ -228,6 +246,7 @@ class WorldTimeConfig
               'type' => '`$BOOLEAN`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'dst_from',
               'short' => 'The datetime when DST starts',
               'type' => '`$STRING`',
@@ -238,6 +257,7 @@ class WorldTimeConfig
               'type' => '`$INTEGER`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'dst_until',
               'short' => 'The datetime when DST ends',
               'type' => '`$STRING`',
@@ -262,6 +282,7 @@ class WorldTimeConfig
               'type' => '`$INTEGER`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'utc_datetime',
               'short' => 'The current UTC datetime in ISO 8601 format',
               'type' => '`$STRING`',
@@ -277,6 +298,10 @@ class WorldTimeConfig
               'type' => '`$INTEGER`',
             ],
           ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
+          ],
           'name' => 'timezone',
           'op' => [
             'list' => [
@@ -288,13 +313,18 @@ class WorldTimeConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/timezone',
-                  'parts' => [
-                    'timezone',
+                  'segments' => [
+                    [
+                      'lit' => 'timezone',
+                    ],
                   ],
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'timezone',
                   ],
                 ],
               ],
@@ -327,10 +357,16 @@ class WorldTimeConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/timezone/{area}/{location}',
-                  'parts' => [
-                    'timezone',
-                    '{area}',
-                    '{location}',
+                  'segments' => [
+                    [
+                      'lit' => 'timezone',
+                    ],
+                    [
+                      'var' => 'area',
+                    ],
+                    [
+                      'var' => 'location',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -341,6 +377,11 @@ class WorldTimeConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'timezone',
+                    '{area}',
+                    '{location}',
                   ],
                 ],
                 [
@@ -359,13 +400,17 @@ class WorldTimeConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/timezone/{area}',
-                  'parts' => [
-                    'timezone',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'area' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'timezone',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -376,6 +421,10 @@ class WorldTimeConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'timezone',
+                    '{id}',
                   ],
                 ],
               ],

@@ -10,6 +10,17 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
+// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
+// the model's active plugin groups. A feature that takes a `plugins` option
+// (secrets over sekreto) reads its own entry; a feature with no plugins has
+// none. Named imports above make each definition statically reachable, so
+// an SDK carries exactly the plugin modules its model selects — the same
+// leanness the old side-effect registry imports bought, without a registry.
+const FEATURE_PLUGINS: Record<string, any[]> = {
+  
+}
+
+
 class Config {
 
   makeFeature(this: any, fn: string) {
@@ -80,6 +91,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "datetime",
           "short": "The current datetime in ISO 8601 format",
           "type": "`$STRING`"
@@ -100,6 +112,7 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "date-time",
           "name": "dst_from",
           "short": "The datetime when DST starts",
           "type": "`$STRING`"
@@ -110,6 +123,7 @@ class Config {
           "type": "`$INTEGER`"
         },
         {
+          "format": "date-time",
           "name": "dst_until",
           "short": "The datetime when DST ends",
           "type": "`$STRING`"
@@ -130,6 +144,7 @@ class Config {
           "type": "`$INTEGER`"
         },
         {
+          "format": "date-time",
           "name": "utc_datetime",
           "short": "The current UTC datetime in ISO 8601 format",
           "type": "`$STRING`"
@@ -167,9 +182,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/ip/{ipv4}",
-              "parts": [
-                "ip",
-                "{ipv4}"
+              "segments": [
+                {
+                  "lit": "ip"
+                },
+                {
+                  "var": "ipv4"
+                }
               ],
               "select": {
                 "exist": [
@@ -179,21 +198,30 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "ip",
+                "{ipv4}"
+              ]
             },
             {
               "args": {},
               "kind": "http",
               "method": "GET",
               "orig": "/ip",
-              "parts": [
-                "ip"
+              "segments": [
+                {
+                  "lit": "ip"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "ip"
+              ]
             }
           ]
         }
@@ -219,6 +247,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "datetime",
           "short": "The current datetime in ISO 8601 format",
           "type": "`$STRING`"
@@ -239,6 +268,7 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "date-time",
           "name": "dst_from",
           "short": "The datetime when DST starts",
           "type": "`$STRING`"
@@ -249,6 +279,7 @@ class Config {
           "type": "`$INTEGER`"
         },
         {
+          "format": "date-time",
           "name": "dst_until",
           "short": "The datetime when DST ends",
           "type": "`$STRING`"
@@ -273,6 +304,7 @@ class Config {
           "type": "`$INTEGER`"
         },
         {
+          "format": "date-time",
           "name": "utc_datetime",
           "short": "The current UTC datetime in ISO 8601 format",
           "type": "`$STRING`"
@@ -288,6 +320,10 @@ class Config {
           "type": "`$INTEGER`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "timezone",
       "op": {
         "list": {
@@ -299,14 +335,19 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/timezone",
-              "parts": [
-                "timezone"
+              "segments": [
+                {
+                  "lit": "timezone"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "timezone"
+              ]
             }
           ]
         },
@@ -338,10 +379,16 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/timezone/{area}/{location}",
-              "parts": [
-                "timezone",
-                "{area}",
-                "{location}"
+              "segments": [
+                {
+                  "lit": "timezone"
+                },
+                {
+                  "var": "area"
+                },
+                {
+                  "var": "location"
+                }
               ],
               "select": {
                 "exist": [
@@ -352,7 +399,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "timezone",
+                "{area}",
+                "{location}"
+              ]
             },
             {
               "args": {
@@ -370,15 +422,19 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/timezone/{area}",
-              "parts": [
-                "timezone",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "area": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "timezone"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -387,7 +443,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "timezone",
+                "{id}"
+              ]
             }
           ]
         }
@@ -407,6 +467,7 @@ class Config {
 const config = new Config()
 
 export {
-  config
+  config,
+  FEATURE_PLUGINS,
 }
 
