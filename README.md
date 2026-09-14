@@ -105,7 +105,7 @@ local result, err = client:Ipn():load({ ipv4 = "example" })
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/world-time` | publish pending — [install from git tag](https://github.com/voxgig-sdk/world-time-sdk/releases) |
+| TypeScript | `@voxgig-sdk/world-time-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/world-time-sdk/releases) |
 | Python | `voxgig-sdk-world-time` | publish pending — [install from git tag](https://github.com/voxgig-sdk/world-time-sdk/releases) |
 | PHP | `voxgig-sdk/world-time` | publish pending — [install from git tag](https://github.com/voxgig-sdk/world-time-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/world-time-sdk/go` | `go get github.com/voxgig-sdk/world-time-sdk/go@latest` |
@@ -119,7 +119,7 @@ local result, err = client:Ipn():load({ ipv4 = "example" })
 ### TypeScript
 
 ```ts
-import { WorldTimeSDK } from '@voxgig-sdk/world-time'
+import { WorldTimeSDK } from '@voxgig-sdk/world-time-sdk'
 
 const client = new WorldTimeSDK()
 

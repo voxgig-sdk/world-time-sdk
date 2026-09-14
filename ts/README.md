@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { WorldTimeSDK } from '@voxgig-sdk/world-time'
+import { WorldTimeSDK } from '@voxgig-sdk/world-time-sdk'
 
 const client = new WorldTimeSDK()
 ```
@@ -506,7 +506,7 @@ world-time/
 Import the SDK from the package root:
 
 ```ts
-import { WorldTimeSDK } from '@voxgig-sdk/world-time'
+import { WorldTimeSDK } from '@voxgig-sdk/world-time-sdk'
 ```
 
 ### Entity state
